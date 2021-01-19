@@ -1,0 +1,51 @@
+﻿@model CarWash.Web.Areas.Manage.ViewModels.services.CreateServiceViewModel
+@{
+    Layout = "~/areas/manage/views/shared/_forms.cshtml";
+}
+
+<br /><br /><br />
+<br />
+<h1 class="text-center">Create Service</h1>
+<hr />
+<br /><br />
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <form method="post" action="~/manage/service/create-services">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+
+                <div class="form-group">
+                    <label for="serviceType" class="control-label mb-1">ServiceType</label>
+                    <select class="form-control" id="serviceType" name="ServiceType">
+                        @{
+                            var options = Enum.GetValues(typeof(CarWash.Web.Infrastructures.Domain.Enums.ServiceType)).Cast<CarWash.Web.Infrastructures.Domain.Enums.ServiceType>();
+
+                            foreach (CarWash.Web.Infrastructures.Domain.Enums.ServiceType option in options)
+                            {
+                                <option value="@option">@option.ToString()</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="control-label mb-2">Description</label>
+                    <input type="text" class="form-control" id="description" name="Description" aria-describedby="descriptionHelp" placeholder="Enter Description">
+                </div>
+                <div class="form-group">
+                    <label for="vehicle" class="control-label mb-2">Vehicle</label>
+                    <input type="text" class="form-control" id="vehicle" name="Vehicle" aria-describedby="vehicleHelp" placeholder="Enter vehicle">
+                </div>
+                <div class="form-group">
+                    <label for="price" class="control-label mb-2">Price</label>
+                    <input type="text" class="form-control" id="price" name="Price" aria-describedby="priceHelp" placeholder="Enter Price">
+                </div>
+             
+                <div class="mt-2">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="~/manage/service/index" class="btn btn-danger">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

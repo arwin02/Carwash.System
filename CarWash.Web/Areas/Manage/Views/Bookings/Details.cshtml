@@ -1,0 +1,51 @@
+﻿@model CarWash.Web.Infrastructures.Domain.Models.Booking
+@{
+    Layout = "~/areas/manage/views/shared/_forms.cshtml";
+}
+
+<br /><br /><br />
+<br />
+<h1 class="text-center">Details</h1>
+<hr />
+<br /><br />
+<div>
+    <h4>Bookings</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Vehicle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Vehicle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BookingAddress)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookingAddress)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ServiceType)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ServiceType)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Time)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Time)
+        </dd>
+        @*<dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Price)
+        </dd>*@
+    </dl>
+</div>
+<div>
+    <a href="~/manage/booking/bookings-edit/@Model.Id" class="btn btn-primary" asp-route-id="@Model.Id">Edit</a> |
+    <a href="~/manage/booking" class="btn btn-danger">Back to List</a>
+</div>

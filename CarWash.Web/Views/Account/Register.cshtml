@@ -1,0 +1,70 @@
+﻿@model CarWash.Web.ViewModels.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+<br /><br /><br />
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-11 mx-auto">
+            <div id="first">
+                <div class="myform form ">
+                    <div class="logo mb-3">
+                        <div class="col-md-12 text-center">
+                            <h1>Register</h1>
+                        </div>
+                    </div>
+                    <form action="/account/register" method="post" name="Register">
+                        <div class="form-group">
+                            <label for="firstname">First Name </label>
+                            <input type="text" name="FirstName" class="form-control" id="firstname" aria-describedby="firstnameHelp" placeholder="Enter First name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastname">Last Name </label>
+                            <input type="text" name="LastName" class="form-control" id="lastname" aria-describedby="lastnameHelp" placeholder="Enter Last name">
+                        </div>
+                        <div class="form-group">
+                            <label for="phonenumber">Phone Number </label>
+                            <input type="text" name="PhoneNumber" class="form-control" id="PhoneNumber" aria-describedby="phoneNumberHelp" placeholder="Enter Phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email</label>
+                            <input type="email" name="EmailAddress" id="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter Email Address">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" name="Password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="confirmpassword">Confirm Password</label>
+                            <input type="password" name="ConfirmPassword" id="confirmpassword" class="form-control" aria-describedby="confirmpasswordHelp" placeholder="Enter Confirm Password">
+                        </div>
+                    
+                        <br />
+                        <div class="col-md-12 text-center ">
+                            <button type="submit" value="Login" class=" btn btn-block mybtn btn-primary tx-tfm">Register</button>
+                        </div>
+                    
+                        @*<div class="col-md-12 mb-3">
+            <p class="text-center">
+                <a href="javascript:void();" class="google btn mybtn">
+                    <i class="fa fa-google-plus">
+                    </i> Signup using Google
+                </a>
+            </p>
+        </div>*@
+                       
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

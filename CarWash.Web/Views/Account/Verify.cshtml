@@ -1,0 +1,47 @@
+﻿@model CarWash.Web.ViewModels.VerifyViewModel
+@{
+    ViewData["Title"] = "Verify";
+}
+
+
+
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Verify your account</h1>
+                <hr />
+            </div>
+        </div>
+        <div class="main-login main-center">
+            <form class="form-horizontal" method="post" action="/account/verify">
+
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Email Address</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="EmailAddress" id="EmailAddress" placeholder="Enter your Email Address" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="name" class="cols-sm-2 control-label">Code</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <input type="text" class="form-control" name="RegistrationCode" id="RegistrationCode" placeholder="Enter your Code" />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group ">
+                    <button type="submit" value="Verify" class="btn btn-primary btn-lg btn-block login-button">Submit</button>
+                </div>
+              
+            </form>
+        </div>
+    </div>
+</div>

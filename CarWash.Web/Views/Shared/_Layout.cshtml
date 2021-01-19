@@ -1,0 +1,117 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>@ViewData["Title"] - CarWash.Web</title>
+
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="~/img/favicon.png" rel="icon">
+    <link href="~/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!--FontAwesome 6 alpha-->
+    <link href="~/vendor/fontawesome/css/all.css" rel="stylesheet" media="all" />
+    <script defer src="~/vendor/fontawesome/js/all.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="~/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/vendor/venobox/venobox.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/css/style.css" rel="stylesheet" />
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</head>
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="fixed-top header" >
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <h1 class="logo"><a href="~/home"><span>L&A Car Wash Booking</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+            <nav class="nav-menu d-none d-lg-block">
+                <ul>
+                    <li class=""><a href="~/home">Home</a></li>
+                    <li><a href="~/home/about">About</a></li>
+                    <li><a href="~/home/ourservices">Services</a></li>
+                    <li><a href="~/home/team">Team</a></li>
+                    <li><a href="~/home/pricing">Pricing</a></li>
+                    <li><a href="~/home/faqs">FAQS</a></li>
+                    <li><a href="~/home/contact">Contact</a></li>
+
+               
+                    <li class="drop-down">
+                        <a href="">Account</a>
+                        <ul>
+                            <li><a href="~/account/register">Sign Up</a></li>
+                            <li><a href="~/account/login">Sign In</a></li>
+                            <li class="drop-down">
+                                <a href="#">Setting</a>
+                                <ul>
+                                    
+                                    @*@if (ViewContext.HttpContext.User.Identity.IsAuthenticated)
+                                    {*@
+                                        <li><a href="~/account/change-password/@WebUser.UserId">Change-Password</a></li>
+                                        <li><a href="~/account/forgot-password">Forgot-Password</a></li>
+                                        <li><a href="~/account/profile/@WebUser.UserId">Profile</a></li>
+                                    @*}*@
+                             
+
+
+                                </ul>
+                            </li>
+                            <li><a href="~/account/logout">Logout</a></li>
+
+                        </ul>
+                    </li>
+
+
+
+                </ul>
+            </nav><!-- .nav-menu -->
+
+        </div>
+    </header><!-- End Header -->
+
+    <partial name="_CookieConsentPartial" />
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        @Html.Partial("~/views/shared/_footer.cshtml")
+    </div>
+
+    <!-- Vendor JS Files -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="~/vendor/php-email-form/validate.js"></script>
+    <script src="~/vendor/waypoints/jquery.waypoints.min.js"></script>
+    <script src="~/vendor/counterup/counterup.min.js"></script>
+    <script src="~/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="~/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/vendor/venobox/venobox.min.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/js/main.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

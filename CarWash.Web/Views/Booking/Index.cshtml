@@ -1,0 +1,32 @@
+﻿@model CarWash.Web.ViewModels.bookings.IndexViewModel
+@using CarWash.Web.Infrastructures.Domain.Models
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Vehicle</th>
+            <th>Description</th>
+            <th>Various Services</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Booking booking in Model.Bookings)
+        {
+        <tr>
+      
+            <td>@booking.Services.Vehicle</td>
+            <td>@booking.Services.Description</td>
+            <td>@booking.Services.ServiceType</td>
+            <td>@booking.Services.Price</td>
+
+        </tr>
+        }
+    </tbody>
+</table>

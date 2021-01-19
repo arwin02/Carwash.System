@@ -1,0 +1,111 @@
+﻿@model CarWash.Web.ViewModels.account.ProfileViewModel
+@using CarWash.Web.Infrastructures.Domain.Helpers
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<hr>
+<div class="container bootstrap snippet">
+    <div class="row">
+        <div class="col-sm-10"><h1>Profile</h1></div>
+          </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <!--left col-->
+
+            <div class="text-center">
+
+
+                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+
+            </div></hr><br>
+
+            @*<div class="panel panel-default">
+            <div class="panel-heading">Website <i class="fa fa-link fa-1x"></i></div>
+            <div class="panel-body"><a href="http://bootnipets.com">bootnipets.com</a></div>
+        </div>
+
+
+        <ul class="list-group">
+            <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Shares</strong></span> 125</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Likes</strong></span> 13</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Posts</strong></span> 37</li>
+            <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
+        </ul>*@
+
+            <div class="panel panel-default">
+
+                <div class="panel-body">
+                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
+                </div>
+            </div>
+
+        </div><!--/col-3-->
+        <div class="col-sm-9">
+            @*<ul class="list-inline">
+                <li><a href="~/account/update-profile/@WebUser.UserId">Update-Profile</a></li>
+            </ul>*@
+
+            <ul class="nav nav-tabs">
+                <li class="active"><a  href="~/account/update-profile/@WebUser.UserId">Update Profile</a></li>
+                
+                <li><a class="offset-2" href="~/account/update-thumbnail/@WebUser.UserId">Thumbnail</a></li>
+               
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <hr>
+                    <form class="form" action="##" method="post" id="registrationForm">
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="first_name">First name :    </label>
+                                <label type="text" class="form-check-label" name="FirstName" id="first_name"><h5>@Model.FirstName</h5></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="lastname">Last name :    </label>
+                                <label type="text" class="form-check-label" name="LastName" id="last_name"><h5>@Model.LastName</h5></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="fullname">Full name :    </label>
+                                <label type="text" class="form-check-label" name="UserName" id="username"><h5>@Model.UserName</h5></label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="phonenumber">Phone number :    </label>
+                                <label type="text" class="form-check-label" name="PhoneNumber" id="last_name"><h5>@Model.PhoneNumber</h5></label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="gender">Gender :    </label>
+                                <label type="text" class="form-check-label" name="Gender" id="gender"><h5>@Model.Gender</h5></label>
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                    <hr>
+
+                </div><!--/tab-pane-->
+
+
+
+            </div><!--/tab-pane-->
+        </div><!--/tab-content-->
+    </div><!--/col-9-->
+</div><!--/row-->
