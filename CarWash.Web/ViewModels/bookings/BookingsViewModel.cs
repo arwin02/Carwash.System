@@ -12,9 +12,6 @@ namespace CarWash.Web.ViewModels.bookings
     public class BookingsViewModel
     {
 
-        //public Guid? CostumerId { get; set; }
-
-
         [Display(Name = "Vehicle")]
         public string Vehicle { get; set; }
 
@@ -37,7 +34,9 @@ namespace CarWash.Web.ViewModels.bookings
 
         public List<Booking> Bookings { get; set; }
 
-        public IEnumerable<Service> Services { get; set; }
+        
+  
+        //public IEnumerable<Service> Services { get; set; }
     }
 }
 

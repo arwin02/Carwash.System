@@ -37,7 +37,7 @@ namespace CarWash.Web.Controllers
         public IActionResult Index()
         {
             //retrieving data in database including services data.
-            var bookings = _context.Bookings.Include(c => c.Services).ToList();
+            var bookings = _context.Bookings.Include(s => s.Services).ToList();
             return View(new IndexViewModel
             {
                 Bookings = bookings,
@@ -46,23 +46,25 @@ namespace CarWash.Web.Controllers
 
 
         [Authorize(Policy = "SignedIn")]
-        [HttpGet,Route("/booking/bookings-costumer/{costumerId}")]
-        public IActionResult Bookings (Guid? costumerId)
+        [HttpGet, Route("/booking/bookings-costumer/{costumerId}")]
+        public IActionResult Bookings(Guid? costumerId)
         {
 
             var user = this._context.Users.FirstOrDefault(u => u.Id == costumerId);
-            if(user == null)
+            if (user == null)
             {
                 ModelState.AddModelError("", "Please login your account before booking");
                 return RedirectToPage("~/account/login");
             }
 
-            var bookings = _context.Bookings.Include(c => c.Services).ToList();
+       
+            var booking = this._context.Bookings.Include(b => b.Services)
+                                             .ToList();
+        
             return View(new BookingsViewModel
             {
-                Bookings = bookings
-                //Services = FeedServices(1)
 
+                Bookings = booking
             });
         }
 
@@ -89,7 +91,6 @@ namespace CarWash.Web.Controllers
             {
                 return View(model);
             }
-
 
             var user = this._context.Users.FirstOrDefault(u => u.Id == WebUser.UserId);
             if (user != null)

@@ -12773,11 +12773,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\VGD 14\\Desktop\\2ndsem\\cw401\\CarWash.Web\\CarWash.Web.csproj",
+      "projectUniqueName": "C:\\Users\\VGD 14\\Pictures\\GithubRepositorySeedData\\Carwash\\CarWash.Web\\CarWash.Web.csproj",
       "projectName": "CarWash.Web",
-      "projectPath": "C:\\Users\\VGD 14\\Desktop\\2ndsem\\cw401\\CarWash.Web\\CarWash.Web.csproj",
+      "projectPath": "C:\\Users\\VGD 14\\Pictures\\GithubRepositorySeedData\\Carwash\\CarWash.Web\\CarWash.Web.csproj",
       "packagesPath": "C:\\Users\\VGD 14\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\VGD 14\\Desktop\\2ndsem\\cw401\\CarWash.Web\\obj\\",
+      "outputPath": "C:\\Users\\VGD 14\\Pictures\\GithubRepositorySeedData\\Carwash\\CarWash.Web\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
