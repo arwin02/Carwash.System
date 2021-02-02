@@ -9,6 +9,7 @@ using CarWash.Web.ViewModels.bookings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -33,92 +34,86 @@ namespace CarWash.Web.Controllers
         }
 
 
-        [HttpGet,Route("~/booking/index")]
+        [HttpGet,Route("/booking/index")]
         public IActionResult Index()
         {
-            //retrieving data in database including services data.
-            var bookings = _context.Bookings.Include(s => s.Services).ToList();
+            //retrieving data in database including services data with eager loading.
+                  
+            
+            var bookings = this._context.Bookings.Include(b => b.Services);
+
             return View(new IndexViewModel
             {
-                Bookings = bookings,
+
+                Bookings = bookings.ToList()
             });
         }
 
 
         [Authorize(Policy = "SignedIn")]
-        [HttpGet, Route("/booking/bookings-costumer/{costumerId}")]
-        public IActionResult Bookings(Guid? costumerId)
+        [HttpGet, Route("/booking/costumer/{userId}")]
+        public IActionResult Bookings(Guid? userId)
         {
-
-            var user = this._context.Users.FirstOrDefault(u => u.Id == costumerId);
-            if (user == null)
+            var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
+            if(user == null)
             {
-                ModelState.AddModelError("", "Please login your account before booking");
-                return RedirectToPage("~/account/login");
+                return BadRequest();
             }
-
-       
-            var booking = this._context.Bookings.Include(b => b.Services)
-                                             .ToList();
-        
-            return View(new BookingsViewModel
-            {
-
-                Bookings = booking
-            });
+            ViewBag.CostumerId = user.Id.Value;
+            return View();
         }
 
-
-        //[Authorize(Policy = "SignedIn")]
-        //[HttpGet, Route("booking/booking-services-feed")]
-        //public List<Service> FeedServices(int pageIndex)
-        //{
-        //    int skip = (int)(3 * (pageIndex - 1));
-        //    return this._context.Services
-        //                        .Where(s => s.Id != null)
-        //                        .OrderBy(s => s.CreatedAt)
-        //                        .Skip(skip)
-        //                        .Take(15)
-        //                        .ToList();
-        //}
-
-
         [Authorize(Policy = "SignedIn")]
-        [HttpPost,Route("/booking/bookings-costumer")]
+        [HttpPost, Route("/booking/costumer")]
         public IActionResult Bookings(BookingsViewModel model)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                var booking = new Booking()
+                {
+                    Id = Guid.NewGuid(),
+                    CostumerId = model.CostumerId,
+                    BookingAddress = model.BookingAddress,
+                    ServiceType = model.ServiceType,
+                    Time = model.Time,
+                    Vehicle = model.Vehicle,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+
+                };
+                this._context.Bookings.Add(booking);
+                this._context.SaveChanges();
+
+            }
+            else
             {
                 return View(model);
             }
 
-            var user = this._context.Users.FirstOrDefault(u => u.Id == WebUser.UserId);
-            if (user != null)
-            {
-                Booking bookings = new Booking()
-                {
-                    Id = Guid.NewGuid(),
-                    CostumerId = user.Id.Value,
-                    ServiceType = model.ServiceType,
-                    Vehicle = model.Vehicle,
-                    BookingAddress = model.BookingAddress,
-                    CreatedAt = DateTime.UtcNow,
-                    UpdatedAt = DateTime.UtcNow,
-                    //hh:mm tt = 12:00 PM"
-                    Time = model.Time,
-
-
-                };
-
-                this._context.Bookings.Add(bookings);
-                this._context.SaveChanges();
-
-            }
 
             return View();
         }
 
+         
+    
 
-       
+
+    [Authorize(Policy = "SignedIn")]
+    [HttpGet, Route("booking/booking-services-feed")]
+    public List<Service> FeedServices(int pageIndex)
+    {
+        int skip = (int)(3 * (pageIndex - 1));
+        return this._context.Services
+                            .Where(s => s.Id != null)
+                            .OrderBy(s => s.CreatedAt)
+                            .Skip(skip)
+                            .Take(15)
+                            .ToList();
     }
+
+
+
+
+
+}
 }

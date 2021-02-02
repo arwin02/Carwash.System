@@ -123,9 +123,9 @@ namespace CarWash.Web.Migrations
                     ServiceId = table.Column<Guid>(nullable: true),
                     CostumerId = table.Column<Guid>(nullable: true),
                     Time = table.Column<string>(nullable: true),
-                    Vehicle = table.Column<string>(nullable: true),
+                    BookingAddress = table.Column<string>(nullable: true),
                     ServiceType = table.Column<int>(nullable: false),
-                    BookingAddress = table.Column<string>(nullable: true)
+                    Vehicle = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

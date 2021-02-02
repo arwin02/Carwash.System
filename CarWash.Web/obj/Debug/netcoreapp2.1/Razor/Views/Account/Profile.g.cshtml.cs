@@ -114,7 +114,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("\r\n            <ul class=\"nav nav-tabs\">\r\n                <li class=\"active\">");
             EndContext();
             BeginContext(2096, 70, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fe0f10ef190f4bed9ecf489dd6410524", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "972a5d1eff61454db99a308c5a772cb3", async() => {
                 BeginContext(2148, 14, true);
                 WriteLiteral("Update Profile");
                 EndContext();
@@ -142,7 +142,7 @@ AddHtmlAttributeValue("", 2131, WebUser.UserId, 2131, 15, false);
             WriteLiteral("</li>\r\n                \r\n                <li>");
             EndContext();
             BeginContext(2211, 83, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "55f6b8d2832b473f8738e44fe1f0dd64", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7eb333ca493d43a5a60c6eb3a90013bb", async() => {
                 BeginContext(2281, 9, true);
                 WriteLiteral("Thumbnail");
                 EndContext();
@@ -171,7 +171,7 @@ AddHtmlAttributeValue("", 2264, WebUser.UserId, 2264, 15, false);
             WriteLiteral("</li>\r\n               \r\n            </ul>\r\n\r\n            <div class=\"tab-content\">\r\n                <div class=\"tab-pane active\" id=\"home\">\r\n                    <hr>\r\n                    ");
             EndContext();
             BeginContext(2481, 2069, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1a029db2919248898a3386b97c4bb6b0", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d4abdf8e117d41a2a02a3babdf51d9ba", async() => {
                 BeginContext(2548, 301, true);
                 WriteLiteral(@"
                         <div class=""form-group"">

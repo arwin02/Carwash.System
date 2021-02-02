@@ -181,3 +181,4 @@ C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\CarWash.Web.dll
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\CarWash.Web.pdb
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\CarWash.Web.csproj.CopyComplete
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_PartialNavbar.g.cshtml.cs

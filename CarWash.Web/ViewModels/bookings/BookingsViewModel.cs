@@ -11,12 +11,12 @@ namespace CarWash.Web.ViewModels.bookings
 {
     public class BookingsViewModel
     {
+        public Guid? CostumerId { get; set; }
 
         [Display(Name = "Vehicle")]
         public string Vehicle { get; set; }
 
         [Display(Name = "Service Type")]
-        [EnumDataType(typeof(ServiceType))]
         public ServiceType ServiceType { get; set; }
 
         [RegularExpression(@"^\d+\.\d{0,2}$")]
@@ -26,17 +26,11 @@ namespace CarWash.Web.ViewModels.bookings
 
 
         [Display(Name = "Time")]
-        [DataType(DataType.Date)]
         public string Time { get; set; }
 
         [Display(Name = "Booking Address")]
         public string BookingAddress { get; set; }
 
-        public List<Booking> Bookings { get; set; }
-
-        
-  
-        //public IEnumerable<Service> Services { get; set; }
     }
 }
 

@@ -8,6 +8,8 @@ namespace CarWash.Web.ViewModels.bookings
 {
     public class IndexViewModel
     {
+        public Guid? Id { get; set; }
+
         public List<Booking> Bookings { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿
+﻿@using CarWash.Web.Infrastructures.Domain.Helpers
 @{
     ViewData["Title"] = "Welcome";
 }
@@ -10,8 +10,6 @@
 
 
       <div class="d-md-inline-flex">
-          <a href="~/home" class="btn btn-primary btn-lg">Go Home</a>
-
-          
-
+          <a href="~/home" class="btn btn-primary btn-lg">Home</a>
+          <a href="~/booking/bookings-costumer/@WebUser.UserId" class="btn btn-primary btn-lg">Booking Car</a>
       </div>

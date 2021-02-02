@@ -118,7 +118,7 @@ namespace CarWash.Web.Controllers
                         await this.SignIn();
 
 
-                        return RedirectPermanent("~/manage/users/index");
+                        return RedirectToAction("~/manage/users/index");
                     }
 
                     else if (userRole.Role == Infrastructures.Domain.Enums.Role.ContentAdmin && user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
@@ -141,7 +141,7 @@ namespace CarWash.Web.Controllers
                         return RedirectPermanent("~/manage/users/index");
                     }
 
-                    else if (userRole.Role == Infrastructures.Domain.Enums.Role.User && user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
+                    else if (user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
                     {
                         user.LoginRetries = 0;
                         user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
@@ -156,9 +156,11 @@ namespace CarWash.Web.Controllers
                         WebUser.SetUser(user, roles, groups);
 
                         await this.SignIn();
-                
 
-                        return RedirectPermanent("~/booking/bookings-costumer/" + user.Id);
+
+                        //return RedirectPermanent("~/booking/bookings-costumer/" + user.Id);
+                        return Redirect("/booking/costumer/" + user.Id);
+
                     }
                     else
                     {
@@ -298,7 +300,7 @@ namespace CarWash.Web.Controllers
             ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
-
+        [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("account/welcome")]
         public IActionResult Welcome()
         {
@@ -306,13 +308,13 @@ namespace CarWash.Web.Controllers
         }
 
 
-
+        [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("account/forgot-password")]
         public IActionResult ForgotPassword()
         {
             return View();
         }
-
+        [Authorize(Policy = "SignedIn")]
         [HttpPost, Route("account/forgot-password")]
         public IActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
@@ -358,17 +360,13 @@ namespace CarWash.Web.Controllers
         [HttpGet, Route("account/change-password/{userId}")]
         public IActionResult ChangePassword(Guid? userId)
         {
-            var user = WebUser.UserId;
+            var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
             if (user == null)
             {
                 return RedirectToAction("~/account/login");
 
             }
 
-            if (user != null)
-            {
-                userId = user;
-            }
             return View();
         }
 
@@ -416,7 +414,7 @@ namespace CarWash.Web.Controllers
 
             var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
 
-            if (WebUser.UserId == null)
+            if (user == null)
             {
                 return RedirectToAction("~/account/login");
             }

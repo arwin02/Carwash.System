@@ -94,7 +94,7 @@ using Microsoft.AspNetCore.Authorization;
                     ");
             EndContext();
             BeginContext(507, 2299, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c1f16ab41dc24b37887a640af90d6afd", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9b0c1a3345a34a65b07a91770aef787d", async() => {
                 BeginContext(564, 738, true);
                 WriteLiteral(@"
                         <div class=""form-group"">
@@ -109,7 +109,7 @@ using Microsoft.AspNetCore.Authorization;
                             <p class="""">I ");
                 EndContext();
                 BeginContext(1302, 58, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14efcc4b967547b69d641220037fde3a", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3eccab9e3339459e8b855a3329b06617", async() => {
                     BeginContext(1338, 18, true);
                     WriteLiteral("forgot a password?");
                     EndContext();
@@ -147,7 +147,7 @@ using Microsoft.AspNetCore.Authorization;
                 WriteLiteral("                        <div class=\"form-group\">\r\n                            <p class=\"text-center\">Don\'t have account? ");
                 EndContext();
                 BeginContext(2684, 57, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6a3db7086d444271ad51c6e2534c9802", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cf77ac2d8a3543858bb671f69f871482", async() => {
                     BeginContext(2725, 12, true);
                     WriteLiteral("Sign up here");
                     EndContext();

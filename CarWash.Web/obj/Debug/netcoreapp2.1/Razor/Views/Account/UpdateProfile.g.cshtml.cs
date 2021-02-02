@@ -103,7 +103,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("\r\n            <div class=\"tab-content\">\r\n                <div class=\"tab-pane active\" id=\"home\">\r\n                    <hr>\r\n                    ");
             EndContext();
             BeginContext(936, 3282, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "49daf47cc38d4b63a01749a314e3df5e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a6bb3613e7ef4df7943990611de2c0d9", async() => {
                 BeginContext(1025, 1546, true);
                 WriteLiteral(@"
                         <div class=""form-group"">
@@ -151,7 +151,7 @@ using Microsoft.AspNetCore.Authorization;
                 WriteLiteral("                                                ");
                 EndContext();
                 BeginContext(3149, 72, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c05957f82f034682a5543dd2879bc675", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6492efc255c04b81a953d5191cdbe089", async() => {
                     BeginContext(3189, 23, false);
 #line 68 "C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\Views\Account\UpdateProfile.cshtml"
                                                                                   Write(genderOption.ToString());
@@ -197,7 +197,7 @@ using Microsoft.AspNetCore.Authorization;
                 WriteLiteral("                                                ");
                 EndContext();
                 BeginContext(3415, 63, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3e5dfc10f74c4a3197c8a52666f45e83", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8586ac9df1d74a13a995a1eceaa6cdc9", async() => {
                     BeginContext(3446, 23, false);
 #line 72 "C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\Views\Account\UpdateProfile.cshtml"
                                                                          Write(genderOption.ToString());
@@ -248,7 +248,7 @@ using Microsoft.AspNetCore.Authorization;
                                 ");
                 EndContext();
                 BeginContext(4039, 82, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "51abe9897d844665900de9af97e0b13f", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ffb4281f07954bc6a1251618c071b07d", async() => {
                     BeginContext(4113, 4, true);
                     WriteLiteral("back");
                     EndContext();

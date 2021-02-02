@@ -6,7 +6,7 @@
 
 <h2>Index</h2>
 
-
+<a href="~/booking/costumer/@Model.Id" class="btn-primary">Book Now</a>
 <table class="table table-bordered table-hover">
     <thead>
         <tr>
@@ -14,19 +14,36 @@
             <th>Description</th>
             <th>Various Services</th>
             <th>Price</th>
+            <th>Booking Address</th>
+            <th>Time</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (Booking booking in Model.Bookings)
-        {
+   
         <tr>
-      
-            <td>@booking.Services.Vehicle</td>
-            <td>@booking.Services.Description</td>
-            <td>@booking.Services.ServiceType</td>
+            @foreach (Booking booking in Model.Bookings)
+            {
+
+            <td>
+                @booking.Services.Vehicle
+            </td>
+
+            <td>
+               @booking.Services.Description
+            </td>
+
+            <td>
+               @booking.Services.ServiceType
+            </td>
+            
             <td>@booking.Services.Price</td>
 
+            <td>
+                @booking.BookingAddress
+            </td>
+            <td>@booking.Time</td>
+            }
         </tr>
-        }
+        
     </tbody>
 </table>

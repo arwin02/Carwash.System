@@ -82,7 +82,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("\r\n<div class=\"text-center\">\r\n    ");
             EndContext();
             BeginContext(187, 709, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f26e5bedcd3d4373ab41ee0ca4c7d525", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f99dec08801c45a59798e8c5574ea076", async() => {
                 BeginContext(273, 82, true);
                 WriteLiteral("\r\n        <div class=\"form-group\">\r\n            <input type=\"hidden\" name=\"UserId\"");
                 EndContext();
@@ -97,7 +97,7 @@ WriteAttributeValue("", 363, Model.UserId, 363, 13, false);
                 WriteLiteral(" />\r\n            <label for=\"Thumbnail\">Thumbnail:</label><br />\r\n            ");
                 EndContext();
                 BeginContext(455, 133, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2a50a993ff614030844799dde2856171", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2355c0b2312a4633bf44bac32fd8e25a", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

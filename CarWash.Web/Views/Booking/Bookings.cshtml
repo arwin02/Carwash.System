@@ -1,242 +1,274 @@
 ﻿@model CarWash.Web.ViewModels.bookings.BookingsViewModel
+@using CarWash.Web.Infrastructures.Domain.Enums
 @using CarWash.Web.Infrastructures.Domain.Models
 @{
-    ViewData["Title"] ="Booking";
+    ViewData["Title"] = "Booking";
 }
+
+<style>
+
+
+    ul {
+        list-style-type: none;
+    }
+
+    li {
+        display: inline-block;
+    }
+
+    input[type="checkbox"][id^="cb"] {
+        display: none;
+    }
+
+    label {
+        border: 1px solid #fff;
+        padding: 10px;
+        display: block;
+        position: relative;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+        label:before {
+            background-color: white;
+            color: white;
+            content: " ";
+            display: block;
+            border-radius: 50%;
+            border: 1px solid grey;
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 28px;
+            transition-duration: 0.4s;
+            transform: scale(0);
+        }
+
+        label img {
+            height: 150px;
+            width: 215px;
+            transition-duration: 0.2s;
+            transform-origin: 50% 50%;
+        }
+
+    :checked + label {
+        border-color: darkgoldenrod;
+    }
+
+        :checked + label:before {
+            content: "✓";
+            background-color: grey;
+            transform: scale(1);
+        }
+
+        :checked + label img {
+            transform: scale(0.9);
+            box-shadow: 0 0 5px #333;
+            z-index: -1;
+        }
+</style>
+
 
 <br /><br /><br />
 <div class="section-title">
     <h2>Bookings</h2>
 </div>
-
 <div>
     <img src="~/img/cars.png" style="width:1100px; height:330px;" />
 </div>
-
-
-
-
-    <!-- Service Type -->
-    <br /><br />
+<div class="form-group">
     <img src="~/img/services/vehicletype.png" />
-    <div class="row">
-        <div class="col-lg-3 mb-4">
-            <div class="card  h-75 text-center">
-                <img class="card-img-top" src="~/img/services/small.png" alt="">
+</div>
 
-            </div>
+<ul>
+    <li>
+        <input type="checkbox" id="cb1" />
+        <label for="cb1"><img src="~/img/services/small.png" /></label>
+    </li>
+    <li>
+        <input type="checkbox" id="cb2" />
+        <label for="cb2"><img src="~/img/services/medium.png" /></label>
+    </li>
+    <li>
+        <input type="checkbox" id="cb3" />
+        <label for="cb3"><img src="~/img/services/large.png" /></label>
+    </li>
+    <li>
+        <input type="checkbox" id="cb4" />
+        <label for="cb4"><img src="~/img/services/extra large.png" /></label>
+    </li>
+</ul>
+
+<!-- /.row -->
+<!-- Wash Type -->
+<br /><br />
+<img src="~/img/services/washpackages.png" />
+<div class="row">
+    <div class="col-lg-3 mb-4">
+        <div class="card  h-75 text-center">
+            <img class="card-img-top" src="~/img/services/washpackages/260pesos.png" alt="">
+            <hr />
+            <a href="#" onclick="detailsone()" title="Details"><button type="button" class="btn btn-outline-secondary">Details</button></a>
+            <br />
         </div>
-        <div class="col-lg-3 mb-4">
-            <div class="card h-75 text-center">
-                <img class="card-img-top" src="~/img/services/medium.png" alt="">
-
-            </div>
-        </div>
-        <div class="col-lg-3 mb-4">
-            <div class="card  h-75 text-center">
-                <img class="card-img-top" src="~/img/services/large.png" alt="">
-
-            </div>
-        </div>
-
-        <div class="col-lg-3 mb-4">
-            <div class="card h-75 text-center">
-                <img class="card-img-top" src="~/img/services/extra large.png" alt="">
-
-            </div>
-        </div>
-
-
     </div>
-    <!-- /.row -->
-    <!-- Wash Type -->
-
-    <br /><br />
-    <img src="~/img/services/washpackages.png" />
-    <div class="row">
-        <div class="col-lg-3 mb-4">
-            <div class="card  h-75 text-center">
-                <img class="card-img-top" src="~/img/services/washpackages/260pesos.png" alt="">
-                <hr />
-                <a href="#" onclick="detailsone()" title="Details"><button type="button" class="btn btn-outline-secondary">Details</button></a>
-                <br />
-            </div>
+    <div class="col-lg-3 mb-4">
+        <div class="card h-75 text-center">
+            <img class="card-img-top" src="~/img/services/washpackages/450pesos.png" alt="">
+            <hr />
+            <a href="#" onclick="detailstwo()" title="Details"><button type="button" class="btn btn-outline-secondary">Details</button></a>
+            <br />
         </div>
-        <div class="col-lg-3 mb-4">
-            <div class="card h-75 text-center">
-                <img class="card-img-top" src="~/img/services/washpackages/450pesos.png" alt="">
-                <hr />
-                <a href="#" onclick="detailstwo()" title="Details"><button type="button" class="btn btn-outline-secondary">Details</button></a>
-                <br />
-            </div>
-        </div>
-        <div class="col-lg-3 mb-4">
-            <div class="card  h-75 text-center">
-                <img class="card-img-top" src="~/img/services/washpackages/1000pesos.png" alt="">
-                <hr />
-                <a href="#" onclick="detailsthree()" title="Details"><button type="button" class="btn btn-outline-secondary">Details</button></a>
-                <br />
-            </div>
-        </div>
-
-        <div class="col-lg-3 mb-4">
-            <div class="card h-75 text-center">
-                <img class="card-img-top" src="~/img/services/washpackages/3000pesos.png" alt="">
-                <hr />
-                <a href="#" onclick="detailsfour()" title="Details"><button type="button" class="btn btn-outline-secondary">Details</button></a>
-                <br />
-            </div>
-        </div>
-
-        @*@<form method="post" action="~/booking/bookings-costumer">*@
-        @*@using (Html.BeginForm("Bookings", "Booking", FormMethod.Post))
-        {
-            <div class="form-group">
-                @Html.LabelFor(b => b.Vehicle)
-                @Html.DropDownListFor(b => b.Vehicle, new SelectList(Model.Services, "Id", "Vehicle"), "", new { @class = "form-control" })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(b => b.Price)
-                @Html.DropDownListFor(b => b.Price, new SelectList(Model.Services, "Id", "Price"), "", new { @class = "form-control" })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(b => b.ServiceType)
-                @Html.DropDownListFor(b => b.ServiceType, new SelectList(Model.Services, "Id", "ServiceType"), "", new { @class = "form-control" })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(b => b.Time)
-                @Html.TextBoxFor(b => b.Time, new { @class = "form-control" })
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(b => b.BookingAddress)
-                @Html.TextBoxFor(b => b.BookingAddress, new { @class = "form-control", })
-            </div>
-
-            <div class="form-group mt-3">
-                <button type="submit" value="Bookings" class="btn btn-primary">Submit</button>
-                <a href="#" class="btn btn-danger">Cancel</a>
-            </div>
-        }*@
-
-        <form method="post" action="~/booking/bookings-costumer">
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary()
-            <div class="form-group">
-                <label for="Price" class="control-label mb-1">Price</label>
-                <select style="border: solid 2px darkgoldenrod;" class="form-control" id="price" name="Price">
-                    @{
-                        //var optionsPrice = Model.Services.ToList();
-
-                        foreach (Booking booking in Model.Bookings)
-                        {
-                            <option value="@booking.Services.Price">@booking.Services.Price</option>
-                        }
-                    }
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="Vehicle" class="control-label mb-1">Vehicle</label>
-                <select style="border: solid 2px darkgoldenrod;" class="form-control" id="vehicle" name="Vehicle">
-                    @{
-                        //var optionsVehicle = Model.Services.ToList();
-
-                        foreach (Booking booking in Model.Bookings)
-                        {
-                            <option value="@booking.Services.Vehicle">@booking.Services.Vehicle</option>
-                        }
-                    }
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="ServiceType" class="control-label mb-1">Services</label>
-                <select style="border: solid 2px darkgoldenrod;" class="form-control" id="price" name="ServiceType">
-                    @{
-                        //var optionsService = Model.Services.ToList();
-
-                        foreach (Booking booking in Model.Bookings)
-                        {
-                         <option value="@booking.Services.ServiceType">@booking.Services.ServiceType</option>
-                        }
-                    }
-                </select>
-            </div>
-
-
-            <div class="form-group">
-                <label for="time">Time:</label>
-                <input style="border: solid 2px darkgoldenrod;" type="datetime-local" class="form-control" id="Time" name="Time" required>
-            </div>
-
-            <div class="form-group">
-                <label for="address">Address:</label>
-                <input style="border: solid 2px darkgoldenrod;" type="text" class="form-control" id="" name="BookingAddress" placeholder="Enter your address" required>
-            </div>
-            <div class="form-group mt-3">
-                <button type="submit" value="Bookings" class="btn btn-primary">Submit</button>
-                <a href="#" class="btn btn-danger">Cancel</a>
-            </div>
-
-
-        </form>
     </div>
+    <div class="col-lg-3 mb-4">
+        <div class="card  h-75 text-center">
+            <img class="card-img-top" src="~/img/services/washpackages/1000pesos.png" alt="">
+            <hr />
+            <a href="#" onclick="detailsthree()" title="Details"><button type="button" class="btn btn-outline-secondary">Details</button></a>
+            <br />
+        </div>
+    </div>
+
+    <div class="col-lg-3 mb-4">
+        <div class="card h-75 text-center">
+            <img class="card-img-top" src="~/img/services/washpackages/3000pesos.png" alt="">
+            <hr />
+            <a href="#" onclick="detailsfour()" title="Details"><button type="button" class="btn btn-outline-secondary">Details</button></a>
+            <br />
+        </div>
+    </div>
+
+
+    <form method="post" action="~/booking/costumer">
+
+        <input type="hidden" name="CostumerId" value="@ViewBag.CostumerId" />
+
+        <div class="form-group">
+            <label for="vehicle">Vehicle:</label>
+            <input style="border: solid 2px darkgoldenrod;" type="text" class="form-control" id="Vehicle" name="Vehicle" required>
+        </div>
+        <div class="form-group">
+            <label for="price">Price:</label>
+            <input style="border: solid 2px darkgoldenrod;" type="text" class="form-control" id="Time" name="Price" required>
+        </div>
+
+        <div class="form-group">
+            <label for="serviceType" class="control-label mb-1">Services</label>
+            <select style="border: solid 2px darkgoldenrod;" class="form-control" id="serviceType" name="ServiceType">
+                @{
+                    var options = Enum.GetValues(typeof(CarWash.Web.Infrastructures.Domain.Enums.ServiceType)).Cast<CarWash.Web.Infrastructures.Domain.Enums.ServiceType>();
+
+                    foreach (CarWash.Web.Infrastructures.Domain.Enums.ServiceType option in options)
+                    {
+                        <option value="@option">@option.ToString()</option>
+                    }
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="time">Time:</label>
+            <input style="border: solid 2px darkgoldenrod;" type="datetime-local" class="form-control" id="Time" name="Time" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input style="border: solid 2px darkgoldenrod;" type="text" class="form-control" id="" name="BookingAddress" placeholder="Enter your address" required>
+        </div>
+        <div class="form-group mt-3">
+            <button type="submit" value="Bookings" class="btn btn-primary">Submit</button>
+            <a href="#" class="btn btn-danger">Cancel</a>
+        </div>
+
+    </form>
+
+
+</div>
 
 
 
 
 @*<br /><br />
-<img src="~/img/services/servicemenu.png" />
-<div class="row">
+    <img src="~/img/services/servicemenu.png" />
+    <div class="row">
 
-    @if (Model.Services.Count > 0)
-    {
-        <table>
-            <thead>
-                <tr>
-                    <th>Service Name</th>
-                    <th>Price</th>
-                    <th>Vehicle Size</th>
-                    <th>Select</th>
+       
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service Name</th>
+                        <th>Price</th>
+                        <th>Vehicle Size</th>
+                        <th>Select</th>
 
-                </tr>
-            </thead>
-            <tbody>
-                @{
-                    foreach (Service service in Model.Services)
-                    {
-                        <tr>
-                            <td>@service.ServiceType</td>
-                            <td>@service.Price.ToString("")</td>
-                            <td>@service.Vehicle</td>
-                            <td>
-                                <button type="button" style="border-radius:20px; border-color:#a38b3e;color: #a38b3e" class="btn">Select</button>
-                            </td>
-                        </tr>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        foreach (Service service in ViewBag.ListServices)
+                        {
+                            <tr>
+                                <td>@service.ServiceType</td>
+                                <td>@service.Price.ToString("")</td>
+                                <td>@service.Vehicle</td>
+                                <td>
+                                    <button type="button" style="border-radius:20px; border-color:#a38b3e;color: #a38b3e" class="btn">Select</button>
+                                </td>
+                            </tr>
+                        }
                     }
-                }
 
-            </tbody>
+                </tbody>
 
-        </table>
-     }
-</div>*@
-
+            </table>
+         
+    </div>*@
 
 
 
+@*<fieldset>
+        <div class="form-horizontal">
+            <div class="editor-label">
+                Vehicle
+            </div>
+            <div class="editor-label">
+                <input type="text" id="txtVehicle" />
+            </div>
 
+            <div class="editor-label">
+                Services
+            </div>
+            <div class="editor-label">
+                <input type="text" id="txtServiceType" />
+            </div>
 
-<!-- /.row -->
+            <div class="editor-label">
+                Booking Address
+            </div>
+            <div class="editor-label">
+                <input type="text" id="txtBookingAddress" />
+            </div>
 
-<div class="container">
+            <div class="editor-label">
+                Price
+            </div>
+            <div class="editor-label">
+                <input type="text" id="txtPrice" />
+            </div>
 
+            <div class="editor-label">
+                <input type="datetime-local" id="dateTime" />
+            </div>
 
-</div>
+            <div class="editor-label">
+                <br />
+                <input class="btn-default" type="button" id="btnSave" value="Save" />
+            </div>
+        </div>
+    </fieldset>*@
+
 
 
 <!--Modal-->
@@ -366,7 +398,6 @@
                 </p>
             </div>
             <div class="modal-footer">
-
                 <span>Price:</span><h5 class="modal-title"><span>&#8369</span>3000</h5>
             </div>
         </div>
@@ -377,25 +408,77 @@
 
 
 <script type="text/javascript">
-    function detailsone() {
-        $("#modal-details-260").modal("show");
+    function myFunction() {
+        var element = document.getElementById("myDIV");
+        element.classList.add("mystyle");
 
-    }
 
-    function detailstwo() {
-        $("#modal-details-450").modal("show");
+        function detailsone() {
+            $("#modal-details-260").modal("show");
 
-    }
+        }
 
-    function detailsthree() {
-        $("#modal-details-1000").modal("show");
+        function detailstwo() {
+            $("#modal-details-450").modal("show");
 
-    }
+        }
 
-    function detailsfour() {
-        $("#modal-details-3000").modal("show");
+        function detailsthree() {
+            $("#modal-details-1000").modal("show");
 
-    }
+        }
+
+        function detailsfour() {
+            $("#modal-details-3000").modal("show");
+
+        }
+
+        $(function () {
+            $("#cb").change(function () {
+                if ($(this).is(":checked")) {
+                    $.ajax({
+                        type: "POST",
+                        url: "~/booking/bookings-costumer",
+                        data: $('#bookingForm').serialize(),
+                        datatype: "html",
+
+                        success: function (data) {
+                            location.reload();
+                        },
+
+                        error: function (xhr) {
+                            alert("Error Occured" + response.error[0]);
+                            location.reload();
+                        }
+                    })
+                }
+                else {
+                    $("div").css("display", "none")  //hide the div
+                    $("div").html(""); //clear the div content
+                }
+            })
+        })
+
+        $(document).ready(function () {
+            $("#btnSave").click(function () {
+                $.ajax(
+                    {
+                        type: "POST", //HTTP POST Method
+                        url: "~/booking/bookings-costumer", // Controller/View
+                        data: { //Passing data
+                            Vehicle: $("#txtVehicle").val(), //Reading text box values using Jquery
+                            ServiceType: $("#txtServiceType").val(),
+                            BookingAddress: $("#txtBookingAddress").val(),
+                            Price: $("#txtPrice").val(),
+                            Time: $("#dateTime").val(),
+
+                        }
+
+                    });
+
+            });
+        });
+
 
 
 </script>

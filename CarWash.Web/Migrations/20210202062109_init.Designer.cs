@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarWash.Web.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20210119065118_init")]
+    [Migration("20210202062109_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

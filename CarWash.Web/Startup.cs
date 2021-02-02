@@ -67,7 +67,7 @@ namespace CarWash.Web
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("SignedIn", policy => policy.RequireAuthenticatedUser());
-                //options.AddPolicy("AuthorizeAdmin", policy => policy.RequireRole("Admin","ContentAdmin", "AuthorizeAdmin", "Administrator"));
+                options.AddPolicy("AuthorizeAdmin", policy => policy.RequireRole("Admin","ContentAdmin", "AuthorizeAdmin", "Administrator"));
                 options.AddPolicy("AuthorizeAdmin", policy => policy.Requirements.Add(new AuthorizeAdminRequirement()));
                 options.AddPolicy("AuthorizeContentAdmin", policy => policy.Requirements.Add(new AuthorizeContentAdminRequirement()));
             });
