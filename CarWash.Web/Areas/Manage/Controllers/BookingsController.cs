@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CarWash.Web.Areas.Manage.ViewModels.bookings;
+using CarWash.Web.Controllers;
 using CarWash.Web.Infrastructures.Domain.Data;
 using CarWash.Web.Infrastructures.Domain.Enums;
 using CarWash.Web.Infrastructures.Domain.Helpers;
@@ -10,6 +11,7 @@ using CarWash.Web.Infrastructures.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 
 
@@ -21,16 +23,18 @@ namespace CarWash.Web.Areas.Manage.Controllers
     [AllowAnonymous]
     public class BookingsController : Controller
     {
+        private readonly IHubContext<SignalHub> _hubContext;
         private readonly DefaultDbContext _context;
         protected readonly IConfiguration _config;
         private IHostingEnvironment _env;
 
 
-        public BookingsController(DefaultDbContext context, IConfiguration config, IHostingEnvironment env)
+        public BookingsController(DefaultDbContext context, IConfiguration config, IHostingEnvironment env, IHubContext<SignalHub> hubContext)
         {
             _context = context;
             _config = config;
             _env = env;
+            _hubContext = hubContext;
 
 
         }
@@ -38,9 +42,9 @@ namespace CarWash.Web.Areas.Manage.Controllers
    
         [HttpGet,Route("manage/booking")]
         [HttpGet,Route("manage/booking/index")]
-        public IActionResult Index(int pageSize = 5, int pageIndex = 1, string keyword = "", string service = "Wash")
+        public IActionResult Index(int pageSize = 5, int pageIndex = 1, string keyword = "", string booking = "Wash")
         {
-            Enum.TryParse(service, out ServiceType serviceType); ;
+            Enum.TryParse(booking, out ServiceType serviceType); ;
 
             Page<Booking> result = new Page<Booking>();
 
@@ -53,7 +57,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
 
             if (string.IsNullOrEmpty(keyword) == false)
             {
-                bookingQuery = bookingQuery.Where(s => s.Vehicle.Contains(keyword));
+                bookingQuery = bookingQuery.Where(s => s.Title.Contains(keyword));
 
             }
 
@@ -116,9 +120,9 @@ namespace CarWash.Web.Areas.Manage.Controllers
                     Id = Guid.NewGuid(),
                     Time = model.Time,
                     BookingAddress = model.BookingAddress,
-                    CostumerId = model.CostumerId,
+                    UserId = model.CostumerId,
                     ServiceType = model.ServiceType,
-                    Vehicle = model.Vehicle,
+                    Title = model.Vehicle,
                     CreatedAt = DateTime.UtcNow,
                     UpdatedAt = DateTime.UtcNow,
 
@@ -193,7 +197,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                     new EditViewModel()
                     {
                         Id = booking.Id.Value,
-                        Vehicle = booking.Vehicle,
+                        Vehicle = booking.Title,
                        Time = booking.Time,
                        BookingAddress = booking.BookingAddress,
                         ServiceType = booking.ServiceType,
@@ -218,7 +222,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
 
             if (booking != null)
             {
-                booking.Vehicle = model.Vehicle;
+                booking.Title = model.Vehicle;
                 booking.Time = model.Time;
                 booking.BookingAddress = model.BookingAddress;
                 booking.ServiceType = model.ServiceType;
@@ -233,6 +237,25 @@ namespace CarWash.Web.Areas.Manage.Controllers
             }
 
             return View();
+        }
+
+        [HttpPost("/manage/booking/change-status")]
+        public async Task<IActionResult> ChangeStatus(ChangeStatusViewModel model)
+        {
+            var booking = _context.Bookings.FirstOrDefault(p => p.Id == model.BookingId);
+
+            if (booking != null)
+            {
+                booking.BookingStatus = model.Status;
+
+                _context.Bookings.Update(booking);
+                _context.SaveChanges();
+            }
+            //Post to Hub
+            await _hubContext.Clients.All.SendAsync("ReceiveNotification",  booking.UserId, "Your booking " + booking.Title + " has been updated to " + booking.BookingStatus + "date of" + booking.UpdatedAt);
+
+
+            return RedirectPermanent("~/manage/booking/index");
         }
     }
 }

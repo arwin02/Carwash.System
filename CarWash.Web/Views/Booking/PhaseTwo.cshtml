@@ -1,0 +1,167 @@
+﻿@model CarWash.Web.ViewModels.bookings.PhaseTwoViewModel
+@using CarWash.Web.Infrastructures.Domain.Models
+@{
+    ViewData["Title"] = "PhaseTwo";
+}
+
+
+
+<br /><br /><br />
+<div class="section-title">
+    <h2>Bookings</h2>
+    <img src="~/img/cars.png" style="width:1100px; height:330px;" />
+</div>
+<div class="form-group">
+    <img src="~/img/services/washpackages.png" />
+</div>
+
+
+<form>
+    <div id="phaseTwo">
+        <input type="hidden" value="@Model.UserId" id="userId" />
+            @*<input type="hidden" value="@Model.BookingId" id="bookingId" />*@
+        <ul>
+            <li>
+                <input type="checkbox" id="cb1" onclick="getServices('1')" />
+                <label for="cb1"><img src="~/img/services/serviceType/Wash.png" /></label>
+            </li>
+            <li>
+                <input type="checkbox" id="cb2" onclick="getServices('2')" />
+                <label for="cb2"><img src="~/img/services/serviceType/Waterless.png" /></label>
+            </li>
+            <li>
+                <input type="checkbox" id="cb3" onclick="getServices('3')" />
+                <label for="cb3"><img src="~/img/services/serviceType/Shine.png" /></label>
+            </li>
+            <li>
+                <input type="checkbox" id="cb4" onclick="getServices('4')" />
+                <label for="cb4"><img src="~/img/services/serviceType/Signature.png" /></label>
+            </li>
+        </ul>
+    </div>
+
+</form>
+
+<div id="tableList" class="row d-none">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th></th>
+                <th style="width: 36px;"></th>
+            </tr>
+        </thead>
+        <tbody id="services-list"></tbody>
+    </table>
+</div>
+
+
+@*@if (Model.Bookings != null)
+{
+    if (Model.Bookings.Count > 0)
+    {
+
+        <div id="itemServices" class="row">
+            <h1>Items Service</h1>
+            <table class="table-responsive">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Type</th>
+                        <th>Time</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <thead>
+                    @foreach (Booking items in Model.Bookings)
+                    {
+                        <tr>
+                            <td>@items.Service.Vehicle</td>
+                            <td>@items.Service.Price.ToString("####")</td>
+                            <td>@items.Service.ServiceType</td>
+                            <td>@items.Service.UpdatedAt.ToString("MM/dd/yyyy hh:mm tt")</td>
+                            <td>
+                                <a href="#" class="btn" title="Details"><i class="fas fa-info"></i></a>
+                                <a href="#" class="btn" title="RemoveOne"><i class="fas fa-trash"></i></a>
+                                <a href="#" class="btn" title="RemoveAll"><i class="fas fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    }
+
+                </thead>
+            </table>
+        </div>
+    }
+}*@
+
+
+<script src="~/js/bookingPhase.js"></script>
+<style>
+
+
+    ul {
+        list-style-type: none;
+    }
+
+    li {
+        display: inline-block;
+    }
+
+    input[type="checkbox"][id^="cb"] {
+        display: none;
+    }
+
+    label {
+        border: 1px solid #fff;
+        padding: 10px;
+        display: block;
+        position: relative;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+        label:before {
+            background-color: white;
+            color: white;
+            content: " ";
+            display: block;
+            border-radius: 50%;
+            border: 1px solid grey;
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            width: 25px;
+            height: 25px;
+            text-align: center;
+            line-height: 28px;
+            transition-duration: 0.4s;
+            transform: scale(0);
+        }
+
+        label img {
+            height: 150px;
+            width: 215px;
+            transition-duration: 0.2s;
+            transform-origin: 50% 50%;
+        }
+
+    :checked + label {
+        border-color: darkgoldenrod;
+    }
+
+        :checked + label:before {
+            content: "✓";
+            background-color: grey;
+            transform: scale(1);
+        }
+
+        :checked + label img {
+            transform: scale(0.9);
+            box-shadow: 0 0 5px #333;
+            z-index: -1;
+        }
+</style>

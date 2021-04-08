@@ -1,0 +1,147 @@
+﻿@model CarWash.Web.ViewModels.bookings.ReviewBookingViewModel
+@{
+    ViewData["Title"] = "BookReview";
+}
+<br /><br /><br /><br />
+
+<div class="section-title">
+    <h2>Booking Review</h2>
+</div>
+<div class="container offset-3">
+    <div class="row">
+        <div class="well col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <address>
+                        <strong>Booking-Car-Wash</strong>
+                        <br>
+                        2110 Dinalupihan,Bataan
+                        <br>
+                        Philippines , Region 3
+                        <br />
+                        <abbr title="Phone">P:</abbr> (213) 484-6829
+                        <hr />
+                        GCASH #: 111111
+                        <br>
+                        PAYMAYA #: 222222
+                        <br>
+                    </address>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                    <p>
+                        <em>Date:@Model.Booking.UpdatedAt.ToString("MMMM dd,yyyy")</em>
+                    </p>
+                    <p>
+                        <em>Receipt #: @Model.Booking.Id</em>
+                    </p>
+                </div>
+            </div>
+            <div class="">
+                <div class="text-center">
+                    <h1>Receipt</h1>
+                </div>
+                @if (Model.Bookings != null)
+                {
+                    if (Model.Bookings.Count > 0)
+                    {
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Service</th>
+                                    <th>Payment</th>
+                                    <th class="text-center">Price</th>
+                                    <th class="text-center">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    @foreach (var booking in Model.Bookings)
+                                    {
+                                        <tr>
+                                            <td class="col-md-9"><em>@booking.Title</em></td>
+                                            <td class="col-md-1" style="text-align: center">
+                                                <a href="~/booking/payment-gateway" title="Pay Now">Pay Now</a>
+
+                                            </td>
+                                            <td class="col-md-1 text-center">&#8369;@booking.Price.ToString("F")</td>
+                                            <td class="col-md-1 text-center">&#8369;@booking.Price.ToString("F")</td>
+                                        </tr>
+
+
+                                    }
+                                }
+                                <tr>
+                                    <td>   </td>
+                                    <td>   </td>
+                                    <td class="text-right">
+                                        <p>
+                                            <strong>Subtotal: </strong>
+                                        </p>
+                                        @*<p>
+                                                <strong>Tax: </strong>
+                                            </p>*@
+                                    </td>
+                                    <td class="text-center">
+                                        <p>
+                                            <strong>&#8369;@Model.TotalPrice.ToString("F")</strong>
+                                        </p>
+                                        @*<p>
+                                                <strong>$6.94</strong>
+                                            </p>*@
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>   </td>
+                                    <td>   </td>
+                                    <td class="text-right"><h4><strong>Total: </strong></h4></td>
+                                    <td class="text-center text-danger"><h4><strong>@Model.TotalPrice.ToString("F")</strong></h4></td>
+                                </tr>
+
+
+                            </tbody>
+                        </table>
+                    }
+
+                }
+
+
+
+                <div id="ItemListShow">
+                    <ul>
+                        <li class="list-unstyled">
+                            @*<a href="" onclick="GetItems('@Model.UserId')" class="btn btn-outline-success"> List Service Items </a>|*@
+                            <a href="~/booking/phase-one-booking/@Model.Booking.UserId" class="btn btn-outline-success">Additional Service</a> |
+                            <a href="#" class="btn btn-outline-warning" onclick="EmptyItems('@Model.Booking.UserId')">Empty Items</a> |
+
+                           
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Empty Items=-->
+<div class="modal" tabindex="-1" role="dialog" id="modal-empty-service">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Empty Items</h5>
+                <button type="button" id="closeEmptyOne" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to empty <span id="modal-empty-service-title"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="modal-empty-service-confirm"><button type="button" class="btn btn-primary">Empty Items</button></a>
+                <button type="button" id="closeEmptyTwo" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/bookingPhase.js"></script>

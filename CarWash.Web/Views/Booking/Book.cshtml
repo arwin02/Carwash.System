@@ -1,0 +1,310 @@
+﻿@model CarWash.Web.ViewModels.bookings.BookViewModel
+@{
+    ViewData["Title"] = "Book";
+}
+
+<br /><br /><br />  
+<div class="container">
+    <div class="row">
+
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+
+            <!-- Preview Image -->
+            @*<img class="img-fluid rounded" src="http://placehold.it/900x300" alt="">*@
+            <div class="title">
+                <h2>@Model.Vehicle</h2>
+            </div>
+            <hr>
+            <!-- Date/Time -->
+            <p>Updated At : @Model.UpdatedAt</p>
+            <hr>
+            <!-- Post Content -->
+            <p class="lead">@Model.Description</p>
+            <hr>
+
+            <!-- Comments Form -->
+                <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#add-comment-form" aria-expanded="false" aria-controls="add-comment-form">
+                    Leave a feedback
+                </button>
+  
+                <button id="unlikeButton" class="btn btn-dark" style="@(Model.IsLiked ? "display:visible" : "display:none")" onclick="feedbackUnlike('@Model.Id','@Model.UserId')"><i class="fa fa-thumbs-down text-light"></i></button>
+                <button id="likeButton" class="btn btn-dark" style="@(Model.IsLiked ? "display:none" : "display:visible")" onclick="feedbackLike('@Model.Id','@Model.UserId')"><i class="fa fa-thumbs-up text-light"></i></button>
+                <h3 class="h6">Rated : <span id="rating-score" class="h4">@Model.RatingAve.ToString("##.##")</span><i class="fa fa-star"></i>&nbsp;&nbsp;&nbsp; Liked by : <span class="h4" id="likes">@Model.Likes</span><i class="fa fa-thumbs-up"></i> </h3>
+                <hr />
+                <div class="collapse" id="add-comment-form">
+                    <form action="/feedback/add-comment-with-rating" class="commenting-form collapse" id="add-comment-form" method="Post">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <div class="form-row">
+                                    <label class="myratings col-md-2">Score : <span id="score"></span></label>
+                                    <fieldset class="rating col-md-4 form-control">
+                                        <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label>
+                                        <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                        <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+                                        <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                        <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="Meh - 3 stars"></label>
+                                        <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                        <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+                                        <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                        <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+                                        <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                    </fieldset>
+                                    <input id="ratings" name="Score" type="hidden" />
+                                    <input name="ServiceId" value="@Model.Id" type="hidden" />
+                                    <input name="UserId" value="@Model.UserId" type="hidden" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                <textarea name="Comment" id="usercomment" placeholder="Type your comment" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <button type="submit" class="btn btn-secondary">Submit Comment</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+          
+            @{
+                if (Model.CommentItems != null)
+                {
+                    if (Model.CommentItems.Count > 0)
+                    {
+                        foreach (var comment in Model.CommentItems)
+                        {
+                            <!-- Single Comment -->
+                <div class="media mb-4">
+                    <img class="d-flex mr-3 rounded-circle" src="~/@(comment.UserIcon)" alt="...">
+                    <span class="date">@comment.UpdatedAt.ToString("dddd, dd MMMM yyyy HH:mm")</span>
+                    <div class="media-body">
+                        <h5 class="mt-0">@comment.UserName</h5>
+
+                        @comment.Content
+                    </div>
+
+                    <div class="footer-">
+
+                    </div>
+                </div>
+
+                          
+                        }
+                    }
+                }
+            }
+
+            <!-- Single Comment -->
+            @*<div class="media mb-4">
+                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <div class="media-body">
+                    <h5 class="mt-0">Commenter Name</h5>
+                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                </div>
+            </div>*@
+
+            <!-- Comment with nested comments -->
+            @*<div class="media mb-4">
+            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+            <div class="media-body">
+                <h5 class="mt-0">Commenter Name</h5>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+
+                <div class="media mt-4">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <div class="media-body">
+                        <h5 class="mt-0">Commenter Name</h5>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    </div>
+                </div>
+
+                <div class="media mt-4">
+                    <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                    <div class="media-body">
+                        <h5 class="mt-0">Commenter Name</h5>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    </div>
+                </div>
+
+            </div>
+        </div>*@
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- Side Widget -->
+            <div class="card my-5">
+                <h5 class="card-header">Details</h5>
+                <div class="card-body">
+                    <strong>Price :</strong><span>@Model.Price.ToString("F")</span>
+                    <br />
+                    <strong>Status :</strong>
+                    <span>@Model.ServiceType </span>
+                  
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+
+</div>
+
+    <style>
+
+
+        .myratings {
+            margin-top: 5px;
+            font-size: 1.5em;
+        }
+
+        fieldset,
+        label {
+            margin: 0;
+            padding: 0;
+        }
+
+        .rating {
+            border: none;
+            cursor: pointer;
+        }
+
+            .rating > [id^="star"] {
+                display: none;
+            }
+
+            .rating > label:before {
+                margin: 5px;
+                font-size: 3em;
+                font-family: FontAwesome;
+                display: inline-block;
+                content: "\2605";
+            }
+
+            .rating > .half:before {
+                content: "\2605";
+                position: absolute;
+            }
+
+            .rating > label {
+                color: #ddd;
+                float: right;
+                cursor: pointer;
+            }
+
+            .rating > [id^="star"]:checked ~ label,
+            .rating:not(:checked) > label:hover,
+            .rating:not(:checked) > label:hover ~ label {
+                color: #FFD700;
+            }
+
+                .rating > [id^="star"]:checked + label:hover,
+                .rating > [id^="star"]:checked ~ label:hover,
+                .rating > label:hover ~ [id^="star"]:checked ~ label,
+                .rating > [id^="star"]:checked ~ label:hover ~ label {
+                    color: #FFED85;
+                }
+    </style>
+
+
+
+    <script src="~/vendor//jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap//js/bootstrap.bundle.min.js"></script>
+    <script>
+    $(document).ready(function () {
+
+        $("input[type='radio']").click(function () {
+            var score = $("input[type='radio']:checked").val();
+
+            $("#score").html(score);
+
+            if (score < 3) {
+                $('.myratings').css('color', 'red');
+            } else {
+                $('.myratings').css('color', 'green');
+            }
+
+            $(".myratings").text("Score : " + score);
+            $("#ratings").val(score);
+        });
+    });
+
+    function feedbackLike(serviceId,userId) {
+    var model = {
+        ServiceId: serviceId,
+        UserId: userId,
+        IsLiked: true
+    }
+
+        feedbackLikeAjax(model);
+
+    }
+
+    function feedbackLikeAjax(model) {
+        route = "/feedback/likes";
+        $.ajax({
+            url: route,
+            dataType: "json",
+            data: model,
+            type: "POST",
+            async: false
+        }).done(function (obj) {
+            var result = obj.data;
+
+            $("#likes").html(result.likes);
+
+            if (result.isLiked == true) {
+                $("#likeButton").hide();
+                $("#unlikeButton").show();
+            }
+            else {
+                $("#unlikeButton").hide();
+                $("#likeButton").show();
+            }
+        });
+    }
+
+    function feedbackUnlike(serviceId, userId) {
+        var model = {
+            ServiceId: serviceId,
+            UserId: userId,
+            IsLiked: false
+        }
+
+        feedbackUnlikeAjax(model);
+
+    }
+
+    function feedbackUnlikeAjax(model) {
+        $.ajax({
+            url: "/feedback/likes",
+            dataType: "json",
+            data: model,
+            type: "POST",
+            async: false
+        }).done(function (obj) {
+            var result = obj.data;
+
+            $("#likes").html(result.likes);
+
+            if (result.isLiked == true) {
+                $("#likeButton").hide();
+                $("#unlikeButton").show();
+            }
+            else {
+                $("#unlikeButton").hide();
+                $("#likeButton").show();
+            }
+        });
+    }
+
+
+
+
+    </script>

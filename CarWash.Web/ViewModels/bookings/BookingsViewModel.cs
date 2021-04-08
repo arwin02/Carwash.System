@@ -1,5 +1,6 @@
 ﻿using CarWash.Web.Infrastructures.Domain.Enums;
 using CarWash.Web.Infrastructures.Domain.Models;
+using CarWash.Web.ViewModels.service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,25 +12,31 @@ namespace CarWash.Web.ViewModels.bookings
 {
     public class BookingsViewModel
     {
-        public Guid? CostumerId { get; set; }
+        
+        public Guid? UserId { get; set; }
 
-        [Display(Name = "Vehicle")]
-        public string Vehicle { get; set; }
+        public string UserName { get; set; }
 
-        [Display(Name = "Service Type")]
-        public ServiceType ServiceType { get; set; }
+        public string PhoneNumber { get; set; }
 
-        [RegularExpression(@"^\d+\.\d{0,2}$")]
-        [Range(0, 9999999999999999.99)]
-        [Display(Name = "Price")]
+        public string  Email { get; set; }
+
+        public Guid? ServiceId { get; set; }
+
         public decimal Price { get; set; }
 
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+
+        public ServiceType ServiceType { get; set; }
 
         [Display(Name = "Time")]
         public string Time { get; set; }
 
-        [Display(Name = "Booking Address")]
+
         public string BookingAddress { get; set; }
+
 
     }
 }

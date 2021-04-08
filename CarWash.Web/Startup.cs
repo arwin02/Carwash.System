@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CarWash.Web.Controllers;
 using CarWash.Web.Infrastructures.Domain.Data;
 using CarWash.Web.Infrastructures.Domain.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -57,20 +58,8 @@ namespace CarWash.Web
             //    options.AccessDeniedPath = new PathString("/manage/users/index");
             //});
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-            services.AddScoped<IAuthorizationHandler, AuthorizeAdminRequirementHandler>();
-            services.AddScoped<IAuthorizationHandler, AuthorizeContentAdminRequirementHandler>();
-            services.AddScoped<IAuthorizationHandler, LoggingAuthorizationHandler>();
-
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("SignedIn", policy => policy.RequireAuthenticatedUser());
-                options.AddPolicy("AuthorizeAdmin", policy => policy.RequireRole("Admin","ContentAdmin", "AuthorizeAdmin", "Administrator"));
-                options.AddPolicy("AuthorizeAdmin", policy => policy.Requirements.Add(new AuthorizeAdminRequirement()));
-                options.AddPolicy("AuthorizeContentAdmin", policy => policy.Requirements.Add(new AuthorizeContentAdminRequirement()));
-            });
+          
+            //services.AddScoped<IAuthorizationHandler, LoggingAuthorizationHandler>();
 
             //Append AddRoles to add Role services:
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedEmail = true)
@@ -85,10 +74,7 @@ namespace CarWash.Web
             //        .Build();
             //});
 
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromDays(1);
-            });
+           
 
             //this services convert enums to return string result.
             services.AddMvc().AddJsonOptions(options =>
@@ -98,9 +84,25 @@ namespace CarWash.Web
             });
 
             services.AddDbContext<DefaultDbContext>(options => options.UseMySql(Configuration.GetConnectionString("DefaultDbContextMySQL"), m => m.MigrationsAssembly("CarWash.Web")));
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IAuthorizationHandler, AuthorizeAdminRequirementHandler>();
+            services.AddScoped<IAuthorizationHandler, AuthorizeContentAdminRequirementHandler>();   
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("SignedIn", policy => policy.RequireAuthenticatedUser());
+                options.AddPolicy("AuthorizeAdmin", policy => policy.RequireRole("Admin", "ContentAdmin", "AuthorizeAdmin", "Administrator"));
+                options.AddPolicy("AuthorizeAdmin", policy => policy.Requirements.Add(new AuthorizeAdminRequirement()));
+                options.AddPolicy("AuthorizeContentAdmin", policy => policy.Requirements.Add(new AuthorizeContentAdminRequirement()));
+            });
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromDays(1);
+            });
+
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -123,12 +125,17 @@ namespace CarWash.Web
             app.UseAuthentication();
             
             Infrastructures.Domain.Helpers.WebUser.Services = app.ApplicationServices;
-
+            app.UseSignalR(routeses =>
+            {
+                routeses.MapHub<SignalHub>("/signalHub");
+            });
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+              
             });
         }
     }

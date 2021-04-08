@@ -24,9 +24,19 @@ namespace CarWash.Web.Migrations
 
                     b.Property<string>("BookingAddress");
 
-                    b.Property<Guid?>("CostumerId");
+                    b.Property<int>("BookingStatus");
 
                     b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Email");
+
+                    b.Property<int>("ItemTotal");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<decimal>("Price");
 
                     b.Property<Guid?>("ServiceId");
 
@@ -34,15 +44,58 @@ namespace CarWash.Web.Migrations
 
                     b.Property<string>("Time");
 
+                    b.Property<string>("Title");
+
                     b.Property<DateTime>("UpdatedAt");
 
-                    b.Property<string>("Vehicle");
+                    b.Property<Guid?>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.Property<int>("VehicleType");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceId");
 
                     b.ToTable("Booking");
+                });
+
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Comment", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Content")
+                        .HasMaxLength(500);
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<bool>("IsPublished");
+
+                    b.Property<int>("Likes");
+
+                    b.Property<bool>("LikesEnabled");
+
+                    b.Property<bool>("MaskUser");
+
+                    b.Property<Guid?>("ServiceId")
+                        .IsRequired();
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Contact", b =>
@@ -88,17 +141,86 @@ namespace CarWash.Web.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Service", b =>
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Like", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("CreatedAt");
 
+                    b.Property<Guid?>("ServiceId")
+                        .IsRequired();
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
+                });
+
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Rating", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<bool>("IsCounted");
+
+                    b.Property<bool>("MaskUser");
+
+                    b.Property<decimal>("Score");
+
+                    b.Property<Guid?>("ServiceId")
+                        .IsRequired();
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Ratings");
+                });
+
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Service", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("Comments");
+
+                    b.Property<bool>("CommentsEnabled");
+
+                    b.Property<DateTime>("CreatedAt");
+
                     b.Property<string>("Description")
                         .HasMaxLength(520);
 
+                    b.Property<bool>("IsPublished");
+
+                    b.Property<string>("Layout")
+                        .HasMaxLength(75);
+
+                    b.Property<int>("Likes");
+
+                    b.Property<bool>("LikesEnabled");
+
                     b.Property<decimal>("Price");
+
+                    b.Property<decimal>("Rating");
+
+                    b.Property<bool>("RatingsEnabled");
 
                     b.Property<int>("ServiceType")
                         .HasMaxLength(255);
@@ -106,6 +228,8 @@ namespace CarWash.Web.Migrations
                     b.Property<DateTime>("UpdatedAt");
 
                     b.Property<string>("Vehicle");
+
+                    b.Property<int>("Views");
 
                     b.HasKey("Id");
 
@@ -116,6 +240,8 @@ namespace CarWash.Web.Migrations
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("BookingsId");
 
                     b.Property<DateTime>("CreatedAt");
 
@@ -131,6 +257,8 @@ namespace CarWash.Web.Migrations
 
                     b.Property<int>("LoginStatus");
 
+                    b.Property<bool>("MaskUser");
+
                     b.Property<string>("Password");
 
                     b.Property<string>("PhoneNumber");
@@ -142,6 +270,8 @@ namespace CarWash.Web.Migrations
                     b.Property<string>("UserName");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookingsId");
 
                     b.ToTable("User");
                 });
@@ -190,9 +320,52 @@ namespace CarWash.Web.Migrations
 
             modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Booking", b =>
                 {
-                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Service", "Services")
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId");
+                });
+
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Comment", b =>
+                {
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Like", b =>
+                {
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Rating", b =>
+                {
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.User", b =>
+                {
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Booking", "Bookings")
+                        .WithMany("Users")
+                        .HasForeignKey("BookingsId");
                 });
 #pragma warning restore 612, 618
         }

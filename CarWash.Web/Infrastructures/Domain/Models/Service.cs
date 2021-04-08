@@ -25,5 +25,17 @@ namespace CarWash.Web.Infrastructures.Domain.Models
         [Display(Name = "Price")]
         public decimal Price { get; set; }
 
+        public bool IsPublished { get; set; }
+
+        public int Likes { get; set; }
+        public decimal Rating { get; set; }
+        public int Views { get; set; }
+        public int Comments { get; set; }
+
+        [MaxLength(75)]
+        public string Layout { get; set; }
+        public bool LikesEnabled { get; set; }
+        public bool RatingsEnabled { get; set; }
+        public bool CommentsEnabled { get; set; }
     }
 }

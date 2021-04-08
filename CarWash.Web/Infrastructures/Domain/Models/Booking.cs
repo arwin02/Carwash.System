@@ -9,13 +9,29 @@ namespace CarWash.Web.Infrastructures.Domain.Models
 {
     public class Booking : BaseModel
     {
-        [Display(Name = "Services")]
         public Guid? ServiceId { get; set; }
 
-        public Service Services { get; set; }
+        public Service Service { get; set; }
 
-        [Display(Name = "Costumer")]
-        public Guid? CostumerId { get; set; }
+        public int ItemTotal { get; set; }
+
+        public string Title { get; set; }
+
+        public string Description { get; set; }
+
+        public decimal Price { get; set; }
+
+        public ServiceType ServiceType { get; set; }
+
+        public VehicleType VehicleType { get; set; }
+
+        public BookingStatus BookingStatus { get; set; }
+
+        public string UserName { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string Email { get; set; }
 
         [Display(Name = "Time")]
         public string Time { get; set; }
@@ -23,9 +39,7 @@ namespace CarWash.Web.Infrastructures.Domain.Models
         [Display(Name = "Booking Address ")]
         public string BookingAddress { get; set; }
 
-
-        public ServiceType ServiceType { get; set; }
-
-        public string Vehicle { get; set; }
+        public Guid? UserId { get; set; }
+        public List<User> Users { get; set; }
     }
 }

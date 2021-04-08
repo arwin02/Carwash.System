@@ -24,6 +24,9 @@ namespace CarWash.Web.Infrastructures.Domain.Data
 
 
         public DbSet<Service> Services { get; set; }
+        public DbSet<Rating> Ratings { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Like> Likes { get; set; }
         public DbSet<Contact> Contacts { get; set; }
 
 

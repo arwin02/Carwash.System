@@ -66,6 +66,7 @@
                 <th>Service Type</th>
                 <th>Time</th>
                 <th>Price</th>
+                <th>Status</th>
                 <th></th>
             </tr>
         </thead>
@@ -74,13 +75,17 @@
                 foreach (Booking booking in Model.Bookings.Items)
                 {
                     <tr>
-                        <td>@booking.Vehicle</td>
+                        <td>@booking.Title</td>
                         <td>@booking.ServiceType</td>
                         <td>@booking.Time</td>
+                        <td>@booking.BookingStatus</td>
                         <td>
                             <a href="~/manage/booking/details/@booking.Id" title="Booking Details"><button type="button" class="btn"><i class="fas fa-info"></i></button></a>
-
-                            <a href="#" onclick="confirmDeleteService('@booking.Id', '@booking.Vehicle')" title="Delete Service"><button type="button" class="btn"><i class="fas fa-times"></i></button></a>
+                            <a href="#" onclick="changeStatus('@booking.Id','@booking.Title', '@booking.BookingStatus', '@booking.UserId')">
+                                <i class="fas fa-book" style="color:#0094ff"></i>
+                            </a>
+                         
+                            <a href="#" onclick="confirmDeleteService('@booking.Id', '@booking.Title')" title="Delete Service"><button type="button" class="btn"><i class="fas fa-times"></i></button></a>
                         </td>
                     </tr>
                 }
@@ -106,7 +111,7 @@
                                 var next = Model.Bookings.PageIndex + 1;
                                 if (next <= Model.Bookings.PageCount)
                                 {
-                                    <li class="page-item"><a class="page-link" href="~/manage/booking?keyword=@Model.Bookings.Keyword&booking=@Model.Bookings&pageSize=@Model.Bookings.PageSize&pageIndex=@next"><span aria-hidden="true">&raquo;</span></a></li>
+                                    <li class="page-item"><a class="page-link" href="~/manage/booking?keyword=@Model.Bookings.Keyword&booking=@Model.ServiceT&pageSize=@Model.Bookings.PageSize&pageIndex=@next"><span aria-hidden="true">&raquo;</span></a></li>
                                 }
                             }
                         </ul>
@@ -121,7 +126,7 @@ else
     <p>0 search results.</p>
 }
 
-
+<!--Delete Book-->
 <div class="modal" tabindex="-1" role="dialog" id="modal-delete-booking">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -142,12 +147,53 @@ else
     </div>
 </div>
 
+<!--Change Status-->
+<div class="modal" tabindex="-1" role="dialog" id="change-status-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Do you want to change the status of <span class="change-status-modal-item-title"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/manage/booking/change-status" method="post">
+                <div class="modal-body">
+                    <p>Do you want to change the status of <span class="change-status-modal-item-title"></span>?</p>
+                    <input type="hidden" name="BookingId" id="change-status-modal-item-id" />
+                    <input type="hidden" name="UserId" id="change-status-modal-user-id" />
+                    Status : <select class="form-select" name="Status" aria-label="" id="change-status-modal-item-status">
+                        <option value="Pending">Pending</option>
+                        <option value="Confirm">Confirm</option>
+                        <option value="Cancel">Cancel</option>
+                        <option value="Complete">Complete</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 
 <script type="text/javascript">
+    function changeStatus(id, title, status, userId) {
+        console.log(id);
+        console.log(title);
+        console.log(status);
+        $(".change-status-modal-item-title").html(title);
+        $("#change-status-modal-item-id").val(id);
+        $("#change-status-modal-user-id").val(userId);
+        $("#change-status-modal-item-status option[value=" + status + "]").prop('selected', true);
+        $("#change-status-modal").modal("show");
+    }
 
-
-
+ 
     function confirmDeleteService(bookingId, Vehicle) {
         $("#modal-delete-booking-vehicle").html(Vehicle);
         $("#modal-delete-booking-confirm").attr("href", "/manage/booking/delete/" + bookingId);
@@ -161,7 +207,7 @@ else
     });
 
     function searchTrigger() {
-        window.location = "/manage/booking?pageIndex=1&keyword=" + $("#searchKeyword").val() + "&service=" + $("#searchStatus").val();
+        window.location = "/manage/booking?pageIndex=1&keyword=" + $("#searchKeyword").val() + "&booking=" + $("#searchStatus").val();
     }
 
 

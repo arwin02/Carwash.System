@@ -123,7 +123,6 @@ C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\bin\Debug\
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\bin\Debug\netcoreapp2.1\CarWash.Web.pdb
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\bin\Debug\netcoreapp2.1\CarWash.Web.Views.dll
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\bin\Debug\netcoreapp2.1\CarWash.Web.Views.pdb
-C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\CarWash.Web.csprojAssemblyReference.cache
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\CarWash.Web.csproj.CoreCompileInputs.cache
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\CarWash.Web.RazorAssemblyInfo.cache
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\CarWash.Web.RazorAssemblyInfo.cs
@@ -157,7 +156,6 @@ C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Account\UpdateProfile.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Account\Verify.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Account\Welcome.g.cshtml.cs
-C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Booking\Bookings.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Booking\Index.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Home\About.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Home\Contact.g.cshtml.cs
@@ -182,3 +180,13 @@ C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\CarWash.Web.pdb
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\CarWash.Web.csproj.CopyComplete
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Shared\_PartialNavbar.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Areas\Manage\Views\Services\Thumbnail.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Booking\BookingWithService.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Booking\PhaseOne.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Booking\PhaseTwo.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Booking\PhaseThree.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\CarWash.Web.csprojAssemblyReference.cache
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Booking\ServiceReview.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Booking\BookReview.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Booking\Book.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Booking\Payment.g.cshtml.cs

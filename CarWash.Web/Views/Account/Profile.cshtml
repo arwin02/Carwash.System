@@ -4,7 +4,7 @@
     ViewData["Title"] = "Profile";
 }
 
-<hr>
+<br /><br /><br />
 <div class="container bootstrap snippet">
     <div class="row">
         <div class="col-sm-10"><h1>Profile</h1></div>
@@ -15,8 +15,20 @@
 
             <div class="text-center">
 
+                @{
+                   
+                    @if (Model.MaskUser == false)
+                    {
+                        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                    }
+                    else
+                    {
+                        <img src="~/images/users/@Model.Id/thumbnail.png" class="avatar img-circle img-thumbnail" alt="avatar">
 
-                <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                    }
+                }
+
+
 
             </div></hr><br>
 
@@ -34,12 +46,7 @@
             <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li>
         </ul>*@
 
-            <div class="panel panel-default">
-
-                <div class="panel-body">
-                    <i class="fa fa-facebook fa-2x"></i> <i class="fa fa-github fa-2x"></i> <i class="fa fa-twitter fa-2x"></i> <i class="fa fa-pinterest fa-2x"></i> <i class="fa fa-google-plus fa-2x"></i>
-                </div>
-            </div>
+           
 
         </div><!--/col-3-->
         <div class="col-sm-9">
@@ -48,59 +55,101 @@
             </ul>*@
 
             <ul class="nav nav-tabs">
-                <li class="active"><a  href="~/account/update-profile/@WebUser.UserId">Update Profile</a></li>
-                
-                <li><a class="offset-2" href="~/account/update-thumbnail/@WebUser.UserId">Thumbnail</a></li>
-               
+                <li class="active"><a  href="~/account/update-profile/@Model.Id">Update Profile</a></li> |
+                <li><a class="" href="~/account/update-thumbnail/@Model.Id">Thumbnail</a></li>
             </ul>
-
+            
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
-                    <hr>
-                    <form class="form" action="##" method="post" id="registrationForm">
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="first_name">First name :    </label>
-                                <label type="text" class="form-check-label" name="FirstName" id="first_name"><h5>@Model.FirstName</h5></label>
+                    <dl class="row">
+                        <dt class="col-sm-2">
+                            First-Name
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.FirstName
+                        </dd>
+                        <dt class="col-sm-2">
+                            LastName
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.LastName
+                        </dd>
+                        <dt class="col-sm-2">
+                            UserName
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.UserName
+                        </dd>
+                        <dt class="col-sm-2">
+                            PhoneNumber
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.PhoneNumber
+                        </dd>
+                        <dt class="col-sm-2">
+                            Gender
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.Gender
+                        </dd>
+                        <dt class="col-sm-2">
+                            Email
+                        </dt>
+                        <dd class="col-sm-10">
+                            @Model.EmailAddress
+                        </dd>
+                    </dl>
+                <hr />
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-mybook-tab" data-bs-toggle="tab" data-bs-target="#nav-mybook" type="button" role="tab" aria-controls="nav-mybook" aria-selected="true">My Book</button>
+                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+                                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
                             </div>
-                        </div>
-                        <div class="form-group">
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-mybook" role="tabpanel" aria-labelledby="nav-mybook-tab">
+                                <table class="table table-striped table-sm container">
+                                    <thead>
+                                        <tr>
+                                            <th>Vehicle</th>
+                                            <th>Price</th>
+                                            <th>Address</th>
+                                            <th>Status</th>
+                                            <th>Feedback</th>
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            foreach (var item in Model.Items)
+                                            {
+                                                <tr>
+                                                    <td>@item.Title</td>
+                                                    <td>@item.Price.ToString("F")</td>
+                                                    <td>@item.BookingAddress</td>
+                                                    <td>@item.BookingStatus</td>
+                                                    <td>
+                                                        @if (item.BookingStatus == CarWash.Web.Infrastructures.Domain.Enums.BookingStatus.Complete || item.BookingStatus == CarWash.Web.Infrastructures.Domain.Enums.BookingStatus.Confirm)
+                                                        {
+                                                            <a href="~/booking/book/@item.ServiceId"><i class="fas fa-comments"></i></a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <p class="w-50">disabled</p>
+                                                              
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
 
-                            <div class="col-xs-6">
-                                <label for="lastname">Last name :    </label>
-                                <label type="text" class="form-check-label" name="LastName" id="last_name"><h5>@Model.LastName</h5></label>
                             </div>
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
                         </div>
-
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="fullname">Full name :    </label>
-                                <label type="text" class="form-check-label" name="UserName" id="username"><h5>@Model.UserName</h5></label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="phonenumber">Phone number :    </label>
-                                <label type="text" class="form-check-label" name="PhoneNumber" id="last_name"><h5>@Model.PhoneNumber</h5></label>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="gender">Gender :    </label>
-                                <label type="text" class="form-check-label" name="Gender" id="gender"><h5>@Model.Gender</h5></label>
-                            </div>
-                        </div>
-
-
-                    </form>
-
-                    <hr>
-
                 </div><!--/tab-pane-->
 
 
@@ -109,3 +158,9 @@
         </div><!--/tab-content-->
     </div><!--/col-9-->
 </div><!--/row-->
+
+<script>
+    var popover = new bootstrap.Popover(document.querySelector('.example-popover'), {
+        container: 'body'
+    })
+</script>

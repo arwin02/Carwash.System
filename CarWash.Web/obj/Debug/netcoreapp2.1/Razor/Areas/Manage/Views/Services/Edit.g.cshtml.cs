@@ -51,7 +51,7 @@ namespace AspNetCore
             WriteLiteral("\r\n<br /><br /><br />\r\n<br />\r\n<h1 class=\"text-center\">Edit Service</h1>\r\n<hr />\r\n<br /><br />\r\n<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col\">\r\n            ");
             EndContext();
             BeginContext(322, 2243, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "28bf15c1e3e94ca494a669c451db3541", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "851ff33597bf493785f8da18660b19a2", async() => {
                 BeginContext(382, 18, true);
                 WriteLiteral("\r\n                ");
                 EndContext();
@@ -165,7 +165,7 @@ WriteAttributeValue("", 2206, Model.Price, 2206, 12, false);
                 WriteLiteral(" aria-describedby=\"priceHelp\" placeholder=\"Enter Price\">\r\n                </div>\r\n\r\n                <div class=\"mt-2\">\r\n                    <button type=\"submit\" class=\"btn btn-primary\">Submit</button>\r\n                    ");
                 EndContext();
                 BeginContext(2442, 78, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "52e31f40f98e4b89bfba0e5ec21ae7cc", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7048bf76101047868e7a0f9ddfb6b1e2", async() => {
                     BeginContext(2510, 6, true);
                     WriteLiteral("Cancel");
                     EndContext();

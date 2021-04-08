@@ -76,7 +76,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("\r\n<br />\r\n<h1 class=\"text-center\">Welcome to Car-Wash-Booking.PH</h1>\r\n<hr />\r\n<br /><br />\r\n\r\n\r\n      <div class=\"d-md-inline-flex\">\r\n          ");
             EndContext();
             BeginContext(239, 56, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a4aa9340dd7f47368fe62132be966c1b", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0b0c469a9060403793fd017ae0ca3a74", async() => {
                 BeginContext(287, 4, true);
                 WriteLiteral("Home");
                 EndContext();
@@ -98,7 +98,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("\r\n          ");
             EndContext();
             BeginContext(307, 100, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e830368326e34d3aaa624c0cfebf7556", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a29621689e944f56b326b05ede73d663", async() => {
                 BeginContext(392, 11, true);
                 WriteLiteral("Booking Car");
                 EndContext();

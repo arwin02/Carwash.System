@@ -22,7 +22,7 @@ namespace CarWash.Web.Infrastructures.Domain.Helpers
             EmailAddress = user.EmailAddress;
             FirstName = user.FirstName;
             LastName = user.LastName;
-            UserId = user.Id.Value;
+            UserId = user.Id;
             Gender = user.Gender;
             PhoneNumber = user.PhoneNumber;
             Roles = roles;
@@ -124,6 +124,12 @@ namespace CarWash.Web.Infrastructures.Domain.Helpers
             }
 
             return WebUser.Roles.Contains(role);
+        }
+
+
+        public static bool IsUserLogggedIn()
+        {
+            return Current.User.Identities.Any(x => x.IsAuthenticated);
         }
 
 

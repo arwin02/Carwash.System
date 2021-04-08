@@ -33,11 +33,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+    <link href="~/vendor/noty/noty.css" rel="stylesheet" type="text/css" />
+    <link href="~/vendor/noty/themes/metroui.css" rel="stylesheet" type="text/css" />
+    <script src="~/vendor/noty/noty.min.js"></script>
+    <style>
+        .noty_bar {
+            z-index: 1000;
+            background-color: beige;
+        }
+    </style>
 
 </head>
 <body>
-   
+
     <partial name="~/Views/Shared/_PartialNavbar.cshtml" />
     <partial name="_CookieConsentPartial" />
 
@@ -46,10 +54,13 @@
         <hr />
         @Html.Partial("~/views/shared/_footer.cshtml")
     </div>
-
+    <script>
+        var currentUser = '@WebID.GetPublicUserId';
+    </script>
     <!-- Vendor JS Files -->
     <script src="~/vendor/jquery/jquery.min.js"></script>
     <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/vendor/jquery.easing/jquery.easing.min.js"></script>
     <script src="~/vendor/php-email-form/validate.js"></script>
     <script src="~/vendor/waypoints/jquery.waypoints.min.js"></script>
@@ -57,6 +68,9 @@
     <script src="~/vendor/owl.carousel/owl.carousel.min.js"></script>
     <script src="~/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="~/vendor/venobox/venobox.min.js"></script>
+    <script src="~/vendor/noty/noty.js"></script>
+    <script src="~/vendor/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/bookingPhase.js"></script>    
 
     <!-- Template Main JS File -->
     <script src="~/js/main.js"></script>

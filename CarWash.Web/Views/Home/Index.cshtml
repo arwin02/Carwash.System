@@ -1,18 +1,23 @@
-﻿@using CarWash.Web.Infrastructures.Domain.Helpers
+﻿@model CarWash.Web.ViewModels.home.IndexViewModel
+@using CarWash.Web.Infrastructures.Domain.Helpers
+@using CarWash.Web.Infrastructures.Domain.Models
 @{
     ViewData["Title"] = "Home Page";
 }
 
 
 <!-- ======= Hero Section ======= -->
-<section id="hero"  style="background:url(../img/cars.png); background-repeat:round" class="d-flex align-items-center justify-content-center">
+<section id="hero" style="background:url(../img/cars.png); background-repeat:round" class="d-flex align-items-center justify-content-center">
     <div class="container position-relative">
         <h1>Welcome to Car-Wash-Booking</h1>
         <h2>
             @*We make sure that your vehicle is clean and shine.*@
             Your Place, Your Time, Your Car is Always in Great Hands With Us!!!
-            <a href="~/booking/costumer/@WebUser.UserId" class="btn-primary">Book here</a>
+            
         </h2>
+        <div class="text-center mt-5">
+            <a href="/booking/index" class="btn btn-lg btn-outline-success">Book a service</a>
+        </div>
 
     </div>
 </section><!-- End Hero -->
@@ -26,7 +31,7 @@
                 <div class="row">
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="assets/img/clients/client-1.png" class="img-fluid" alt="">
+                        <img src="~" class="img-fluid" alt="">
                     </div>
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
@@ -114,142 +119,37 @@
             </div>
         </section>*@<!-- End Counts Section -->
     <!-- ======= Services Section ======= -->
-    <section id="services" class="services">
+    @*<section id="services" class="services">
         <div class="container">
 
             <div class="section-title">
                 <h2>Services</h2>
                 <p>various of services that we offer for our dear costumer</p>
             </div>
-
+          
             <div class="row">
+                @foreach (Service items in Model.Services)
+                {
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="icon-box iconbox-blue">
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="icon-box iconbox-blue">
-                        <div class="icon">
-                            <img src="~/img/services/small.png" style="border-radius:50%;" />
+                            <div class="icon">
+                                <img src="~/images/services/@items.Id/thumbnail.png" style="border-radius:50%;" />
+                            </div>
+                            <br /><br />
+                            <h4><a href="">@items.Vehicle</a></h4>
+                            <p>@items.Price.ToString("F")</p>
+
                         </div>
-                        <h4><a href="">Labor Buff</a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
                     </div>
-                </div>
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="icon-box iconbox-blue">
-                        <div class="icon">
-                            <img src="~/img/services/small.png" style="border-radius:50%;" />
-                        </div>
-                        <h4><a href="">Air </a></h4>
-                        <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
-                    </div>
-                </div>
+                }
 
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="icon-box iconbox-orange ">
-                        <div class="icon">
-                            <img src="~/img/services/small.png" style="border-radius:50%;" />
-                        </div>
-                        <h4><a href="">Labor Wax</a></h4>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="icon-box iconbox-pink">
-                        <div class="icon">
-                            <img src="~/img/services/medium.png" style="border-radius:50%;" />
-                        </div>
-                        <h4><a href="">Spot Glass Water Mark Removal</a></h4>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="icon-box iconbox-yellow">
-                        <div class="icon">
-                            <img src="~/img/services/medium.png" style="border-radius:50%;" />
-                        </div>
-                        <h4><a href="">Interior Dressing</a></h4>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="icon-box iconbox-red">
-                        <div class="icon">
-                            <img src="~/img/services/medium.png" style="border-radius:50%;" />
-                        </div>
-                        <h4><a href="">Exterior Dressing</a></h4>
-                        <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="icon-box iconbox-teal">
-                        <div class="icon">
-                            <img src="~/img/services/large.png" style="border-radius:50%;" />
-                        </div>
-                        <h4><a href="">Spot Paint Light Scratch Correction</a></h4>
-                        <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="icon-box iconbox-teal">
-                        <div class="icon">
-                            <img src="~/img/services/large.png" style="border-radius:50%;" />
-                        </div>
-                        <h4><a href="">Spot Paint Water Mark Removal</a></h4>
-                        <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="icon-box iconbox-teal">
-                        <div class="icon">
-                            <img src="~/img/services/large.png" style="border-radius:50%;" />
-                        </div>
-                        <h4><a href="">Seat Cover Install/Uninstall</a></h4>
-                        <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="icon-box iconbox-teal">
-                        <div class="icon">
-                            <img src="~/img/services/extra large.png" style="border-radius:50%;" />
-                        </div>
-                        <h4><a href="">Seat Cover Install/Uninstall</a></h4>
-                        <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="icon-box iconbox-teal">
-                        <div class="icon">
-                            <img src="~/img/services/extra large.png" style="border-radius:50%;" />
-                        </div>
-                        <h4><a href="">Seat Cover Install/Uninstall</a></h4>
-                        <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                    </div>
-                </div>
-
-
-                <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="icon-box iconbox-teal">
-                        <div class="icon">
-                            <img src="~/img/services/extra large.png" style="border-radius:50%;" />
-                        </div>
-                        <h4><a href="">Seat Cover Install/Uninstall</a></h4>
-                        <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
-                    </div>
-                </div>
 
             </div>
-
+            
         </div>
-    </section><!-- End Services Section -->
+    </section>*@<!-- End Services Section -->
     <!-- ======= Cta Section ======= -->
     @*<section id="cta" class="cta">
             <div class="container">

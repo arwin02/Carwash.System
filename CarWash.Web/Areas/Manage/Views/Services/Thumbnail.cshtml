@@ -1,0 +1,34 @@
+﻿@model CarWash.Web.Areas.Manage.ViewModels.services.ThumbnailViewModel
+@{
+    Layout = "~/areas/manage/views/shared/_forms.cshtml";
+}
+
+
+
+<br />
+<br />
+<br />
+<br />
+<h1 class="text-center">Thumbnail</h1>
+<br />
+<br />
+<div class="text-center">
+    <form action="~/manage/service/update-thumbnail" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <input type="hidden" name="ServiceId" value="@Model.ServiceId" />
+            <label for="Thumbnail" ></label><br />
+            <img src="~/images/service/@Model.ServiceId/thumbnail.png " id="imgProfile" style="width: 216px; height: 150px" class="img-thumbnail mb-3 float-lg-start" />
+            <input type="file" class="form-control" name="thumbnail" />
+
+            @Html.ValidationSummary()
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Upload" class="btn btn-primary" />
+                <a href="~/manage/service/index" class="btn btn-danger">Cancel</a>
+            </div>
+        </div>
+    </form>
+
+</div><hr />

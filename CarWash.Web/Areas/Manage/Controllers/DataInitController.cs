@@ -94,7 +94,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                                Gender = Infrastructures.Domain.Enums.Gender.Male,
                                Password = BCrypt.BCryptHelper.HashPassword("Arwin123", BCrypt.BCryptHelper.GenerateSalt(9)),
                                PhoneNumber = "09123456789",
-                           
+                               MaskUser = true,
                                UserName = "Arwin Tolentino",
 
 
@@ -115,8 +115,8 @@ namespace CarWash.Web.Areas.Manage.Controllers
                               Gender = Infrastructures.Domain.Enums.Gender.Male,
                               Password = BCrypt.BCryptHelper.HashPassword("larich123", BCrypt.BCryptHelper.GenerateSalt(9)),
                               PhoneNumber = "09123456789",
-
-                              UserName = "Larich Tolentino",
+                              MaskUser = true,
+                              UserName = "Larich Morales",
 
 
 
@@ -138,7 +138,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                               Password = BCrypt.BCryptHelper.HashPassword("user123", BCrypt.BCryptHelper.GenerateSalt(9)),
                               PhoneNumber = "09123456789",
                               UserName = "User1 Tester",
-
+                              MaskUser = true,
 
 
 
@@ -155,7 +155,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                 this._context.UserGroups.Add(
                            new Infrastructures.Domain.Models.UserGroup()
                            {
-                               Id = Guid.Parse("f2a67339-22d5-4a59-ad6f-1ce4e6bf09c3"),
+                               Id = Guid.Parse("152e9c2c-492e-47f8-807f-f5e14f507e99"),
                                UserId = Guid.Parse("1bb688b3-3228-48c5-80bb-35050994a8fa"),
                                GroupId = Guid.Parse("97624d06-c1c5-4790-acab-36d5ae507582")
 
@@ -166,7 +166,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                 this._context.UserGroups.Add(
                            new Infrastructures.Domain.Models.UserGroup()
                            {
-                               Id = Guid.Parse("dbe8b2f9-98a3-4813-8a2b-3376a2605327"),
+                               Id = Guid.Parse("d0ceb6af-a54a-45ec-85b5-d35ee4ded484"),
                                UserId = Guid.Parse("a265c0a2-5b7c-4d29-bdf1-f95780d820df"),
                                GroupId = Guid.Parse("dd781d9f-5552-4755-8253-337578045ee2")
 
@@ -177,7 +177,20 @@ namespace CarWash.Web.Areas.Manage.Controllers
                            });
 
 
-              
+                this._context.UserGroups.Add(
+                           new Infrastructures.Domain.Models.UserGroup()
+                           {
+                               Id = Guid.Parse("f88fe5cc-4ff8-4313-889d-1fd2301e633c"),
+                               UserId = Guid.Parse("f0c0f3ab-7cb6-48fd-abe8-45dc2d5c1bf1"),
+                               GroupId = Guid.Parse("f3e1021c-ada6-4e87-90d1-461e7c0768f1")
+
+
+
+
+
+                           });
+
+
             }
             #endregion
 
@@ -188,7 +201,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                 this._context.UserRoles.Add(
                            new Infrastructures.Domain.Models.UserRole()
                            {
-                               Id = Guid.Parse("1bb688b3-3228-48c5-80bb-35050994a8fa"),
+                               Id = Guid.Parse("267b62b0-80cd-45e1-b4b9-8dbc8aa82c83"),
                                UserId = Guid.Parse("1bb688b3-3228-48c5-80bb-35050994a8fa"),
                                Role = Infrastructures.Domain.Enums.Role.ContentAdmin,
 
@@ -200,7 +213,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                 this._context.UserRoles.Add(
                            new Infrastructures.Domain.Models.UserRole()
                            {
-                               Id = Guid.Parse("804970a0-63b4-4d43-8ada-4dca94ea1fec"),
+                               Id = Guid.Parse("8324183b-61ea-49d8-aac3-c637f5181c70"),
                                UserId = Guid.Parse("a265c0a2-5b7c-4d29-bdf1-f95780d820df"),
                                Role = Infrastructures.Domain.Enums.Role.Admin,
 
@@ -213,7 +226,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                 this._context.UserRoles.Add(
                        new Infrastructures.Domain.Models.UserRole()
                        {
-                           Id = Guid.Parse("2d237735-2473-4d4b-a926-c1d74b1f03ea"),
+                           Id = Guid.Parse("6165c70c-5a96-4c6b-8400-e30b73b4dc74"),
                            UserId = Guid.Parse("f0c0f3ab-7cb6-48fd-abe8-45dc2d5c1bf1"),
                            Role = Infrastructures.Domain.Enums.Role.User,
 
@@ -232,65 +245,169 @@ namespace CarWash.Web.Areas.Manage.Controllers
 
             if (this._context.Services.Count() < 1)
             {
-                this._context.Services.Add(
-                        new Infrastructures.Domain.Models.Service()
-                        {
-                            Vehicle = "Small",
-                            Description = "Pressurised Body Wash," + "Foam Cannon Wash(Synthetic Wax & Conditioner)" + ",   Air Blow Dry" + ", Interior Vacuum and Cleaning" + ",  Glass Cleaning" + ",   Tire and Wheel Shine" + ", Engine Wipe",
-                            CreatedAt = DateTime.UtcNow,
-                            UpdatedAt = DateTime.UtcNow,
-                            Id = Guid.Parse("48c17352-e45f-46b8-b288-532dfd989f43"),
-                            Price = 260,
-                            ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
-
-                        });
-
-                this._context.Services.Add(
-                      new Infrastructures.Domain.Models.Service()
-                      {
-                          Vehicle = "Medium",
-                          Description = "Waterless wash light to medium Dirt or Stain," + " Bead and Shine Chemical Wash(Carnauba, Polymer and Siloxane)," + ", Tire and Wheel Shine" + "  Plush Microfiber Towel Hand Dry," + "  Engine Wipe",                       
-                          CreatedAt = DateTime.UtcNow,
-                          UpdatedAt = DateTime.UtcNow,
-                          Id = Guid.Parse("cade2002-37c6-4beb-a731-9ca411be158f"),
-                          Price = 450,
-                          ServiceType = Infrastructures.Domain.Enums.ServiceType.Waterless,
-
-                      });
-
-                this._context.Services.Add(
-                        new Infrastructures.Domain.Models.Service()
-                        {
-                            Vehicle = "Large",
-                            Description = "  Pressurised Body Wash," + " Paint Degrimming and Tar Removal," + " Foam Cannon Wash(Synthetic Wash and Conditioner)," + "   Air Blow Dry," + "   Interior Vacuum and Cleaning,"+ "DA1.0 paint Cleaning and Degreasing," + "  J1.0 Sealant Wax Spray(Carnauba, Polymer, Siloxane)" + "Glass Cleaning," + "Tire and Wheel Shine," + " Engine wipe",
-                             CreatedAt = DateTime.UtcNow,
-                            UpdatedAt = DateTime.UtcNow,
-                            Id = Guid.Parse("4ea25ac2-48fe-4362-a397-a1c2db9f91db"),
-                            Price = 1000,
-                            ServiceType = Infrastructures.Domain.Enums.ServiceType.Shine,
-
-                        });
-
-                this._context.Services.Add(
-                    new Infrastructures.Domain.Models.Service()
-                    {
-                        Vehicle = "Extra Large",
-                        Description = "  Pressurised Body Wash," + "  Paint Degrimming and Tar Removal," + "Foam Cannon Wash(Synthetic Wash and Conditioner)," + " Air Blow Dry,"+ " Interior Vacuum and Cleaning," + "  DA1.0 paint Cleaning and Degreasing," + " J1.0 Sealant Wax Spray(Carnauba, Polymer, Siloxane)," + " Glass Cleaning," 
-                        + " Tire and Wheel Shine," + "NJ1.0 Engine Degreasing / Wipe Down," + " Zero Bacteria ",
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow,
-                        Id = Guid.Parse("117b87c1-8f39-4b64-8a54-4bed313afb87"),
-                        Price = 3000,
-                        ServiceType = Infrastructures.Domain.Enums.ServiceType.Signature,
-
-                    });
-
-
-
+                //Manual-Individual-Wash-Services
                 this._context.Services.Add(
                   new Infrastructures.Domain.Models.Service()
                   {
-                      Vehicle = "MICRO" + "" +"(Small)",
+                      Vehicle = "Mr. Sponge's Economy Wash",
+                      Description = "Small",
+                      CreatedAt = DateTime.UtcNow,
+                      UpdatedAt = DateTime.UtcNow,
+                      Id = Guid.Parse("b0b923f7-74f4-4eb1-9832-23b772979da8"),
+                      Price = 129, 
+                      ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+
+                  });
+
+                this._context.Services.Add(
+                 new Infrastructures.Domain.Models.Service()
+                 {
+                     Vehicle = "Mr. Sponge’s Classic Swag (w/ vacuum)",
+                     Description = "Small",
+                     CreatedAt = DateTime.UtcNow,
+                     UpdatedAt = DateTime.UtcNow,
+                     Id = Guid.Parse("7e4afd49-3d01-4bce-89c0-b4c18d06bf08"),
+                     Price = 159,
+                     ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+
+                 });
+
+                this._context.Services.Add(
+                new Infrastructures.Domain.Models.Service()
+                {
+                    Vehicle = "Wash and Wax Deluxe",
+                    Description = "Small",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    Id = Guid.Parse("f937603b-693a-4ba8-b38d-6b2e21c9962f"),
+                    Price = 499,
+                    ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+
+                });
+
+                this._context.Services.Add(
+                new Infrastructures.Domain.Models.Service()
+                {
+                    Vehicle = "Mr. Sponge's Economy Wash",
+                    Description = "Medium ",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    Id = Guid.Parse("f4ae51f3-629c-48ec-8695-f978f4c8e7a8"),
+                    Price = 149,
+                    ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+
+                });
+
+                this._context.Services.Add(
+                 new Infrastructures.Domain.Models.Service()
+                 {
+                     Vehicle = "Mr. Sponge’s Classic Swag (w/ vacuum)",
+                     Description = "Medium",
+                     CreatedAt = DateTime.UtcNow,
+                     UpdatedAt = DateTime.UtcNow,
+                     Id = Guid.Parse("c12cf5b4-a65c-461b-b5a5-9c05febef41a"),
+                     Price = 179,
+                     ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+
+                 });
+
+                this._context.Services.Add(
+                new Infrastructures.Domain.Models.Service()
+                {
+                    Vehicle = "Wash and Wax Deluxe",
+                    Description = "Medium",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    Id = Guid.Parse("4a5958f0-872f-4488-9170-e84d176743c6"),
+                    Price = 519,
+                    ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+
+                });
+
+                this._context.Services.Add(
+              new Infrastructures.Domain.Models.Service()
+              {
+                  Vehicle = "Mr. Sponge's Economy Wash",
+                  Description = "Large ",
+                  CreatedAt = DateTime.UtcNow,
+                  UpdatedAt = DateTime.UtcNow,
+                  Id = Guid.Parse("91ae4d5f-ae88-4ba8-ac37-892cc2b16305"),
+                  Price = 169,
+                  ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+
+              });
+
+                this._context.Services.Add(
+                 new Infrastructures.Domain.Models.Service()
+                 {
+                     Vehicle = "Mr. Sponge’s Classic Swag (w/ vacuum)",
+                     Description = "Large",
+                     CreatedAt = DateTime.UtcNow,
+                     UpdatedAt = DateTime.UtcNow,
+                     Id = Guid.Parse("b25f14a3-16da-4ba1-95c0-a8bd41816613"),
+                     Price = 199,
+                     ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+
+                 });
+
+                this._context.Services.Add(
+                new Infrastructures.Domain.Models.Service()
+                {
+                    Vehicle = "Wash and Wax Deluxe",
+                    Description = "Large",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    Id = Guid.Parse("d913bb7c-2a68-484e-a197-ab199add60d0"),
+                    Price = 539,
+                    ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+
+                });
+
+
+                this._context.Services.Add(
+              new Infrastructures.Domain.Models.Service()
+              {
+                  Vehicle = "Mr. Sponge's Economy Wash",
+                  Description = "Extra" + " " + "Large",
+                  CreatedAt = DateTime.UtcNow,
+                  UpdatedAt = DateTime.UtcNow,
+                  Id = Guid.Parse("bff598dd-79c7-4dd1-a0c1-f7d46f3984e9"),
+                  Price = 189,
+                  ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+
+              });
+
+                this._context.Services.Add(
+                 new Infrastructures.Domain.Models.Service()
+                 {
+                     Vehicle = "Mr. Sponge’s Classic Swag (w/ vacuum)",
+                     Description = "Extra" + " " + "Large",
+                     CreatedAt = DateTime.UtcNow,
+                     UpdatedAt = DateTime.UtcNow,
+                     Id = Guid.Parse("0d472148-341e-4121-8ffb-73904db002c3"),
+                     Price = 219,
+                     ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+
+                 });
+
+                this._context.Services.Add(
+                new Infrastructures.Domain.Models.Service()
+                {
+                    Vehicle = "Wash and Wax Deluxe",
+                    Description = "Extra" + " " + "Large",
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    Id = Guid.Parse("4fffb666-2ccd-4750-878b-a84350be46bd"),
+                    Price = 559,
+                    ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+
+                });
+
+                //Auto-Package-Wash-Services
+                this._context.Services.Add(
+                  new Infrastructures.Domain.Models.Service()
+                  {
+                      Vehicle = "MICRO" + " " +"(Small)",
                       Description = "Pressurised Body Wash," + "Foam Cannon Wash(Synthetic Wax & Conditioner)" + ",   Air Blow Dry" + ", Interior Vacuum and Cleaning" + ",  Glass Cleaning" + ",   Tire and Wheel Shine" + ", Engine Wipe",
                       CreatedAt = DateTime.UtcNow,
                       UpdatedAt = DateTime.UtcNow,
@@ -341,8 +458,8 @@ namespace CarWash.Web.Areas.Manage.Controllers
 
                    });
 
-             
 
+                //Auto-Package-Waterless-Services
                 this._context.Services.Add(
                    new Infrastructures.Domain.Models.Service()
                    {
@@ -409,7 +526,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                });
 
 
-
+                //Auto-Package-Shine-Services
                 this._context.Services.Add(
                       new Infrastructures.Domain.Models.Service()
                       {
@@ -450,8 +567,8 @@ namespace CarWash.Web.Areas.Manage.Controllers
 
                   });
 
-
-                    this._context.Services.Add(
+                //Auto-Package-Signature-Services
+                this._context.Services.Add(
                 new Infrastructures.Domain.Models.Service()
                 {
                     Vehicle = "LIMOUSINE" + "" + "EXTRA LARGE",
@@ -461,7 +578,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                     UpdatedAt = DateTime.UtcNow,
                     Id = Guid.Parse("d8de9aaf-8e4f-4b45-9486-451032d4696a"),
                     Price = 3000,
-                    ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+                    ServiceType = Infrastructures.Domain.Enums.ServiceType.Signature,
 
                 });
 
@@ -475,7 +592,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                   UpdatedAt = DateTime.UtcNow,
                   Id = Guid.Parse("f109a8ff-e169-4191-8916-eae435484327"),
                   Price = 3000,
-                  ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+                  ServiceType = Infrastructures.Domain.Enums.ServiceType.Signature,
 
               });
 
@@ -490,7 +607,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                  UpdatedAt = DateTime.UtcNow,
                  Id = Guid.Parse("37379123-92b9-4234-b403-1a0f3674f19e"),
                  Price = 3000,
-                 ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+                 ServiceType = Infrastructures.Domain.Enums.ServiceType.Signature,
 
              });
 
@@ -505,7 +622,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                  UpdatedAt = DateTime.UtcNow,
                  Id = Guid.Parse("e7bedc19-d3c2-47b2-b710-97b1de1faec7"),
                  Price = 3000,
-                 ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+                 ServiceType = Infrastructures.Domain.Enums.ServiceType.Signature,
 
              });
             }
@@ -524,18 +641,21 @@ namespace CarWash.Web.Areas.Manage.Controllers
                 this._context.Bookings.Add(
                            new Infrastructures.Domain.Models.Booking()
                            {
-                               Id = Guid.Parse("4fd5b1b2-7031-48b2-9ec4-f402daeb62b0"),
+                               Id = Guid.Parse("95729086-13dd-4e93-b01e-d1834b4b32be"),
                                BookingAddress = "Dinalupihan,Bataan",
-                               CostumerId = Guid.Parse("1bb688b3-3228-48c5-80bb-35050994a8fa"),
+                               UserId = Guid.Parse("1bb688b3-3228-48c5-80bb-35050994a8fa"),
+                               Title = "MICRO" + "" + "(Small)",
+                               ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+                               Description = "Pressurised Body Wash," + "Foam Cannon Wash(Synthetic Wax & Conditioner)" + ",   Air Blow Dry" + ", Interior Vacuum and Cleaning" + ",  Glass Cleaning" + ",   Tire and Wheel Shine" + ", Engine Wipe",
+                               Email = "arwintolentino@gmail.com",
+                               UserName = "Arwin Tolentino",
+                               Price = 260,
+                               BookingStatus = Infrastructures.Domain.Enums.BookingStatus.Pending,
+                               PhoneNumber = "09123456789",
                                CreatedAt = DateTime.UtcNow,
                                UpdatedAt = DateTime.UtcNow,
                                Time = "3:45 PM",
                                ServiceId = Guid.Parse("77e2ced2-05c5-4cb5-a5c3-feb92f2f5f10"),
-                               
-                               
-
-
-
 
                            });
 
@@ -543,12 +663,19 @@ namespace CarWash.Web.Areas.Manage.Controllers
                 this._context.Bookings.Add(
                            new Infrastructures.Domain.Models.Booking()
                            {
-                               Id = Guid.Parse("6e69691a-6f1a-4227-ad59-d8340348f38f"),
+                               Id = Guid.Parse("a17cc642-4616-44d3-a5ee-f1ade9442d38"),
                                BookingAddress = "Dinalupihan,Bataan",
-                               CostumerId = Guid.Parse("a265c0a2-5b7c-4d29-bdf1-f95780d820df"),
+                               UserId = Guid.Parse("a265c0a2-5b7c-4d29-bdf1-f95780d820df"),
+                               Title = "SEDAN" + "" + "(Small)",
+                               ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+                               Description = "Pressurised Body Wash," + "Foam Cannon Wash(Synthetic Wax & Conditioner)" + ",   Air Blow Dry" + ", Interior Vacuum and Cleaning" + ",  Glass Cleaning" + ",   Tire and Wheel Shine" + ", Engine Wipe",
+                               Email = "larichmorales@gmail.com",
+                               UserName = "Larich Morales",
+                               Price = 260,
+                               BookingStatus = Infrastructures.Domain.Enums.BookingStatus.Pending,
+                               PhoneNumber = "09123456789",
                                CreatedAt = DateTime.UtcNow,
                                UpdatedAt = DateTime.UtcNow,
-                      
                                Time = "3:45 PM",
                                ServiceId = Guid.Parse("bb8a61ba-a5bf-4026-9c86-0d7575d0df9d"),
                           
@@ -563,9 +690,17 @@ namespace CarWash.Web.Areas.Manage.Controllers
                 this._context.Bookings.Add(
                            new Infrastructures.Domain.Models.Booking()
                            {
-                               Id = Guid.Parse("510b2356-f08a-4b46-a5ab-f4bc2b4d5f93"),
+                               Id = Guid.Parse("dffa8f94-fd53-443c-8f3d-3cad56ce547a"),
                                BookingAddress = "Dinalupihan,Bataan",
-                               CostumerId = Guid.Parse("f0c0f3ab-7cb6-48fd-abe8-45dc2d5c1bf1"),
+                               UserId = Guid.Parse("f0c0f3ab-7cb6-48fd-abe8-45dc2d5c1bf1"),
+                               Title = "HATCHBACK" + "" + "(Small)",
+                               ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
+                               Description = "Pressurised Body Wash," + "Foam Cannon Wash(Synthetic Wax & Conditioner)" + ",   Air Blow Dry" + ", Interior Vacuum and Cleaning" + ",  Glass Cleaning" + ",   Tire and Wheel Shine" + ", Engine Wipe",
+                                Email = "user1@gmail.com",
+                               UserName = "User Tester",
+                               Price = 240,
+                               BookingStatus = Infrastructures.Domain.Enums.BookingStatus.Pending,
+                               PhoneNumber = "",
                                CreatedAt = DateTime.UtcNow,
                                UpdatedAt = DateTime.UtcNow,
                                Time = "3:45 PM",
@@ -577,17 +712,17 @@ namespace CarWash.Web.Areas.Manage.Controllers
             }
             #endregion
 
-            foreach (Booking booking in _context.Bookings)
-            {
-                var bookingDataBase = this._context.Bookings.Where(b =>
-                    b.ServiceId == booking.ServiceId &&
-                    b.CostumerId == booking.CostumerId).SingleOrDefault();
+            //foreach (Booking booking in _context.Bookings)
+            //{
+            //    var bookingDataBase = this._context.Bookings.Where(b =>
+            //        b.ServiceId == booking.ServiceId &&
+            //        b.CostumerId == booking.CostumerId).SingleOrDefault();
 
-                if(bookingDataBase == null)
-                {
-                    _context.Bookings.Add(booking);
-                }
-            }
+            //    if(bookingDataBase == null)
+            //    {
+            //        _context.Bookings.Add(booking);
+            //    }
+            //}
 
             this._context.SaveChanges();
             return Ok("Ok");

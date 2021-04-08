@@ -19,22 +19,34 @@ namespace CarWash.Web.Controllers
         protected readonly IConfiguration _config;
         private IHostingEnvironment _env;
 
-        public HomeController(DefaultDbContext context, IConfiguration config, IHostingEnvironment env)
+        public HomeController(DefaultDbContext context)
         {
             _context = context;
-            _config = config;
-            _env = env;
-
-
 
         }
-
+    
+    
 
         public IActionResult Index()
         {
-            return View();
+            return View(new IndexViewModel
+            {
+                Services = FeedServices(1)
+            });
         }
+        
 
+        [HttpGet, Route("home/feed-services")]
+        public List<Service> FeedServices(int pageIndex)
+        {
+            int skip = (int)(3 * (pageIndex - 1));
+            return this._context.Services
+                                .Where(s => s.Id != null)
+                                .OrderBy(s => s.CreatedAt)
+                                .Skip(skip)
+                                .Take(15)
+                                .ToList();
+        }
 
         [HttpGet, Route("/home/pricing")]
         public IActionResult Pricing()

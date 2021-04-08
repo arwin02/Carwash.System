@@ -16,6 +16,8 @@
                         </div>
                     </div>
                     <form action="/account/register" method="post" name="Register">
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary()
                         <div class="form-group">
                             <label for="firstname">First Name </label>
                             <input type="text" name="FirstName" class="form-control" id="firstname" aria-describedby="firstnameHelp" placeholder="Enter First name">
@@ -45,12 +47,12 @@
                             <label for="confirmpassword">Confirm Password</label>
                             <input type="password" name="ConfirmPassword" id="confirmpassword" class="form-control" aria-describedby="confirmpasswordHelp" placeholder="Enter Confirm Password">
                         </div>
-                    
+
                         <br />
                         <div class="col-md-12 text-center ">
                             <button type="submit" value="Login" class=" btn btn-block mybtn btn-primary tx-tfm">Register</button>
                         </div>
-                    
+
                         @*<div class="col-md-12 mb-3">
             <p class="text-center">
                 <a href="javascript:void();" class="google btn mybtn">
@@ -59,7 +61,7 @@
                 </a>
             </p>
         </div>*@
-                       
+
                     </form>
 
                 </div>

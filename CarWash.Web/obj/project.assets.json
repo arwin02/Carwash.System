@@ -11,6 +11,15 @@
           "lib/netcoreapp2.0/BCrypt-Core.dll": {}
         }
       },
+      "jQuery/1.8.0": {
+        "type": "package"
+      },
+      "jquery.noty/2.3.5": {
+        "type": "package",
+        "dependencies": {
+          "jQuery": "1.8.0"
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -4688,6 +4697,52 @@
         "bcrypt-core.2.0.0.nupkg.sha512",
         "bcrypt-core.nuspec",
         "lib/netcoreapp2.0/BCrypt-Core.dll"
+      ]
+    },
+    "jQuery/1.8.0": {
+      "sha512": "laDFQRJrIRHT0Z0GVYklMt3bE0iu0MZFJwHwg21kt3SHb7Bj8TdNiM3K+ZdK1DzB8ZxKy8z7NkJvwMas+dmHBw==",
+      "type": "package",
+      "path": "jquery/1.8.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/jquery-1.8.0-vsdoc.js",
+        "Content/Scripts/jquery-1.8.0.js",
+        "Content/Scripts/jquery-1.8.0.min.js",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/jquery-1.8.0.intellisense.js",
+        "Tools/uninstall.ps1",
+        "jquery.1.8.0.nupkg.sha512",
+        "jquery.nuspec"
+      ]
+    },
+    "jquery.noty/2.3.5": {
+      "sha512": "dBc9chVw6FGO1JKlZpbqEpJ7tQdacNl5vZKcrduLWfvEMaKretP3KkVTyy2nsLJVEtiFJDRAduPBnv7eBph9cA==",
+      "type": "package",
+      "path": "jquery.noty/2.3.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/Scripts/noty/jquery.noty.js",
+        "content/Scripts/noty/layouts/bottom.js",
+        "content/Scripts/noty/layouts/bottomCenter.js",
+        "content/Scripts/noty/layouts/bottomLeft.js",
+        "content/Scripts/noty/layouts/bottomRight.js",
+        "content/Scripts/noty/layouts/center.js",
+        "content/Scripts/noty/layouts/centerLeft.js",
+        "content/Scripts/noty/layouts/centerRight.js",
+        "content/Scripts/noty/layouts/inline.js",
+        "content/Scripts/noty/layouts/top.js",
+        "content/Scripts/noty/layouts/topCenter.js",
+        "content/Scripts/noty/layouts/topLeft.js",
+        "content/Scripts/noty/layouts/topRight.js",
+        "content/Scripts/noty/themes/bootstrap.js",
+        "content/Scripts/noty/themes/default.js",
+        "content/Scripts/noty/themes/relax.js",
+        "jquery.noty.2.3.5.nupkg.sha512",
+        "jquery.noty.nuspec"
       ]
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -12763,7 +12818,8 @@
       "Microsoft.NETCore.App >= 2.1.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.1.9",
       "Pomelo.EntityFrameworkCore.MySql >= 2.1.1",
-      "SixLabors.ImageSharp >= 1.0.2"
+      "SixLabors.ImageSharp >= 1.0.2",
+      "jquery.noty >= 2.3.5"
     ]
   },
   "packageFolders": {
@@ -12842,6 +12898,10 @@
           "SixLabors.ImageSharp": {
             "target": "Package",
             "version": "[1.0.2, )"
+          },
+          "jquery.noty": {
+            "target": "Package",
+            "version": "[2.3.5, )"
           }
         },
         "imports": [

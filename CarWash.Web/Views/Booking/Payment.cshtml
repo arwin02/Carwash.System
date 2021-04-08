@@ -1,0 +1,119 @@
+﻿@model CarWash.Web.ViewModels.payment.PaymentGatewayViewModel
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<div class="section-title mt-5">
+    <h2>Payment-Gateway</h2>
+   
+</div>
+
+<div class="container py-5" id="featured-3">
+    <div class="pb-2 border-bottom">
+        <div class="row">
+            <div class="col-6">
+                <h4>Our GCASH REFERAL #: 11111</h4>
+            </div>
+            <div class="col-6">
+                <h4>Our PAYMAYA REFERAL #: 11111</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row g-5 py-5">
+        <div class="feature col-md-6">
+            <div class="feature-icon bg-primary bg-gradient">
+                <img src="~/img/payment-gateway/gcash.jpg" width="620" height="200" alt="gcash"/>
+            </div>
+            <div class="text-center">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#gcashModal">
+                    <h2>GCASH PAYMENT</h2>
+                </a>
+            </div>
+            
+        </div>
+
+        <div class="feature col-md-6">
+            <div class="feature-icon bg-primary bg-gradient">
+                <img src="~/img/payment-gateway/paymaya.jpg" width="620" height="200" alt="gcash" />
+            </div>
+            <div class="text-center">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#paymayaModal">
+                    <h2>PAYMAYA PAYMENT</h2>
+                </a>
+            </div>
+           
+           
+        </div>
+
+      
+    </div>
+</div>
+
+
+
+<!--Gcash Modal -->
+<div class="modal fade" id="gcashModal" tabindex="-1" aria-labelledby="gcashModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">GCASH PAYMENT</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="~/booking/payment-image" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="UserId" value="@WebID.GetPublicUserId" />
+                        <label for="PaymentImage">Payment Image:</label><br />
+                        <img src="~/images/payments-gateway/@WebID.GetPublicUserId/payment-gateway.png" style="max-width:400px;max-height:700px;" /></br></br>
+                        <input type="file" class="form-control" name="PaymentImage" />
+                        @Html.ValidationSummary()
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="submit" value="Upload" />
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Paymaya Modal -->
+<div class="modal fade" id="paymayaModal" tabindex="-1" aria-labelledby="paymayaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">PAYMAYA PAYMENT</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="~/booking/payment-image" method="post">
+                    <div class="form-group">
+                        <input type="hidden" name="UserId" value="@WebID.GetPublicUserId" />
+                        <label for="PaymentImage">Payment Image:</label><br />
+                        <img src="~/images/payments-gateway/@WebID.GetPublicUserId/payment-gateway.png" style="max-width:400px;max-height:700px;" /></br></br>
+                        <input type="file" class="form-control" name="PaymentImage" />
+                        @Html.ValidationSummary()
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="submit" value="Upload" />
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      
+            </div>
+        </div>
+    </div>
+</div>

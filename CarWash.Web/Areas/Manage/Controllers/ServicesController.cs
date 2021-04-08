@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CarWash.Web.Areas.Manage.ViewModels.services;
@@ -11,6 +12,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 
 namespace CarWash.Web.Areas.Manage.Controllers
 {
@@ -222,5 +226,79 @@ namespace CarWash.Web.Areas.Manage.Controllers
 
             return View();
         }
+
+
+        [Authorize(Policy = "AuthorizeAdmin")]
+        [HttpGet, Route("/manage/service/update-thumbnail/{serviceId}")]
+        public IActionResult Thumbnail(Guid? serviceId)
+        {
+            return View(new ThumbnailViewModel() { ServiceId = serviceId });
+        }
+
+
+        [Authorize(Policy = "AuthorizeAdmin")]
+        [HttpPost, Route("/manage/service/update-thumbnail")]
+        public async Task<IActionResult> Thumbnail(ThumbnailViewModel model)
+        {
+            //Check file size of the uploaded thumbnail
+            //reject if the file is greater than 2mb
+            var fileSize = model.Thumbnail.Length;
+            if ((fileSize / 1048576.0) > 2)
+            {
+                ModelState.AddModelError("", "The file you uploaded is too large. Filesize limit is 2mb.");
+                return View(model);
+            }
+            //Check file type of the uploaded thumbnail
+            //reject if the file is not a jpeg or png
+            if (model.Thumbnail.ContentType != "image/jpeg" && model.Thumbnail.ContentType != "image/png")
+            {
+                ModelState.AddModelError("", "Please upload a jpeg or png file for the thumbnail.");
+                return View(model);
+            }
+            //Formulate the directory where the file will be saved
+            //create the directory if it does not exist
+            var dirPath = _env.WebRootPath + "/images/services/" + model.ServiceId.ToString();
+            if (!Directory.Exists(dirPath))
+            {
+                Directory.CreateDirectory(dirPath);
+            }
+            //always name the file thumbnail.png
+            var filePath = dirPath + "/thumbnail.png";
+            if (model.Thumbnail.Length > 0)
+
+            {
+                //Open a file stream to read all the file data into a byte array
+                byte[] bytes = await FileBytes(model.Thumbnail.OpenReadStream());
+                //load the file into the third party (ImageSharp) Nuget Plugin                
+                using (Image<Rgba32> image = Image.Load(bytes))
+                {
+                    //use the Mutate method to resize the image 150px wide by 150px long
+                    image.Mutate(x => x.Resize(215, 150));
+                    //save the image into the path formulated earlier
+                    image.Save(filePath);
+                }
+            }
+            return RedirectToAction("Thumbnail", new { ServiceId = model.ServiceId });
+        }
+
+
+
+
+        #region Helpers
+        public async Task<byte[]> FileBytes(Stream input)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
+        }
+
+        #endregion
     }
 }

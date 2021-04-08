@@ -76,7 +76,7 @@
                         <td>@service.ServiceType</td>
                         <td>
                             <a href="~/manage/service/details/@service.Id" title="Service Details"><button type="button" class="btn"><i class="fas fa-info"></i></button></a>
-
+                            <a href="~/manage/service/update-thumbnail/@service.Id" title="Thumbnail"><button type="button" class="btn"><i class="fa fa-image"></i></button></a>
                             <a href="#" onclick="confirmDeleteService('@service.Id', '@service.Vehicle')" title="Delete Service"><button type="button" class="btn"><i class="fas fa-times"></i></button></a>
                         </td>
                     </tr>

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "a1510c7602c82110317a3dda4959e3863edf3f44"
+    "signature": "3af710da139f3db46c48a4a5cb88874ac2f9abf0"
   },
   "compilationOptions": {
     "defines": [
@@ -31,7 +31,8 @@
           "Microsoft.NETCore.App": "2.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.1.9",
           "Pomelo.EntityFrameworkCore.MySql": "2.1.1",
-          "SixLabors.ImageSharp": "1.0.2"
+          "SixLabors.ImageSharp": "1.0.2",
+          "jquery.noty": "2.3.5"
         },
         "runtime": {
           "CarWash.Web.dll": {}
@@ -49,6 +50,12 @@
         },
         "compile": {
           "lib/netcoreapp2.0/BCrypt-Core.dll": {}
+        }
+      },
+      "jQuery/1.8.0": {},
+      "jquery.noty/2.3.5": {
+        "dependencies": {
+          "jQuery": "1.8.0"
         }
       },
       "Microsoft.AspNetCore.Razor.Design/2.1.2": {},
@@ -3546,6 +3553,20 @@
       "sha512": "sha512-g6CJ6ixfOjyLkyuQIQn61Isb4ee+0Q0eqsNn0fHB+s5kbChNU9zETXafDD83SN+1eU/QWPSL5f2lTM0PG9mGVg==",
       "path": "bcrypt-core/2.0.0",
       "hashPath": "bcrypt-core.2.0.0.nupkg.sha512"
+    },
+    "jQuery/1.8.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-laDFQRJrIRHT0Z0GVYklMt3bE0iu0MZFJwHwg21kt3SHb7Bj8TdNiM3K+ZdK1DzB8ZxKy8z7NkJvwMas+dmHBw==",
+      "path": "jquery/1.8.0",
+      "hashPath": "jquery.1.8.0.nupkg.sha512"
+    },
+    "jquery.noty/2.3.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dBc9chVw6FGO1JKlZpbqEpJ7tQdacNl5vZKcrduLWfvEMaKretP3KkVTyy2nsLJVEtiFJDRAduPBnv7eBph9cA==",
+      "path": "jquery.noty/2.3.5",
+      "hashPath": "jquery.noty.2.3.5.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Razor.Design/2.1.2": {
       "type": "package",

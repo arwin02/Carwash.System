@@ -114,7 +114,6 @@ namespace CarWash.Web.Controllers
                         var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
 
                         WebUser.SetUser(user, roles, groups);
-
                         await this.SignIn();
 
 
@@ -134,7 +133,7 @@ namespace CarWash.Web.Controllers
                         var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
 
                         WebUser.SetUser(user, roles, groups);
-
+                        WebID.SetAdminId(user.Id);
                         await this.SignIn();
 
 
@@ -154,12 +153,12 @@ namespace CarWash.Web.Controllers
                         var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
                       
                         WebUser.SetUser(user, roles, groups);
-
+                        WebID.SetUserId(user.Id);
                         await this.SignIn();
 
 
                         //return RedirectPermanent("~/booking/bookings-costumer/" + user.Id);
-                        return Redirect("/booking/costumer/" + user.Id);
+                        return Redirect("/booking/index");
 
                     }
                     else
@@ -471,18 +470,39 @@ namespace CarWash.Web.Controllers
         public IActionResult Profile(Guid? userId)
         {
             var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
-
-
+            var myBookViews = this._context.Bookings.Where(ub => ub.UserId == userId)
+                                        .OrderByDescending(ub => ub.CreatedAt)
+                                        .Take(5)
+                                        .Select(ub => new MyBookViewModel()
+                                        {
+                                            Id = ub.Id,
+                                            ServiceId = ub.ServiceId,
+                                            Title = ub.Title,
+                                            ServiceType = ub.ServiceType,
+                                            VehicleType = ub.VehicleType,
+                                            BookingAddress = ub.BookingAddress,
+                                            PhoneNumber = ub.PhoneNumber,
+                                            Description = ub.Description,
+                                            BookingStatus = ub.BookingStatus,
+                                            Email = ub.Email,
+                                            Time = ub.Time,
+                                            Price = ub.Price,
+                                           
+                                        }).ToList();
 
             return View(new ProfileViewModel
             {
+                Id = userId,
+                Items = myBookViews,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 EmailAddress = user.EmailAddress,
                 Gender = user.Gender,
                 PhoneNumber = user.PhoneNumber,
                 UserName = user.UserName,
-    
+                MaskUser = user.MaskUser,
+             
+
             });
 
         }
@@ -500,45 +520,55 @@ namespace CarWash.Web.Controllers
         [HttpPost, Route("/account/update-thumbnail")]
         public async Task<IActionResult> Thumbnail(ThumbnailViewModel model)
         {
-            //Check file size of the uploaded thumbnail
-            //reject if the file is greater than 2mb
-            var fileSize = model.Thumbnail.Length;
-            if ((fileSize / 1048576.0) > 2)
+            var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
+            if(user != null)
             {
-                ModelState.AddModelError("", "The file you uploaded is too large. Filesize limit is 2mb.");
-                return View(model);
-            }
-            //Check file type of the uploaded thumbnail
-            //reject if the file is not a jpeg or png
-            if (model.Thumbnail.ContentType != "image/jpeg" && model.Thumbnail.ContentType != "image/png")
-            {
-                ModelState.AddModelError("", "Please upload a jpeg or png file for the thumbnail.");
-                return View(model);
-            }
-            //Formulate the directory where the file will be saved
-            //create the directory if it does not exist
-            var dirPath = _env.WebRootPath + "/images/users/" + model.UserId.ToString();
-            if (!Directory.Exists(dirPath))
-            {
-                Directory.CreateDirectory(dirPath);
-            }
-            //always name the file thumbnail.png
-            var filePath = dirPath + "/thumbnail.png";
-            if (model.Thumbnail.Length > 0)
-
-            {
-                //Open a file stream to read all the file data into a byte array
-                byte[] bytes = await FileBytes(model.Thumbnail.OpenReadStream());
-                //load the file into the third party (ImageSharp) Nuget Plugin                
-                using (Image<Rgba32> image = Image.Load(bytes))
+                //Check file size of the uploaded thumbnail
+                //reject if the file is greater than 2mb
+                var fileSize = model.Thumbnail.Length;
+                if ((fileSize / 1048576.0) > 2)
                 {
-                    //use the Mutate method to resize the image 150px wide by 150px long
-                    image.Mutate(x => x.Resize(150, 150));
-                    //save the image into the path formulated earlier
-                    image.Save(filePath);
+                    ModelState.AddModelError("", "The file you uploaded is too large. Filesize limit is 2mb.");
+                    return View(model);
                 }
+                //Check file type of the uploaded thumbnail
+                //reject if the file is not a jpeg or png
+                if (model.Thumbnail.ContentType != "image/jpeg" && model.Thumbnail.ContentType != "image/png")
+                {
+                    ModelState.AddModelError("", "Please upload a jpeg or png file for the thumbnail.");
+                    return View(model);
+                }
+                //Formulate the directory where the file will be saved
+                //create the directory if it does not exist
+                var dirPath = _env.WebRootPath + "/images/users/" + model.UserId.ToString();
+                if (!Directory.Exists(dirPath))
+                {
+                    Directory.CreateDirectory(dirPath);
+                }
+                //always name the file thumbnail.png
+                var filePath = dirPath + "/thumbnail.png";
+                if (model.Thumbnail.Length > 0)
+
+                {
+                    //Open a file stream to read all the file data into a byte array
+                    byte[] bytes = await FileBytes(model.Thumbnail.OpenReadStream());
+                    //load the file into the third party (ImageSharp) Nuget Plugin                
+                    using (Image<Rgba32> image = Image.Load(bytes))
+                    {
+                        //use the Mutate method to resize the image 150px wide by 150px long
+                        image.Mutate(x => x.Resize(150, 150));
+                        //save the image into the path formulated earlier
+                        image.Save(filePath);
+                    }
+                }
+                user.MaskUser = true;
+                this._context.Users.Update(user);
+                this._context.SaveChanges();
+
+                return RedirectToAction("Thumbnail", new { UserId = model.UserId });
             }
-            return RedirectToAction("Thumbnail", new { UserId = model.UserId });
+
+            return NotFound();
         }
 
 
@@ -616,7 +646,7 @@ namespace CarWash.Web.Controllers
         #region Email
         private void EmailSendNow(string message, string messageTo, string messageName, string emailSubject)
         {
-            var fromAddress = new MailAddress(emailUserName, "ProjectBSIS401 Apps");
+            var fromAddress = new MailAddress(emailUserName, "CarWash Apps");
             string body = message;
 
 

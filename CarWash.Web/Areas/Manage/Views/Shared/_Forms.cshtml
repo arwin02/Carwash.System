@@ -36,12 +36,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <link href="~/vendor/noty/noty.css" rel="stylesheet" type="text/css" />
+    <link href="~/vendor/noty/themes/metroui.css" rel="stylesheet" type="text/css" />
+    <script src="~/vendor/noty/noty.min.js"></script>
+    <style>
+        .noty_bar {
+            z-index: 1000;
+            background-color: beige;
+        }
+    </style>
 
 </head>
 <body>
 
 
-   
+
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top header">
         <div class="container d-flex align-items-center justify-content-between">
@@ -56,17 +65,36 @@
                     <li><a href="~/manage/service/index">Services</a></li>
                     <li><a href="~/manage/booking">Bookings</a></li>
 
+                    @{
+                        @if (!WebUser.IsUserLogggedIn() == true)
+                        {
+                            <li class="drop-down">
+                                <a href="">Account</a>
+                                <ul>
+                                    <li><a href="~/account/login">Sign In</a></li>
+                                    <li><a href="~/account/register">Sign Up</a></li>
+                                    <li><a href="~/account/logout">Logout</a></li>
+                                 
+                                </ul>
+                            </li>
+
+                        }
+                        else
+                        {
+                            <li class="drop-down">
+                                <a href="">Account</a>
+                                <ul>
+                                    <li><a class="dropdown-item" href="~/account/profile/@WebID.GetAdminUserId">Profile</a></li>
+                                    <li><a class="dropdown-item" href="~/account/change-password/@WebID.GetAdminUserId">Change Password</a></li>
+                                    <li><a href="~/account/logout">Logout</a></li>
+                                </ul>
+                            </li>
 
 
-                    <li class="drop-down">
-                        <a href="">Account</a>
-                        <ul>
-                            <li><a href="~/account/register">Sign Up</a></li>
-                            <li><a href="~/account/login">Sign In</a></li>
-                            <li><a href="~/account/logout">Logout</a></li>
+                        }
+                    }
 
-                        </ul>
-                    </li>
+                 
 
 
 
@@ -94,7 +122,10 @@
     <script src="~/vendor/owl.carousel/owl.carousel.min.js"></script>
     <script src="~/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="~/vendor/venobox/venobox.min.js"></script>
-
+    <script src="~/vendor/noty/jquery.noty.js"></script>
+    <script src="~/vendor/noty/themes/bootstrap.js"></script>
+    <script src="~/vendor/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/bookingPhase.js"></script>
     <!-- Template Main JS File -->
     <script src="~/js/main.js"></script>
 

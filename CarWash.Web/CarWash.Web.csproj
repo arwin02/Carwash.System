@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt-Core" Version="2.0.0" />
+    <PackageReference Include="jquery.noty" Version="2.3.5" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
@@ -16,7 +17,12 @@
 
   <ItemGroup>
     <Folder Include="Areas\Manage\Data\" />
-    <Folder Include="wwwroot\images\users\" />
+    <Folder Include="Views\FeedBacks\" />
+    <Folder Include="wwwroot\images\payments-gateway\" />
+    <Folder Include="wwwroot\images\services\" />
+    <Folder Include="wwwroot\images\services\48c17352-e45f-46b8-b288-532dfd989f43\" />
+    <Folder Include="wwwroot\images\services\7aa9d3bb-738e-457e-a3cf-c955058dd8f3\" />
+    <Folder Include="wwwroot\images\services\b17b378c-6a3f-4105-ab96-e9766c543f12\" />
   </ItemGroup>
 
 </Project>

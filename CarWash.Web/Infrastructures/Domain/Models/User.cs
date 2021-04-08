@@ -34,9 +34,12 @@ namespace CarWash.Web.Infrastructures.Domain.Models
         
         public string PhoneNumber { get; set; }
 
+        public bool MaskUser { get; set; }
 
         public string RegistrationCode { get; set; }
 
-        
+        //public Guid? BookingId { get; set; }
+
+        public Booking Bookings { get; set; }
     }
 }
