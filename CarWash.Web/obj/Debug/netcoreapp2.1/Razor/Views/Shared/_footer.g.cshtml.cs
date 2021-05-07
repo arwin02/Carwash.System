@@ -102,7 +102,7 @@ using Microsoft.AspNetCore.Authorization;
                         <li><i class=""bx bx-chevron-right""></i> ");
             EndContext();
             BeginContext(862, 25, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "90599f8f36ec4dd49c5b3a66e80e6966", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f4ba667774a845e1809251e1474b9e52", async() => {
                 BeginContext(879, 4, true);
                 WriteLiteral("Home");
                 EndContext();
@@ -123,7 +123,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("</li>\r\n                        <li><i class=\"bx bx-chevron-right\"></i> ");
             EndContext();
             BeginContext(958, 35, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e1dff3e474bd47d399bf86a111d26121", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a6f5f05009184c83ab994e371d2e364a", async() => {
                 BeginContext(981, 8, true);
                 WriteLiteral("About us");
                 EndContext();
@@ -144,7 +144,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("</li>\r\n                        <li><i class=\"bx bx-chevron-right\"></i> ");
             EndContext();
             BeginContext(1064, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "118bf2730a824257b00437381f3330e4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8ba7f25b2c584218be2f68ae857fa0b5", async() => {
                 BeginContext(1090, 8, true);
                 WriteLiteral("Services");
                 EndContext();
@@ -165,7 +165,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("</li>\r\n                        <li><i class=\"bx bx-chevron-right\"></i> ");
             EndContext();
             BeginContext(1173, 30, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ba46774f4053493292c40af60037a645", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "66bf2c7cf1924cc7894426a574829833", async() => {
                 BeginContext(1195, 4, true);
                 WriteLiteral("FAQS");
                 EndContext();

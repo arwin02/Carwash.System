@@ -7,7 +7,7 @@ namespace CarWash.Web.ViewModels
 {
     public class VerifyViewModel
     {
-        public string EmailAddress { get; set; }
+       
 
         public string RegistrationCode { get; set; }
     }

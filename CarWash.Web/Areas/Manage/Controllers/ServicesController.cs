@@ -11,6 +11,7 @@ using CarWash.Web.Infrastructures.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -92,7 +93,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
         [HttpGet, Route("manage/service/delete/{serviceId}")]
         public IActionResult Delete(Guid? serviceId)
         {
-            var service = this._context.Services.FirstOrDefault(s => s.Id == serviceId);
+            var service = this._context.Services.Include(s => s.Booking).FirstOrDefault(s => s.Id == serviceId);
 
             if (service != null)
             {
@@ -232,6 +233,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
         [HttpGet, Route("/manage/service/update-thumbnail/{serviceId}")]
         public IActionResult Thumbnail(Guid? serviceId)
         {
+          
             return View(new ThumbnailViewModel() { ServiceId = serviceId });
         }
 
@@ -240,6 +242,8 @@ namespace CarWash.Web.Areas.Manage.Controllers
         [HttpPost, Route("/manage/service/update-thumbnail")]
         public async Task<IActionResult> Thumbnail(ThumbnailViewModel model)
         {
+
+            var service = this._context.Services.FirstOrDefault(s => s.Id == model.ServiceId);
             //Check file size of the uploaded thumbnail
             //reject if the file is greater than 2mb
             var fileSize = model.Thumbnail.Length;
@@ -278,6 +282,11 @@ namespace CarWash.Web.Areas.Manage.Controllers
                     image.Save(filePath);
                 }
             }
+
+            service.Thumbnail = true;
+            this._context.Services.Update(service);
+            this._context.SaveChanges();
+
             return RedirectToAction("Thumbnail", new { ServiceId = model.ServiceId });
         }
 

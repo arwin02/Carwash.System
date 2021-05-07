@@ -8,26 +8,27 @@ namespace CarWash.Web.ViewModels.bookings
 {
     public class PhaseThreePostViewModel
     {
-        [Required(ErrorMessage = "UserId is required")]
+      
         public Guid? UserId { get; set; }
 
-        public Guid? ServiceId { get; set; }
+        
+        public Guid? BookingId { get; set; }
 
-
-        [Required(ErrorMessage = "UserName is required")]
-        public string UserName { get; set; }
-
-
-        [Required(ErrorMessage = "PhoneNumber is required")]
+        [Required(ErrorMessage = "Phone Number is required")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
+
         [Required(ErrorMessage = "Email is required")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Time is required")]
+        [Display(Name = "Time")]
         public string Time { get; set; }
 
         [Required(ErrorMessage = "Address is required")]
+        [Display(Name = "Address Number")]
         public string Address { get; set; }
 
     }

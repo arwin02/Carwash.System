@@ -1,0 +1,37 @@
+﻿@model CarWash.Web.ViewModels.chats.MessagesViewModel
+@using CarWash.Web.Infrastructures.Domain.Models
+@{
+    ViewData["Title"] = "Messages";
+}
+
+<h2 class="mt-5">Messages</h2>
+
+
+
+@{
+    var userId = WebID.GetPublicUserId;
+}
+
+
+
+<div class="row">
+    @foreach (Chat chat in Model.Chats)
+    {
+        <div class="col-lg-6">
+            <div class="mb-3">
+            <a href="~/chats/private-chat/@chat.Id" class="btn btn-lg btn-primary">
+               @chat.Users.FirstOrDefault(x => x.UserAdminId != userId).User.UserName
+            </a>
+            </div>
+            
+
+        </div>
+    }
+
+</div>
+   
+  
+
+
+
+

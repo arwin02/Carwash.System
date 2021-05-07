@@ -1,48 +1,81 @@
 ﻿@model CarWash.Web.ViewModels.VerifyViewModel
 @{
-    ViewData["Title"] = "Verify";
+    Layout = null;
+    Layout = "~/views/shared/_secondaryLayout.cshtml";
 }
 
 
 
-<div class="container">
+<div class="container mt-5 mt-5">
     <div class="row main">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h1 class="title">Verify your account</h1>
-                <hr />
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="panel-heading">
+                <div class="panel-title text-center">
+                    <h1 class="title">Verify your account</h1>
+                    <hr />
+                </div>
+            </div>
+
+            <div class="main-login main-center">
+                <div asp-validation-summary="All" class="text-danger text-center"></div>
+                <form class="form-horizontal" method="post" action="/account/verify">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <h3 for="name" class="text-center">You'll recieve an verification code thru email.</h3>
+                        <div class="cols-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                                <input type="text" class="form-control" name="RegistrationCode" id="RegistrationCode" placeholder="Enter your Code" />
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group text-center">
+                        <input type="submit" id="submit" value="Submit" class="btn btn-primary btn-lg btn-block login-button">
+                    </div>
+
+                </form>
             </div>
         </div>
-        <div class="main-login main-center">
-            <form class="form-horizontal" method="post" action="/account/verify">
-                @Html.AntiForgeryToken()
-                @Html.ValidationSummary()
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Email Address</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="EmailAddress" id="EmailAddress" placeholder="Enter your Email Address" />
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="name" class="cols-sm-2 control-label">Code</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="RegistrationCode" id="RegistrationCode" placeholder="Enter your Code" />
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group ">
-                    <button type="submit" value="Verify" class="btn btn-primary btn-lg btn-block login-button">Submit</button>
-                </div>
-
-            </form>
-        </div>
+        <div class="col-3"></div>
+      
+       
     </div>
 </div>
+
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#submit").attr('disabled', 'disabled');
+
+        $("form").keyup(function () {
+            // To Disable Submit Button
+            $("#submit").attr('disabled', 'disabled');
+            // Validating Fields
+            var RegistrationCode = $("#RegistrationCode").val();
+          
+
+            if (!(RegistrationCode == ""))
+            {
+
+                // To Enable Submit Button
+                $("#submit").removeAttr('disabled');
+                $("#submit").css({
+                    "cursor": "pointer",
+                    "box-shadow": "1px 0px 6px #333"
+                });
+
+            }
+        });
+        // On Click Of Submit Button
+        $("#submit").click(function () {
+            $("#submit").css({
+                "cursor": "default",
+                "box-shadow": "none"
+            });
+
+        });
+    });
+
+</script>

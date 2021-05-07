@@ -252,7 +252,26 @@ namespace CarWash.Web.Areas.Manage.Controllers
                 _context.SaveChanges();
             }
             //Post to Hub
-            await _hubContext.Clients.All.SendAsync("ReceiveNotification",  booking.UserId, "Your booking " + booking.Title + " has been updated to " + booking.BookingStatus + "date of" + booking.UpdatedAt);
+            await _hubContext.Clients.All.SendAsync("ReceiveNotification",  booking.UserId, "Your booking " + booking.Title + " has been updated to " + booking.BookingStatus + " "  + "date of" + booking.UpdatedAt);
+
+
+            return RedirectPermanent("~/manage/booking/index");
+        }
+
+        [HttpPost("/manage/booking/change-payment-status")]
+        public async Task<IActionResult> PaymentChangeStatus(PaymentChangeStatusViewModel model)
+        {
+            var booking = _context.Bookings.FirstOrDefault(p => p.Id == model.BookingId);
+
+            if (booking != null)
+            {
+                booking.PaymentType = model.PaymentType;
+
+                _context.Bookings.Update(booking);
+                _context.SaveChanges();
+            }
+            //Post to Hub
+            await _hubContext.Clients.All.SendAsync("ReceiveNotification", booking.UserId, "Your booking " + booking.Title + " has been updated to " + booking.PaymentType + " " +  "date of" + booking.UpdatedAt);
 
 
             return RedirectPermanent("~/manage/booking/index");

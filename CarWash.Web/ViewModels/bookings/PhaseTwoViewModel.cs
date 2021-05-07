@@ -15,6 +15,5 @@ namespace CarWash.Web.ViewModels.bookings
 
         public ServiceType ServiceType { get; set; }
 
-        public List<Booking> Bookings { get; set; }
     }
 }

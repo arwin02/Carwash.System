@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -14,6 +15,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
 
 namespace CarWash.Web.Areas.Manage.Controllers
 {
@@ -219,6 +223,19 @@ namespace CarWash.Web.Areas.Manage.Controllers
             return RedirectToAction("index");
         }
 
+        [HttpGet,Route("manage/users/profile/{userId}")]
+        public IActionResult Profile(Guid? userId)
+        {
+            var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
+            if(user == null)
+            {
+                return Redirect("manage/users/index");
+            }
+            return View(new ProfileViewModel
+            {
+                User = user,
+            });
+        }
 
 
         [Authorize(Policy = "AuthorizeAdmin")]
@@ -265,6 +282,91 @@ namespace CarWash.Web.Areas.Manage.Controllers
 
             return RedirectToAction("index");
         }
+
+
+        [Authorize(Policy = "SignedIn")]
+        [HttpGet, Route("manage/users/update-thumbnail/{userId}")]
+        public IActionResult Thumbnail(Guid? userId)
+        {
+            return View(new ThumbnailViewModel() { UserId = userId });
+        }
+
+
+        [Authorize(Policy = "SignedIn")]
+        [HttpPost, Route("manage/users/update-thumbnail")]
+        public async Task<IActionResult> Thumbnail(ThumbnailViewModel model)
+        {
+            var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
+            if (user != null)
+            {
+                //Check file size of the uploaded thumbnail
+                //reject if the file is greater than 2mb
+                var fileSize = model.Thumbnail.Length;
+                if ((fileSize / 1048576.0) > 2)
+                {
+                    ModelState.AddModelError("", "The file you uploaded is too large. Filesize limit is 2mb.");
+                    return View(model);
+                }
+                //Check file type of the uploaded thumbnail
+                //reject if the file is not a jpeg or png
+                if (model.Thumbnail.ContentType != "image/jpeg" && model.Thumbnail.ContentType != "image/png")
+                {
+                    ModelState.AddModelError("", "Please upload a jpeg or png file for the thumbnail.");
+                    return View(model);
+                }
+                //Formulate the directory where the file will be saved
+                //create the directory if it does not exist
+                var dirPath = _env.WebRootPath + "/images/admins/" + model.UserId.ToString();
+                if (!Directory.Exists(dirPath))
+                {
+                    Directory.CreateDirectory(dirPath);
+                }
+                //always name the file thumbnail.png
+                var filePath = dirPath + "/thumbnail.png";
+                if (model.Thumbnail.Length > 0)
+
+                {
+                    //Open a file stream to read all the file data into a byte array
+                    byte[] bytes = await FileBytes(model.Thumbnail.OpenReadStream());
+                    //load the file into the third party (ImageSharp) Nuget Plugin                
+                    using (Image<Rgba32> image = Image.Load(bytes))
+                    {
+                        //use the Mutate method to resize the image 150px wide by 150px long
+                        image.Mutate(x => x.Resize(150, 150));
+                        //save the image into the path formulated earlier
+                        image.Save(filePath);
+                    }
+                }
+                user.MaskUser = true;
+                this._context.Users.Update(user);
+                this._context.SaveChanges();
+
+                return RedirectToAction("Thumbnail", new { UserId = model.UserId });
+            }
+
+            return NotFound();
+        }
+
+
+        #region Helpers
+        //generate randomstring password
+       
+        public async Task<byte[]> FileBytes(Stream input)
+        {
+            byte[] buffer = new byte[16 * 1024];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                int read;
+                while ((read = input.Read(buffer, 0, buffer.Length)) > 0)
+                {
+                    ms.Write(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
+        }
+        #endregion
+
+
         #region Notifications
         #region Email
         private void EmailSendNow(string message, string messageTo, string messageName, string emailSubject)

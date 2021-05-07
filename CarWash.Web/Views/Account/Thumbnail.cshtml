@@ -9,13 +9,15 @@
 <a class="btn btn-primary" href="~/account/profile/@WebID.GetPublicUserId">Profile</a>
 <div class="row">
     <div class="col-md-6">
+        <div asp-validation-summary="All" class="text-danger text-center"></div>
+        @Html.AntiForgeryToken()
         <form action="~/account/update-thumbnail" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <input type="hidden" name="UserId" value="@Model.UserId" />
                 <label for="Thumbnail">Thumbnail:</label><br />
                 <img src="~/images/users/@Model.UserId/thumbnail.png" style="max-width:150px;max-height:150px;" /></br></br>
                 <input type="file" class="form-control" name="Thumbnail" />
-                @Html.ValidationSummary()
+
             </div>
             <div class="form-group">
                 <div class="col-md-10">

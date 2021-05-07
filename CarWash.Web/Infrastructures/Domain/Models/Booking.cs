@@ -11,7 +11,7 @@ namespace CarWash.Web.Infrastructures.Domain.Models
     {
         public Guid? ServiceId { get; set; }
 
-        public Service Service { get; set; }
+        public List<Service> Service { get; set; }
 
         public int ItemTotal { get; set; }
 
@@ -27,6 +27,8 @@ namespace CarWash.Web.Infrastructures.Domain.Models
 
         public BookingStatus BookingStatus { get; set; }
 
+        public PaymentType PaymentType { get; set; }
+
         public string UserName { get; set; }
 
         public string PhoneNumber { get; set; }
@@ -41,5 +43,7 @@ namespace CarWash.Web.Infrastructures.Domain.Models
 
         public Guid? UserId { get; set; }
         public List<User> Users { get; set; }
+
+        
     }
 }

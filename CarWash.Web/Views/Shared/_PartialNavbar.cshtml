@@ -16,7 +16,7 @@
                 <li class=""><a href="~/home">Home</a></li>
                 <li><a href="~/home/about">About</a></li>
                 <li class="drop-down">
-                    <a href="~/booking/index">Services</a>
+                    <a href="~/services/index">Services</a>
                     <ul>
                         @if (!WebUser.IsUserLogggedIn() == true)
                         {
@@ -50,6 +50,8 @@
                         <li class="drop-down">
                             <a href="">Account</a>
                             <ul>
+                                <li><a class="dropdown-item" href="~/chats/find-admin">Chat</a></li>
+                                <li><a class="dropdown-item" href="~/chats/messages">Messages</a></li>
                                 <li><a class="dropdown-item" href="~/account/profile/@WebID.GetPublicUserId">Profile</a></li>
                                 <li><a class="dropdown-item" href="~/account/change-password/@WebID.GetPublicUserId">Change Password</a></li>
                                 <li><a href="~/account/logout">Logout</a></li>

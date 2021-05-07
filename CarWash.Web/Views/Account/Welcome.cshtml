@@ -1,15 +1,25 @@
 ﻿@using CarWash.Web.Infrastructures.Domain.Helpers
 @{
-    ViewData["Title"] = "Welcome";
+    Layout = null;
+    Layout = "~/views/shared/_secondaryLayout.cshtml";
 }
 
-<br />
-<h1 class="text-center">Welcome to Car-Wash-Booking.PH</h1>
+
+<h1 class="text-center mt-5">Welcome to Car-Wash-Booking.PH</h1>
 <hr />
 <br /><br />
+<div class="m-5">
+    <div class="page-wrap d-flex flex-row align-items-center">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12 text-center">  
+                    <h3>Thank you for signing up to Car-Wash-Booking</h3>
+                    <br />
+                    <h4 class="mb-4 lead"> Your account is now verified. You'll recieve a notification email every time you login to our website and logging out.</h4>
 
-
-      <div class="d-md-inline-flex">
-          <a href="~/home" class="btn btn-primary btn-lg">Home</a>
-          <a href="~/booking/bookings-costumer/@WebUser.UserId" class="btn btn-primary btn-lg">Booking Car</a>
-      </div>
+                    <a href="~/account/login" class="btn btn-primary">Login now! <i class="fas fa-user-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

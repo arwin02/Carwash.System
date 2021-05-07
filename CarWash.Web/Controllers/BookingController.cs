@@ -36,20 +36,6 @@ namespace CarWash.Web.Controllers
         }
 
 
-        [HttpGet, Route("/booking/index")]
-        public IActionResult Index()
-        {
-            var userId = WebID.GetPublicUserId;
-            var service = this._context.Services.ToList();
-            var bookings = this._context.Bookings;
-            return View(new IndexViewModel
-            {
-                UserId = userId,
-                Services = service,
-                Bookings = bookings.ToList()
-            });
-        }
-
         public IActionResult ServiceSummary()
         {
             return View();
@@ -127,37 +113,31 @@ namespace CarWash.Web.Controllers
             var service = this._context.Services.FirstOrDefault(s => s.Id == serviceId);
             if (user == null)
             {
-                return BadRequest();
+                if (service == null)
+                {
+                    return BadRequest();
+                }
+              
             }
-            if(service == null)
-            {
-                return BadRequest();
-            }
-
+          
             return View(new BookingsViewModel
             {
-
-                UserId = user.Id,
-                UserName = user.UserName,
-                PhoneNumber = user.PhoneNumber,
-                Email = user.EmailAddress,
-
-                ServiceId = service.Id,
-                Title = service.Vehicle,
-                Price = service.Price,
-                Description = service.Description,
-                ServiceType = service.ServiceType,
+                User =user,
+                Service = service
+                
             });
         }
 
         [Authorize(Policy = "SignedIn")]
         [HttpPost, Route("/booking/costumer-service")]
-        public IActionResult PostBookingWithService(BookingsViewModel model)
+        public IActionResult BookingWithService(PostAutoBookingViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+
+            Guid? Id = null;
 
             var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
             var service = this._context.Services.FirstOrDefault(s => s.Id == model.ServiceId);
@@ -169,17 +149,25 @@ namespace CarWash.Web.Controllers
                     {
                         Id = Guid.NewGuid(),
                         ServiceId = model.ServiceId,
-                        UserId = user.Id,
-                        UserName = model.UserName,
+                        UserId = model.UserId,
+                        UserName = user.UserName,
                         PhoneNumber = model.PhoneNumber,
                         Email = model.Email,
-                        BookingStatus = Infrastructures.Domain.Enums.BookingStatus.Pending,
                         BookingAddress = model.BookingAddress,
+                        Time = model.Time,
+                        Title = service.Vehicle,
+                        Description = service.Description,
+                        Price = service.Price,
+                        ServiceType = service.ServiceType,
+                        ItemTotal = 1,
+                        BookingStatus = Infrastructures.Domain.Enums.BookingStatus.Pending,
+                        PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid,
                         CreatedAt = DateTime.UtcNow,
                         UpdatedAt = DateTime.UtcNow,
-                        Time = model.Time,
+                      
                     };
 
+                    Id = booking.Id;
                     this._context.Bookings.Add(booking);
 
                     service.RatingsEnabled = true;
@@ -192,8 +180,12 @@ namespace CarWash.Web.Controllers
 
                
             }
-            return Content(@"/booking/index");
+            if(Id != null)
+            {
+                return Content(@"/booking/book-review/" + Id);
+            }
 
+            return Content(@"/services/index");
             //return Redirect("/feedback/user-feedbacks/" + model.UserId + "/" + model.ServiceId);
 
         }
@@ -225,31 +217,36 @@ namespace CarWash.Web.Controllers
             {
                 return View(model);
             }
-
+            Guid? _id = null;
             var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
             if(user != null)
             {
-                var booking = new Booking();
-                booking.VehicleType = model.VehicleType;
-                booking.Id = Guid.NewGuid();
-                booking.UserId = model.UserId;
-                booking.UpdatedAt = DateTime.UtcNow;
-                booking.CreatedAt = DateTime.UtcNow;
+                var booking = new Booking
+                {
+                    Id = Guid.NewGuid(),
+                    VehicleType = model.VehicleType,
+                    UserId = model.UserId,
+                    UpdatedAt = DateTime.UtcNow,
+                    CreatedAt = DateTime.UtcNow
+                };
+                _id = booking.Id;
 
                 this._context.Bookings.Add(booking);
                 this._context.SaveChanges();
+
+
             }
              //return Redirect("/booking/phase-two-booking/" + model.UserId);
-            return Content(@"/booking/phase-two-booking/"+ model.UserId);
+            return Content(@"/booking/phase-two-booking/"+ _id);
 
         }
 
 
-        [HttpGet, Route("/booking/phase-two-booking/{userId}")]
-        public IActionResult PhaseTwo(Guid? userId)
+        [HttpGet, Route("/booking/phase-two-booking/{bookingId}")]
+        public IActionResult PhaseTwo(Guid? bookingId)
         {
-            var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
-            var booking = this._context.Bookings.FirstOrDefault(b => b.UserId == user.Id);
+            var user = this._context.Users.FirstOrDefault(u => u.Id == WebID.GetPublicUserId);
+            var booking = this._context.Bookings.FirstOrDefault(b => b.Id == bookingId);
 
 
             //var ItemServices = this._context.Bookings.Where(b => b.UserId == user.Id).Include(b => b.Service)
@@ -266,9 +263,8 @@ namespace CarWash.Web.Controllers
             return View(new PhaseTwoViewModel()
             {
                 BookingId = booking.Id,
-                UserId = userId,
-                //Bookings = ItemServices
-                
+                UserId = user.Id,
+              
                 
             });
         }
@@ -280,31 +276,40 @@ namespace CarWash.Web.Controllers
             {
                 return BadRequest();
             }
+            Guid? _id = null;
 
+            var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
             var service = this._context.Services.FirstOrDefault(s => s.Id == model.ServiceId);
-            var booking = this._context.Bookings.FirstOrDefault(b => b.UserId == model.UserId);
+            var booking = this._context.Bookings.FirstOrDefault(b => b.Id == model.BookingId);
 
-            if (service != null)
+            if(user != null)
             {
-                if (booking != null)
+                if (service != null)
                 {
+                    if (booking != null)
+                    {
 
-                    booking.ServiceId = model.ServiceId;
-                    booking.Price = service.Price;
-                    booking.Description = service.Description;
-                    booking.ServiceType = service.ServiceType;
-                    booking.Title = service.Vehicle;
-                    booking.Service = this._context.Services.FirstOrDefault(s => s.Id == model.ServiceId);
-                    booking.ItemTotal = 1;
-                    booking.BookingStatus = Infrastructures.Domain.Enums.BookingStatus.Pending; 
+                        booking.ServiceId = model.ServiceId;
+                        booking.Price = service.Price;
+                        booking.Description = service.Description;
+                        booking.ServiceType = service.ServiceType;
+                        booking.Title = service.Vehicle;
+                        booking.ItemTotal = 1;
+                        booking.BookingStatus = Infrastructures.Domain.Enums.BookingStatus.Pending;
+                        booking.PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid;
 
-                    this._context.Bookings.Update(booking);
-                    this._context.SaveChanges();
+                        this._context.Bookings.Update(booking);
+                        this._context.SaveChanges();
+
+                        _id = booking.Id;
+                    }
+
+
                 }
 
-
             }
-            return Content(@"/booking/phase-three-booking/" + model.UserId + "/" + model.ServiceId);
+           
+            return Content(@"/booking/phase-three-booking/" + model.UserId + "/" + _id);
            
         }
 
@@ -332,31 +337,26 @@ namespace CarWash.Web.Controllers
                 }).ToList();
         }
 
-        [HttpGet, Route("/booking/phase-three-booking/{userId}/{serviceId}")]
-        public IActionResult PhaseThree(Guid? userId,Guid? serviceId)
+        [HttpGet, Route("/booking/phase-three-booking/{userId}/{bookingId}")]
+        public IActionResult PhaseThree(Guid? userId,Guid? bookingId)
         {
             var user = this._context.Users.FirstOrDefault(u => u.Id == userId);
-            var service = this._context.Services.FirstOrDefault(s => s.Id == serviceId);
-
-            var bookingList = this._context.Bookings.FirstOrDefault(b => b.UserId == user.Id);
+            var booking = this._context.Bookings.FirstOrDefault(b => b.Id == bookingId);
                                            
             if (user == null)
             {
-                return BadRequest();
+                if (booking == null)
+                {
+                    return BadRequest();
+                }
+              
             }
-            if(service == null)
-            {
-                return BadRequest();
-            }
+          
 
             return View(new PhaseThreeViewModel()
             {
-                ServiceId = service.Id,
-                UserId = user.Id,
-                UserName = user.UserName,
-                PhoneNumber = user.PhoneNumber,
-                Email = user.EmailAddress,
-                Bookings = bookingList
+                User = user,
+                Booking = booking
             });
         }
 
@@ -372,7 +372,7 @@ namespace CarWash.Web.Controllers
             }
 
 
-            return RedirectPermanent("~/booking/index");
+            return RedirectPermanent("~/services/index");
         }
 
         [HttpGet,Route("/booking/empty-items/{userId}")]
@@ -388,7 +388,7 @@ namespace CarWash.Web.Controllers
             }
             this._context.SaveChanges();
 
-            return Redirect("~/booking/index/" + userId);
+            return Redirect("~/services/index");
         }
 
 
@@ -402,14 +402,13 @@ namespace CarWash.Web.Controllers
             }
 
             var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
-            var booking = this._context.Bookings.FirstOrDefault(b => b.UserId == user.Id);
+            var booking = this._context.Bookings.FirstOrDefault(b => b.Id == model.BookingId);
 
             if (user != null)
             {
                 if(booking != null)
                 {
-                    booking.UserId = model.UserId;
-                    booking.UserName = model.UserName;
+                    booking.UserName = user.UserName;
                     booking.PhoneNumber = model.PhoneNumber;
                     booking.Email = model.Email;
                     booking.Time = model.Time;
@@ -422,18 +421,19 @@ namespace CarWash.Web.Controllers
             }
             //return Content(@"/home/service-book/" + model.UserId);
             //return Content(@"/feedback/user-feedbacks/" + model.UserId + "/" + model.ServiceId );
-            return Content(@"/booking/book-review/" + model.UserId);
+            return Content(@"/booking/book-review/" + booking.Id);
         }
 
 
 
-        [HttpGet,Route("/booking/book-review/{userId}")]
-        public IActionResult BookReview(Guid? userId)
+        [HttpGet,Route("/booking/book-review/{bookingId}")]
+        public IActionResult BookReview(Guid? bookingId)
         {
-            var booking = this._context.Bookings.FirstOrDefault(b => b.UserId == userId);
 
-            var bookings = this._context.Bookings.Where(b => b.UserId == userId)
-                                                 .OrderByDescending(b => b.UpdatedAt)
+            var booking = this._context.Bookings.FirstOrDefault(b => b.Id == bookingId);
+
+            var bookings = this._context.Bookings.Where(b => b.Id == bookingId)
+                                                 .OrderByDescending(b => b.UpdatedAt == DateTime.Today)
                                                  .ToList();
 
             return View(new ReviewBookingViewModel
@@ -518,6 +518,7 @@ namespace CarWash.Web.Controllers
             }
         }
         #endregion
+
         private decimal CalculateTotalPrice()
         {
             var bookings = this._context.Bookings;

@@ -1,0 +1,53 @@
+﻿@model CarWash.Web.ViewModels.chats.FindViewModel
+@{
+    ViewData["Title"] = "Find";
+}
+
+<h1 class="text-center mt-5" style="color:#">Find</h1>
+
+<div class="container">
+    <div class="row">
+        @foreach (var user in Model.Users)
+        {
+            if (Model.Users.Count > 1)
+            {
+                <div class="col-lg-6">
+                    <div class="card mb-3" style="max-width: 540px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="~/images/users/@user.Id/thumbnail.png" alt="@(user.FirstName != null ? "Admin" : "")">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <h1 class="card-title">@(user.FirstName != null ? "Admin" : "")</h1>
+                                    <a href="~/chats/create-private-room/@user.Id">Chat me<i class="fas fa-comment-alt"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            else if(Model.Users.Count == 1)
+            {
+                <div class="col-lg-12">
+                    <div class="col-lg-6">
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                                <div class="col-md-4">
+                                    <img src="~/images/users/@user.Id/thumbnail.png" alt="@(user.FirstName != null ? "Admin" : "")">
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="card-body">
+                                        <h1 class="card-title">@(user.FirstName != null ? "Admin" : "")</h1>
+                                        <a href="~/chats/create-private-room/@user.Id">Chat me<i class="fas fa-comment-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        }
+    </div>
+</div>

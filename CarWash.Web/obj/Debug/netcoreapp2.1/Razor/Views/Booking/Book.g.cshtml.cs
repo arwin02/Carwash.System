@@ -195,7 +195,7 @@ WriteAttributeValue("", 1359, Model.UserId, 1359, 13, false);
             WriteLiteral("</span><i class=\"fa fa-thumbs-up\"></i> </h3>\r\n                <hr />\r\n                <div class=\"collapse\" id=\"add-comment-form\">\r\n                    ");
             EndContext();
             BeginContext(1792, 3112, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "be1da12c420c47bf99e7003c07058541", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5865af7600aa475383321e5773f3917d", async() => {
                 BeginContext(1910, 2278, true);
                 WriteLiteral(@"
                         <div class=""row"">
@@ -284,7 +284,7 @@ WriteAttributeValue("", 4289, Model.UserId, 4289, 13, false);
             WriteLiteral("                            <!-- Single Comment -->\r\n                <div class=\"media mb-4\">\r\n                    ");
             EndContext();
             BeginContext(5317, 78, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "dec242ae29424d09ac766240f10061d9", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "22f73947fd86401caaedde42cd428200", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -463,7 +463,7 @@ AddHtmlAttributeValue("", 5364, comment.UserIcon, 5364, 19, false);
     ");
             EndContext();
             BeginContext(10303, 54, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cc0fa38b0d954206a08b1f9ecf3bc4ef", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e4e6a8e078e14e1cb33afdaf18e8199a", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -481,7 +481,7 @@ AddHtmlAttributeValue("", 5364, comment.UserIcon, 5364, 19, false);
             WriteLiteral("\r\n    ");
             EndContext();
             BeginContext(10363, 70, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6845da9ff2534795be44713ee6df24b5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5e1d2be9d1b64b77ad4d1b124646d018", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

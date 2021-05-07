@@ -18,10 +18,10 @@
         </thead>
         <tbody>
             <tr>
-                <td>@Model.Title</td>
-                <td>@Model.Price.ToString("F")</td>
-                <td>@Model.ServiceType</td>
-                <td>@Model.Description</td>
+                <td>@Model.Service.Vehicle</td>
+                <td>@Model.Service.Price.ToString("F")</td>
+                <td>@Model.Service.ServiceType</td>
+                <td>@Model.Service.Description</td>
             </tr>
         </tbody>
     </table>
@@ -37,24 +37,16 @@
                 @Html.ValidationSummary()
                 <div class="col-sm-12">
                     <div class="row">
-                        <input type="hidden" id="UserId" value="@Model.UserId" />
-                        <input type="hidden" id="Title" name="Title" value="@Model.Title" />
-                        <input type="hidden" id="ServiceType" name="ServiceType" value="@Model.ServiceType" />
-                        <input type="hidden" id="Price" name="Price" value="@Model.Price" />
-                        <input type="hidden" id="Description" name="Description" value="@Model.Description" />
-                        <input type="hidden" id="serviceId" value="@Model.ServiceId" />
-
-                        <div class="col-sm-6 form-group">
-                            <label>User Name</label>
-                            <input type="text" placeholder="Enter First Name Here.." id="username" value="@Model.UserName" class="form-control">
-                        </div>
+                        <input type="hidden" id="UserId" value="@Model.User.Id" />
+                        <input type="hidden" id="ServiceId" value="@Model.Service.Id" />
+                        <h2>@Model.User.UserName</h2>
                         <div class="col-sm-6 form-group">
                             <label>Phone Number</label>
-                            <input type="text" placeholder="Enter Phone Number Here.." id="PhoneNumber" value="@Model.PhoneNumber" class="form-control">
+                            <input type="text" placeholder="Enter Phone Number Here.." id="PhoneNumber" value="@Model.User.PhoneNumber" class="form-control">
                         </div>
                         <div class="col-sm-6 form-group">
                             <label>Email Address</label>
-                            <input type="text" placeholder="Enter Email Address Here.." id="email" value="@Model.Email" class="form-control">
+                            <input type="text" placeholder="Enter Email Address Here.." id="email" value="@Model.User.EmailAddress" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="BookingAddress">Pick-up Address</label>
@@ -65,15 +57,12 @@
                             <input type="datetime-local" class="form-control" name="Time" id="time" required="">
                         </div>
 
-                        @*<div class="form-group col-md-6 col-sm-6">
-            <label for="arrival">Arrival Date</label>
-            <input type="text" class="form-control input-sm datepicker" id="arrival" placeholder="">
-        </div>*@
+                   
                     </div>
                     <br />
                     <button type="button"  id="autoSubmit" class="w-100 btn-lg btn-info">Book Service</button>
                     <hr />
-                    <a href="~/booking/index" class="w-100 btn btn-danger btn-lg">&#8592;Cancel</a>
+                    <a href="~/services/index" class="w-100 btn btn-danger btn-lg">&#8592;Cancel</a>
                 </div>
             </form>
         </div>
@@ -81,4 +70,82 @@
     </div>
 </div>
 
-<script src="~/js/bookingPhase.js"></script>
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#autoSubmit").attr('disabled', 'disabled');
+
+        $("form").keyup(function () {
+            // To Disable Submit Button
+            $("#autoSubmit").attr('disabled', 'disabled');
+            // Validating Fields
+            var PhoneNumber = $("#PhoneNumber").val();
+            var email = $("#email").val();
+            var bookingAddress = $("#bookingAddress").val();
+            var time = $("#time").val();
+            
+
+
+            if (!(PhoneNumber == "" || email == "" || bookingAddress == "" || ematimeil == "")) {
+
+                // To Enable Submit Button
+                $("#autoSubmit").removeAttr('disabled');
+                $("#autoSubmit").css({
+                    "cursor": "pointer",
+                    "box-shadow": "1px 0px 6px #333"
+                });
+
+            }
+        });
+        // On Click Of Submit Button
+        $("#autoSubmit").click(function () {
+            $("#submit").css({
+                "cursor": "default",
+                "box-shadow": "none"
+            });
+
+        });
+    });
+
+
+    $(document).ready(function () {
+        $("#autoSubmit").click(function () {
+
+            var userId = $("#UserId").val();
+            var serviceId = $("#ServiceId").val();
+            var phoneNumber = $("#PhoneNumber").val();
+            var email = $("#email").val();
+            var bookingAddress = $("#bookingAddress").val();
+            var time = $("#time").val();
+           
+            var auto = {
+                UserId: userId,
+                ServiceId: serviceId,
+                PhoneNumber: phoneNumber,
+                Email: email,
+                Time: time,
+                BookingAddress: bookingAddress,   
+            }
+
+            AutoBookForm(auto);
+        });
+    });
+
+
+
+    function AutoBookForm(auto) {
+        var route = "/booking/costumer-service";
+        $.ajax({
+            url: route,
+            method: "POST",
+            data: auto,
+            success: function (redirectToIndex) {
+                window.location = redirectToIndex;
+            },
+            error: function (err) {
+                $("#ErrorList").html(err);
+            }
+        });
+    }
+
+</script>

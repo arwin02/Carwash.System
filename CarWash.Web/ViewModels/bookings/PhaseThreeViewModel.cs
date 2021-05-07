@@ -8,17 +8,9 @@ namespace CarWash.Web.ViewModels.bookings
 {
     public class PhaseThreeViewModel
     {
-        public Guid? UserId { get; set; }
-
-        public string UserName { get; set; }
-
-        public string PhoneNumber { get; set; }
-
-        public string Email { get; set; }
+        public User User { get; set; }
 
 
-        public Guid? ServiceId { get; set; }
-
-        public Booking Bookings { get; set; }
+        public Booking Booking { get; set; }
     }
 }

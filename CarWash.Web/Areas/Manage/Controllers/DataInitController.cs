@@ -256,7 +256,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                       Id = Guid.Parse("b0b923f7-74f4-4eb1-9832-23b772979da8"),
                       Price = 129, 
                       ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
-
+                      
                   });
 
                 this._context.Services.Add(
@@ -380,7 +380,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                 this._context.Services.Add(
                  new Infrastructures.Domain.Models.Service()
                  {
-                     Vehicle = "Mr. Sponge’s Classic Swag (w/ vacuum)",
+                     Vehicle = "Mr. Sponge’s Classic Swag " + " " + "(w/ vacuum)",
                      Description = "Extra" + " " + "Large",
                      CreatedAt = DateTime.UtcNow,
                      UpdatedAt = DateTime.UtcNow,
@@ -402,7 +402,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                     ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
 
                 });
-
+                //No images in top
                 //Auto-Package-Wash-Services
                 this._context.Services.Add(
                   new Infrastructures.Domain.Models.Service()
@@ -414,7 +414,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                       Id = Guid.Parse("77e2ced2-05c5-4cb5-a5c3-feb92f2f5f10"),
                       Price = 260,
                       ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
-
+                      Thumbnail = true,
                   });
 
 
@@ -428,7 +428,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                           Id = Guid.Parse("bb8a61ba-a5bf-4026-9c86-0d7575d0df9d"),
                           Price = 260,
                           ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
-
+                          Thumbnail = true,
                       });
 
                 this._context.Services.Add(
@@ -441,7 +441,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                          Id = Guid.Parse("4b1eb8db-e4ff-44e0-93d4-18b841fde950"),
                          Price = 260,
                          ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
-
+                         Thumbnail = true,
                      });
 
 
@@ -455,7 +455,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                        Id = Guid.Parse("b17b378c-6a3f-4105-ab96-e9766c543f12"),
                        Price = 260,
                        ServiceType = Infrastructures.Domain.Enums.ServiceType.Wash,
-
+                       Thumbnail = true,
                    });
 
 
@@ -470,7 +470,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                        Id = Guid.Parse("f628a4cc-8163-47d2-9662-37e15d2d9d6c"),
                        Price = 450,
                        ServiceType = Infrastructures.Domain.Enums.ServiceType.Waterless,
-
+                       Thumbnail = true,
                    });
 
                 this._context.Services.Add(
@@ -483,7 +483,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                      Id = Guid.Parse("b19014ed-800c-4feb-8de9-4ed0c5aaebcf"),
                      Price = 450,
                      ServiceType = Infrastructures.Domain.Enums.ServiceType.Waterless,
-
+                     Thumbnail = true,
                  });
 
                 this._context.Services.Add(
@@ -496,7 +496,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                     Id = Guid.Parse("7aa9d3bb-738e-457e-a3cf-c955058dd8f3"),
                     Price = 450,
                     ServiceType = Infrastructures.Domain.Enums.ServiceType.Waterless,
-
+                    Thumbnail = true,
                 });
 
                 this._context.Services.Add(
@@ -509,7 +509,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                       Id = Guid.Parse("b526d015-3862-4449-aede-e00194f3493e"),
                       Price = 450,
                       ServiceType = Infrastructures.Domain.Enums.ServiceType.Waterless,
-
+                      Thumbnail = true,
                   });
 
                 this._context.Services.Add(
@@ -522,7 +522,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                    Id = Guid.Parse("3696c397-1b67-435e-8f57-bf92b8922201"),
                    Price = 450,
                    ServiceType = Infrastructures.Domain.Enums.ServiceType.Waterless,
-
+                   Thumbnail = true,
                });
 
 
@@ -537,7 +537,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                           Id = Guid.Parse("e9a86cf4-075c-43ba-ae07-9831ee239a23"),
                           Price = 1000,
                           ServiceType = Infrastructures.Domain.Enums.ServiceType.Shine,
-
+                          Thumbnail = true,
                       });
 
 
@@ -551,7 +551,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                          Id = Guid.Parse("3685ab21-ce0c-4937-b85e-ef83d236f79c"),
                          Price = 1000,
                          ServiceType = Infrastructures.Domain.Enums.ServiceType.Shine,
-
+                         Thumbnail = true,
                      });
 
                 this._context.Services.Add(
@@ -564,7 +564,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                       Id = Guid.Parse("0452de9b-68d9-4f1f-b5e3-1cf88dae91e7"),
                       Price = 1000,
                       ServiceType = Infrastructures.Domain.Enums.ServiceType.Shine,
-
+                      Thumbnail = true,
                   });
 
                 //Auto-Package-Signature-Services
@@ -579,7 +579,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                     Id = Guid.Parse("d8de9aaf-8e4f-4b45-9486-451032d4696a"),
                     Price = 3000,
                     ServiceType = Infrastructures.Domain.Enums.ServiceType.Signature,
-
+                    Thumbnail = true,
                 });
 
                         this._context.Services.Add(
@@ -593,7 +593,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                   Id = Guid.Parse("f109a8ff-e169-4191-8916-eae435484327"),
                   Price = 3000,
                   ServiceType = Infrastructures.Domain.Enums.ServiceType.Signature,
-
+                  Thumbnail = true,
               });
 
 
@@ -608,7 +608,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                  Id = Guid.Parse("37379123-92b9-4234-b403-1a0f3674f19e"),
                  Price = 3000,
                  ServiceType = Infrastructures.Domain.Enums.ServiceType.Signature,
-
+                 Thumbnail = true,
              });
 
 
@@ -623,7 +623,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                  Id = Guid.Parse("e7bedc19-d3c2-47b2-b710-97b1de1faec7"),
                  Price = 3000,
                  ServiceType = Infrastructures.Domain.Enums.ServiceType.Signature,
-
+                 Thumbnail = true,
              });
             }
 
@@ -651,6 +651,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                                UserName = "Arwin Tolentino",
                                Price = 260,
                                BookingStatus = Infrastructures.Domain.Enums.BookingStatus.Pending,
+                               PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid,
                                PhoneNumber = "09123456789",
                                CreatedAt = DateTime.UtcNow,
                                UpdatedAt = DateTime.UtcNow,
@@ -673,6 +674,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                                UserName = "Larich Morales",
                                Price = 260,
                                BookingStatus = Infrastructures.Domain.Enums.BookingStatus.Pending,
+                               PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid,
                                PhoneNumber = "09123456789",
                                CreatedAt = DateTime.UtcNow,
                                UpdatedAt = DateTime.UtcNow,
@@ -700,6 +702,7 @@ namespace CarWash.Web.Areas.Manage.Controllers
                                UserName = "User Tester",
                                Price = 240,
                                BookingStatus = Infrastructures.Domain.Enums.BookingStatus.Pending,
+                               PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid,
                                PhoneNumber = "",
                                CreatedAt = DateTime.UtcNow,
                                UpdatedAt = DateTime.UtcNow,

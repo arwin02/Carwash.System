@@ -67,6 +67,7 @@
                 <th>Time</th>
                 <th>Price</th>
                 <th>Status</th>
+                <th>Payment Status</th>
                 <th></th>
             </tr>
         </thead>
@@ -78,13 +79,19 @@
                         <td>@booking.Title</td>
                         <td>@booking.ServiceType</td>
                         <td>@booking.Time</td>
+                        <td>@booking.Price.ToString("F")</td>
                         <td>@booking.BookingStatus</td>
+                        <td>@booking.PaymentType</td>
                         <td>
                             <a href="~/manage/booking/details/@booking.Id" title="Booking Details"><button type="button" class="btn"><i class="fas fa-info"></i></button></a>
                             <a href="#" onclick="changeStatus('@booking.Id','@booking.Title', '@booking.BookingStatus', '@booking.UserId')">
                                 <i class="fas fa-book" style="color:#0094ff"></i>
-                            </a>
-                         
+                            </a>&nbsp;
+
+                            <a href="#" onclick="paymentChangeStatus('@booking.Id','@booking.Title', '@booking.PaymentType', '@booking.UserId')">
+                                <i class="fas fa-dollar-sign" style="color:#1c6926"></i>
+                            </a>&nbsp;
+
                             <a href="#" onclick="confirmDeleteService('@booking.Id', '@booking.Title')" title="Delete Service"><button type="button" class="btn"><i class="fas fa-times"></i></button></a>
                         </td>
                     </tr>
@@ -179,6 +186,36 @@ else
 </div>
 
 
+<!--Payment Change Status-->
+<div class="modal" tabindex="-1" role="dialog" id="change-payment-status-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Do you want to change the payment status of <span class="change-payment-status-modal-item-title"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/manage/booking/change-payment-status" method="post">
+                <div class="modal-body">
+                    <p>Do you want to change the payment status of <span class="change-payment-status-modal-item-title"></span>?</p>
+                    <input type="hidden" name="BookingId" id="change-payment-status-modal-item-id" />
+                    <input type="hidden" name="UserId" id="change-payment-status-modal-user-id" />
+                    Status : <select class="form-select" name="PaymentType" aria-label="" id="change-payment-status-modal-item-status">
+                        <option value="Paid">Paid</option>
+                        <option value="Unpaid">Unpaid</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 
 
 <script type="text/javascript">
@@ -193,7 +230,19 @@ else
         $("#change-status-modal").modal("show");
     }
 
- 
+    function paymentChangeStatus(id, title, paymentStatus, userId) {
+        console.log(id);
+        console.log(title);
+        console.log(paymentStatus);
+        $(".change-payment-status-modal-item-title").html(title);
+        $("#change-payment-status-modal-item-id").val(id);
+        $("#change-payment-status-modal-user-id").val(userId);
+        $("#change-payment-status-modal-item-status option[value=" + paymentStatus + "]").prop('selected', true);
+        $("#change-payment-status-modal").modal("show");
+    }
+
+    
+
     function confirmDeleteService(bookingId, Vehicle) {
         $("#modal-delete-booking-vehicle").html(Vehicle);
         $("#modal-delete-booking-confirm").attr("href", "/manage/booking/delete/" + bookingId);

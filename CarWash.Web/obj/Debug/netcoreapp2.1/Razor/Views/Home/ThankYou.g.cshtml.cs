@@ -79,7 +79,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("<br />\r\n<h1 class=\"text-center\">Thank you for contacting us, we check your request as soon as possible.</h1>\r\n<hr />\r\n<br /><br />\r\n\r\n\r\n");
             EndContext();
             BeginContext(182, 56, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "17af61c60e1b4a68b154c038b7b1c66e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f2376c3f1032415daef48337d5e566e8", async() => {
                 BeginContext(230, 4, true);
                 WriteLiteral("Home");
                 EndContext();

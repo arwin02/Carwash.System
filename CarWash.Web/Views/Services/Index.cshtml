@@ -1,0 +1,132 @@
+﻿@model CarWash.Web.ViewModels.services.IndexViewModel
+@using CarWash.Web.Infrastructures.Domain.Models;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+
+
+<div class="container">
+    <div class="text-center text-success">
+        <h2>AUTO-BOOKING-SERVICES</h2>
+
+    </div>
+    <hr />
+    @if (!WebUser.IsUserLogggedIn() == true)
+    {
+        <p class="text-danger">Login to activate-manual-booking</p>
+    }
+    else
+    {
+        <a href="~/booking/phase-one-booking/@WebID.GetPublicUserId" class="btn-lg btn-outline-success">Manual Booking</a>
+    }
+
+
+    <hr />
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="input-group mb-3">
+                <input type="text" id="searchKeyword" placeholder="search services" class="form-control" aria-label="search groups" aria-describedby="basic-addon2" value="@Model.Services.Keyword">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2"><a href="#" onclick="searchTrigger()"><i class="fa fa-search fa-lg fa-fw" aria-hidden="true"></i></a></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @if (Model.Services.Items.Count > 0)
+    {
+        <div class="row">
+            @{
+                foreach (Service service in Model.Services.Items)
+                {
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                        <div class="our-services-wrapper mb-60">
+                            <div class="services-inner">
+                                <div class="our-services-img">
+                                    @if (service.Thumbnail == true)
+                                    {
+                                        <img src="~/images/services/@service.Id/thumbnail.png" width="100" alt="">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/default/services/Default.png" width="100" alt="">
+                                    }
+                                </div>
+                                <div class="our-services-text">
+                                    <h4>@service.Vehicle</h4>
+                                    @if (service.Description.Length <= 50)
+                                    {
+                                        <p> @service.Description</p>
+                                    }
+                                    else
+                                    {
+                                        <p> @service.Description.Substring(0, 50)<span>...</span></p>
+                                    }
+                                    <small>Price: @service.Price.ToString("####") &#8369; </small>
+                                    <hr />
+                                    @if (!WebUser.IsUserLogggedIn() == true)
+                                    {
+                                        <p class="text-danger">Login to activate-booking</p>
+                                    }
+                                    else
+                                    {
+                                        <a href="~/booking/costumer/@service.Id" class="btn btn-outline-success">Book Now</a>
+                                        <a href="~/services/details/@service.Id" class="btn btn-outline-info">Detail</a>
+                                    }
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                }
+            }
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item"><span class="form-control-plaintext">Page&nbsp;&nbsp;&nbsp;</span></li>
+                <li class="page-item"><input type="number" value="@Model.Services.PageIndex" class="form-control" style="width:50px;" onKeydown="javascript: if(event.keyCode == 13 && isNaN(parseInt($(this).val()))==false) window.location='/services/index?pageIndex=' + (isNaN(parseInt($(this).val())) ? 1 : parseInt($(this).val()));" /></li>
+                <li class="page-item"><span class="form-control-plaintext">&nbsp;&nbsp;&nbsp;of @Model.Services.PageCount&nbsp;&nbsp;&nbsp;</span></li>
+                @{
+                    var prev = Model.Services.PageIndex - 1;
+                    if (prev > 0)
+                    {
+                        <li class="page-item"><a class="page-link" href="~/services/index?keyword=@Model.Services.Keyword&pageSize=@Model.Services.PageSize&pageIndex=@prev"><span aria-hidden="true">&laquo;</span></a></li>
+                    }
+                }
+                <li class="page-item"><a class="page-link" href="#">@(Model.Services.PageIndex)</a></li>
+                @{
+                    var next = Model.Services.PageIndex + 1;
+                    if (next <= Model.Services.PageCount)
+                    {
+                        <li class="page-item"><a class="page-link" href="~/services/index?keyword=@Model.Services.Keyword&pageSize=@Model.Services.PageSize&pageIndex=@next"><span aria-hidden="true">&raquo;</span></a></li>
+                    }
+                }
+            </ul>
+        </nav>
+
+    }
+
+</div>
+
+
+
+
+<script>
+
+
+
+    $("#searchKeyword").keyup(function (event) {
+        if (event.keyCode === 13) {
+            searchTrigger();
+        }
+    });
+
+    function searchTrigger() {
+        window.location = "/services/index?pageIndex=1&keyword=" + $("#searchKeyword").val();
+    }
+</script>

@@ -84,7 +84,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("\r\n\r\n<br /><br /><br />\r\n<div class=\"section-title\">\r\n    <h2>Bookings</h2>\r\n    ");
             EndContext();
             BeginContext(182, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "46483a0047374349a348a08f82dea2dc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "df3919ee064b49b5b5725b5e240231c6", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -103,7 +103,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("\r\n</div>\r\n<div class=\"form-group\">\r\n    ");
             EndContext();
             BeginContext(286, 44, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "39393f0cef8a4e6297336b949e2f6c66", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "362b2a4c71464142b7257bbf1d0990f5", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -121,7 +121,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("\r\n</div>\r\n\r\n");
             EndContext();
             BeginContext(342, 971, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0225135d45f7476b8ccae6d97757f9df", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "088957f95959404484ae6866356be635", async() => {
                 BeginContext(348, 55, true);
                 WriteLiteral("\r\n    <div id=\"phaseOne\">\r\n        <input type=\"hidden\"");
                 EndContext();
@@ -136,7 +136,7 @@ WriteAttributeValue("", 411, Model.UserId, 411, 13, false);
                 WriteLiteral(" id=\"userId\" />\r\n        <ul>\r\n            <li>\r\n                <input type=\"checkbox\" value=\"1\" id=\"cb1\" onclick=\"BtnClick(\'1\')\" />\r\n                <label for=\"cb1\">");
                 EndContext();
                 BeginContext(593, 38, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "fb559d7969eb4b55844da57dc61b986f", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "45a09f1fa2834dd5ba80042b0cca451d", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -154,7 +154,7 @@ WriteAttributeValue("", 411, Model.UserId, 411, 13, false);
                 WriteLiteral("</label>\r\n            </li>\r\n            <li>\r\n                <input type=\"checkbox\" value=\"2\" id=\"cb2\" onclick=\"BtnClick(\'2\')\" />\r\n                <label for=\"cb2\">");
                 EndContext();
                 BeginContext(797, 39, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "653e0ea197504607830d05e0fd094438", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "8a3a4ef83a4648f8aa567e168580bfab", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -172,7 +172,7 @@ WriteAttributeValue("", 411, Model.UserId, 411, 13, false);
                 WriteLiteral("</label>\r\n            </li>\r\n            <li>\r\n                <input type=\"checkbox\" value=\"3\" id=\"cb3\" onclick=\"BtnClick(\'3\')\" />\r\n                <label for=\"cb3\">");
                 EndContext();
                 BeginContext(1002, 38, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "52ddd32d27224377bb20a7a98f42adb5", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "c37d063ec8004d8c9b7352678ec6a10d", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -190,7 +190,7 @@ WriteAttributeValue("", 411, Model.UserId, 411, 13, false);
                 WriteLiteral("</label>\r\n            </li>\r\n            <li>\r\n                <input type=\"checkbox\" value=\"4\" id=\"cb4\" onclick=\"BtnClick(\'4\')\" />\r\n                <label for=\"cb4\">");
                 EndContext();
                 BeginContext(1206, 44, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "dfd45c05bb904411a9552cdb0b3df53f", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "9d3ac38cae4c4e298ae76b8380a5aa4a", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -225,7 +225,7 @@ WriteAttributeValue("", 411, Model.UserId, 411, 13, false);
             WriteLiteral("\r\n\r\n<div id=\"itemList\" style=\"display:none\">\r\n\r\n</div>\r\n\r\n\r\n");
             EndContext();
             BeginContext(1373, 44, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "582896d348bb4622b7b3fb2c13f8202c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "82b2937bf5904f7c90a1425b57c58ba8", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

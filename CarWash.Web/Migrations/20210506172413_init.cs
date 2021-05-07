@@ -8,6 +8,49 @@ namespace CarWash.Web.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Booking",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
+                    ServiceId = table.Column<Guid>(nullable: true),
+                    ItemTotal = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Price = table.Column<decimal>(nullable: false),
+                    ServiceType = table.Column<int>(nullable: false),
+                    VehicleType = table.Column<int>(nullable: false),
+                    BookingStatus = table.Column<int>(nullable: false),
+                    PaymentType = table.Column<int>(nullable: false),
+                    UserName = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    Time = table.Column<string>(nullable: true),
+                    BookingAddress = table.Column<string>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Booking", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Chats",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
+                    ChatType = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Chats", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Contact",
                 columns: table => new
                 {
@@ -38,32 +81,6 @@ namespace CarWash.Web.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Groups", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Service",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(nullable: false),
-                    CreatedAt = table.Column<DateTime>(nullable: false),
-                    UpdatedAt = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(maxLength: 520, nullable: true),
-                    ServiceType = table.Column<int>(maxLength: 255, nullable: false),
-                    Vehicle = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(nullable: false),
-                    IsPublished = table.Column<bool>(nullable: false),
-                    Likes = table.Column<int>(nullable: false),
-                    Rating = table.Column<decimal>(nullable: false),
-                    Views = table.Column<int>(nullable: false),
-                    Comments = table.Column<int>(nullable: false),
-                    Layout = table.Column<string>(maxLength: 75, nullable: true),
-                    LikesEnabled = table.Column<bool>(nullable: false),
-                    RatingsEnabled = table.Column<bool>(nullable: false),
-                    CommentsEnabled = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Service", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,34 +117,60 @@ namespace CarWash.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Booking",
+                name: "Service",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     UpdatedAt = table.Column<DateTime>(nullable: false),
-                    ServiceId = table.Column<Guid>(nullable: true),
-                    ItemTotal = table.Column<int>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    Description = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(maxLength: 520, nullable: true),
+                    ServiceType = table.Column<int>(maxLength: 255, nullable: false),
+                    Vehicle = table.Column<string>(nullable: true),
                     Price = table.Column<decimal>(nullable: false),
-                    ServiceType = table.Column<int>(nullable: false),
-                    VehicleType = table.Column<int>(nullable: false),
-                    BookingStatus = table.Column<int>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    Email = table.Column<string>(nullable: true),
-                    Time = table.Column<string>(nullable: true),
-                    BookingAddress = table.Column<string>(nullable: true),
-                    UserId = table.Column<Guid>(nullable: true)
+                    IsPublished = table.Column<bool>(nullable: false),
+                    Likes = table.Column<int>(nullable: false),
+                    Rating = table.Column<decimal>(nullable: false),
+                    Views = table.Column<int>(nullable: false),
+                    Comments = table.Column<int>(nullable: false),
+                    Layout = table.Column<string>(maxLength: 75, nullable: true),
+                    LikesEnabled = table.Column<bool>(nullable: false),
+                    RatingsEnabled = table.Column<bool>(nullable: false),
+                    CommentsEnabled = table.Column<bool>(nullable: false),
+                    BookingId = table.Column<Guid>(nullable: true),
+                    Thumbnail = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Booking", x => x.Id);
+                    table.PrimaryKey("PK_Service", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Booking_Service_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "Service",
+                        name: "FK_Service_Booking_BookingId",
+                        column: x => x.BookingId,
+                        principalTable: "Booking",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Messages",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    CreatedAt = table.Column<DateTime>(nullable: false),
+                    UpdatedAt = table.Column<DateTime>(nullable: false),
+                    ChatId = table.Column<Guid>(nullable: true),
+                    UserId = table.Column<Guid>(nullable: true),
+                    Timestamp = table.Column<DateTime>(nullable: false),
+                    Text = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    MessageCount = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Messages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Messages_Chats_ChatId",
+                        column: x => x.ChatId,
+                        principalTable: "Chats",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -150,7 +193,8 @@ namespace CarWash.Web.Migrations
                     PhoneNumber = table.Column<string>(nullable: true),
                     MaskUser = table.Column<bool>(nullable: false),
                     RegistrationCode = table.Column<string>(nullable: true),
-                    BookingsId = table.Column<Guid>(nullable: true)
+                    BookingsId = table.Column<Guid>(nullable: true),
+                    ChatId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -161,6 +205,38 @@ namespace CarWash.Web.Migrations
                         principalTable: "Booking",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_User_Chats_ChatId",
+                        column: x => x.ChatId,
+                        principalTable: "Chats",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChatUsers",
+                columns: table => new
+                {
+                    UserAdminId = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<Guid>(nullable: false),
+                    ChatId = table.Column<Guid>(nullable: false),
+                    Role = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChatUsers", x => new { x.ChatId, x.UserId, x.UserAdminId });
+                    table.ForeignKey(
+                        name: "FK_ChatUsers_Chats_ChatId",
+                        column: x => x.ChatId,
+                        principalTable: "Chats",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ChatUsers_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -254,9 +330,9 @@ namespace CarWash.Web.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Booking_ServiceId",
-                table: "Booking",
-                column: "ServiceId");
+                name: "IX_ChatUsers_UserId",
+                table: "ChatUsers",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_ServiceId",
@@ -279,6 +355,11 @@ namespace CarWash.Web.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Messages_ChatId",
+                table: "Messages",
+                column: "ChatId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ratings_ServiceId",
                 table: "Ratings",
                 column: "ServiceId");
@@ -289,13 +370,26 @@ namespace CarWash.Web.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Service_BookingId",
+                table: "Service",
+                column: "BookingId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_User_BookingsId",
                 table: "User",
                 column: "BookingsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_User_ChatId",
+                table: "User",
+                column: "ChatId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ChatUsers");
+
             migrationBuilder.DropTable(
                 name: "Comments");
 
@@ -309,6 +403,9 @@ namespace CarWash.Web.Migrations
                 name: "Likes");
 
             migrationBuilder.DropTable(
+                name: "Messages");
+
+            migrationBuilder.DropTable(
                 name: "Ratings");
 
             migrationBuilder.DropTable(
@@ -318,13 +415,16 @@ namespace CarWash.Web.Migrations
                 name: "UserRole");
 
             migrationBuilder.DropTable(
+                name: "Service");
+
+            migrationBuilder.DropTable(
                 name: "User");
 
             migrationBuilder.DropTable(
                 name: "Booking");
 
             migrationBuilder.DropTable(
-                name: "Service");
+                name: "Chats");
         }
     }
 }

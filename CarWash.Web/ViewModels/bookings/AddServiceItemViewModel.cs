@@ -12,5 +12,6 @@ namespace CarWash.Web.ViewModels.bookings
 
         public Guid? UserId { get; set; }
         
+        public Guid? BookingId { get; set; }
     }
 }

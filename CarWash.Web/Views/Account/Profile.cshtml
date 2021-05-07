@@ -103,8 +103,8 @@
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                 <button class="nav-link active" id="nav-mybook-tab" data-bs-toggle="tab" data-bs-target="#nav-mybook" type="button" role="tab" aria-controls="nav-mybook" aria-selected="true">My Book</button>
-                                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
-                                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+                                @*<button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+                                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>*@
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent">
@@ -132,12 +132,20 @@
                                                     <td>
                                                         @if (item.BookingStatus == CarWash.Web.Infrastructures.Domain.Enums.BookingStatus.Complete || item.BookingStatus == CarWash.Web.Infrastructures.Domain.Enums.BookingStatus.Confirm)
                                                         {
-                                                            <a href="~/booking/book/@item.ServiceId"><i class="fas fa-comments"></i></a>
+                                                            if (item.ServiceId != null)
+                                                            {
+                                                                <a href="~/booking/book/@item.ServiceId"><i class="fas fa-comments"></i></a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <small>Rate is not available</small>
+                                                            }
+
                                                         }
                                                         else
                                                         {
                                                             <p class="w-50">disabled</p>
-                                                              
+
                                                         }
                                                     </td>
                                                 </tr>

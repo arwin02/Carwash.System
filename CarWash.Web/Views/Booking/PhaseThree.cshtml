@@ -16,36 +16,36 @@
 
 
 
-@if (Model.Bookings != null)
+@if (Model.Booking != null)
 {
-   
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Item Price</th>
-                    <th>Item Total</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-              
-                    <tr>
-                        <td>@Model.Bookings.Title</td>
-                        <td>@Model.Bookings.Price.ToString("F")</td>
-                        <td>@Model.Bookings.ServiceType</td>
-                        <td>
-                            @*<a href="#"><i class="fas fa-trash"></i></a>*@
-                            <a href="#" onclick="confirmDelete('@Model.Bookings.Id','@Model.Bookings.Title','@Model.UserId', '@Model.ServiceId')" title="Delete Service"><button type="button" class="btn"><i class="fas fa-times"></i></button></a>
 
-                        </td>
-                    </tr>
-                
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Item Price</th>
+                <th>Item Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
 
-            </tbody>
-        </table>
+            <tr>
+                <td>@Model.Booking.Title</td>
+                <td>@Model.Booking.Price.ToString("F")</td>
+                <td>@Model.Booking.ServiceType</td>
+                <td>
+                    @*<a href="#"><i class="fas fa-trash"></i></a>*@
+                    <a href="#" onclick="confirmDelete('@Model.Booking.Id','@Model.Booking.Title','@Model.User.Id')" title="Delete Service"><button type="button" class="btn"><i class="fas fa-times"></i></button></a>
 
-    
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+
 }
 <div class="container">
     <div class="row">
@@ -53,25 +53,24 @@
             <label id="ErrorList"></label>
             @Html.AntiForgeryToken()
             @Html.ValidationSummary()
-            <input type="hidden" id="UserId" name="UserId" value="@Model.UserId" />
-            <input type="hidden" id="UserName" name="UserName" value="@Model.UserName" />
-            <input type="hidden" id="ServiceId" value="@Model.ServiceId" />
-            <h3>@Model.UserName</h3>
+            <input type="hidden" id="UserId" name="UserId" value="@Model.User.Id" />
+            <input type="hidden" id="BookingId" value="@Model.Booking.Id" />
+            <h3>@Model.User.UserName</h3>
             <div class="form-group">
-                <label class="form-label" for="PhoneNumber">Phone</label>
-                <input class="form-control" id="Email" type="email" value="@Model.Email" placeholder="Phone Number" />
+                <label class="form-label" for="Email">Email (*)</label>
+                <input class="form-control" id="Email" type="email" value="@Model.User.EmailAddress" placeholder="Email Address" />
             </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <div class="form-group">
-                        <label class="form-label" for="PhoneNumber">Phone</label>
-                        <input class="form-control" type="text" id="PhoneNumber" value="@Model.PhoneNumber" placeholder="Phone Number" width="50" height="50" />
+                        <label class="form-label" for="PhoneNumber">Phone (*)</label>
+                        <input class="form-control" type="text" id="PhoneNumber" value="@Model.User.PhoneNumber" placeholder="Phone Number" width="50" height="50" />
                     </div>
 
                 </div>
                 <div class="col-md-6 mb-3">
                     <div class="form-group">
-                        <label class="form-label" for="Time">Time</label>
+                        <label class="form-label" for="Time">Date of Book (*)</label>
                         <input class="form-control" id="Time" type="datetime-local" placeholder="Time" />
                     </div>
                 </div>
@@ -79,10 +78,11 @@
 
 
             <div class="form-group">
-                <label class="form-label" for="Address">Address</label>
+                <label class="form-label" for="Address">Address (*)</label>
                 <input class="form-control" id="Address" type="text" placeholder="Address" />
             </div>
             <hr />
+            <p>REQUIRED (*)</p>
             <button type="button" id="submit" class="btn btn-primary">Submit</button>
         </form>
 
@@ -112,4 +112,83 @@
 </div>
 
 
-<script src="~/js/bookingPhase.js"></script>
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#submit").attr('disabled', 'disabled');
+
+        $("form").keyup(function () {
+            // To Disable Submit Button
+            $("#submit").attr('disabled', 'disabled');
+            // Validating Fields
+            var Email = $("#Email").val();
+            var PhoneNumber = $("#PhoneNumber").val();
+            var Time = $("#Time").val();
+           
+
+            if (!(Email == "" || PhoneNumber == "" || Time == "")) {
+
+                // To Enable Submit Button
+                $("#submit").removeAttr('disabled');
+                $("#submit").css({
+                    "cursor": "pointer",
+                    "box-shadow": "1px 0px 6px #333"
+                });
+
+            }
+        });
+        // On Click Of Submit Button
+        $("#submit").click(function () {
+            $("#submit").css({
+                "cursor": "default",
+                "box-shadow": "none"
+            });
+
+        });
+    });
+
+
+
+    $(document).ready(function () {
+        $("#submit").click(function () {
+            var userId = $("#UserId").val();
+            var bookingId = $("#BookingId").val();
+            var phoneNumber = $("#PhoneNumber").val();
+            var email = $("#Email").val();
+            var time = $("#Time").val();
+            var address = $("#Address").val();
+
+
+            var objPhaseThree = {
+                UserId: userId,
+                BookingId: bookingId,
+                PhoneNumber: phoneNumber,
+                Email: email,
+                Time: time,
+                Address: address,
+
+            }
+
+            PhaseThreeSubmitForm(objPhaseThree);
+
+        });
+
+    });
+
+
+    function PhaseThreeSubmitForm(objPhaseThree) {
+        var routePhaseThree = "/booking/phase-three-booking";
+        $.ajax({
+            url: routePhaseThree,
+            method: "POST",
+            data: objPhaseThree,
+            success: function (redirectToIndex) {
+                window.location = redirectToIndex;
+            },
+            error: function (err) {
+                $("#ErrorList").html(err);
+            }
+        });
+    }
+
+</script>

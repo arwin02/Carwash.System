@@ -19,6 +19,7 @@
 <form>
     <div id="phaseTwo">
         <input type="hidden" value="@Model.UserId" id="userId" />
+        <input type="hidden" value="@Model.BookingId" id="bookingId" />
             @*<input type="hidden" value="@Model.BookingId" id="bookingId" />*@
         <ul>
             <li>
@@ -58,45 +59,6 @@
     </table>
 </div>
 
-
-@*@if (Model.Bookings != null)
-{
-    if (Model.Bookings.Count > 0)
-    {
-
-        <div id="itemServices" class="row">
-            <h1>Items Service</h1>
-            <table class="table-responsive">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Type</th>
-                        <th>Time</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <thead>
-                    @foreach (Booking items in Model.Bookings)
-                    {
-                        <tr>
-                            <td>@items.Service.Vehicle</td>
-                            <td>@items.Service.Price.ToString("####")</td>
-                            <td>@items.Service.ServiceType</td>
-                            <td>@items.Service.UpdatedAt.ToString("MM/dd/yyyy hh:mm tt")</td>
-                            <td>
-                                <a href="#" class="btn" title="Details"><i class="fas fa-info"></i></a>
-                                <a href="#" class="btn" title="RemoveOne"><i class="fas fa-trash"></i></a>
-                                <a href="#" class="btn" title="RemoveAll"><i class="fas fa-trash"></i></a>
-                            </td>
-                        </tr>
-                    }
-
-                </thead>
-            </table>
-        </div>
-    }
-}*@
 
 
 <script src="~/js/bookingPhase.js"></script>

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarWash.Web.Migrations
 {
     [DbContext(typeof(DefaultDbContext))]
-    [Migration("20210319033200_init")]
+    [Migration("20210506172413_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,8 @@ namespace CarWash.Web.Migrations
 
                     b.Property<int>("ItemTotal");
 
+                    b.Property<int>("PaymentType");
+
                     b.Property<string>("PhoneNumber");
 
                     b.Property<decimal>("Price");
@@ -58,9 +60,42 @@ namespace CarWash.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ServiceId");
-
                     b.ToTable("Booking");
+                });
+
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Chat", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ChatType");
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Chats");
+                });
+
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.ChatUser", b =>
+                {
+                    b.Property<Guid?>("ChatId");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.Property<Guid?>("UserAdminId");
+
+                    b.Property<int>("Role");
+
+                    b.HasKey("ChatId", "UserId", "UserAdminId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("ChatUsers");
                 });
 
             modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Comment", b =>
@@ -166,6 +201,34 @@ namespace CarWash.Web.Migrations
                     b.ToTable("Likes");
                 });
 
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Message", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid?>("ChatId");
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<int>("MessageCount");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Text");
+
+                    b.Property<DateTime>("Timestamp");
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.Property<Guid?>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChatId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Rating", b =>
                 {
                     b.Property<Guid?>("Id")
@@ -200,6 +263,8 @@ namespace CarWash.Web.Migrations
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<Guid?>("BookingId");
+
                     b.Property<int>("Comments");
 
                     b.Property<bool>("CommentsEnabled");
@@ -227,6 +292,8 @@ namespace CarWash.Web.Migrations
                     b.Property<int>("ServiceType")
                         .HasMaxLength(255);
 
+                    b.Property<bool>("Thumbnail");
+
                     b.Property<DateTime>("UpdatedAt");
 
                     b.Property<string>("Vehicle");
@@ -234,6 +301,8 @@ namespace CarWash.Web.Migrations
                     b.Property<int>("Views");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookingId");
 
                     b.ToTable("Service");
                 });
@@ -244,6 +313,8 @@ namespace CarWash.Web.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid?>("BookingsId");
+
+                    b.Property<Guid?>("ChatId");
 
                     b.Property<DateTime>("CreatedAt");
 
@@ -274,6 +345,8 @@ namespace CarWash.Web.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("BookingsId");
+
+                    b.HasIndex("ChatId");
 
                     b.ToTable("User");
                 });
@@ -320,11 +393,17 @@ namespace CarWash.Web.Migrations
                     b.ToTable("UserRole");
                 });
 
-            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Booking", b =>
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.ChatUser", b =>
                 {
-                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Service", "Service")
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Chat", "Chat")
+                        .WithMany("Users")
+                        .HasForeignKey("ChatId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("ServiceId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Comment", b =>
@@ -351,6 +430,13 @@ namespace CarWash.Web.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Message", b =>
+                {
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Chat", "Chat")
+                        .WithMany("Messages")
+                        .HasForeignKey("ChatId");
+                });
+
             modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Rating", b =>
                 {
                     b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Service", "Service")
@@ -363,11 +449,22 @@ namespace CarWash.Web.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.Service", b =>
+                {
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Booking", "Booking")
+                        .WithMany("Service")
+                        .HasForeignKey("BookingId");
+                });
+
             modelBuilder.Entity("CarWash.Web.Infrastructures.Domain.Models.User", b =>
                 {
                     b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Booking", "Bookings")
                         .WithMany("Users")
                         .HasForeignKey("BookingsId");
+
+                    b.HasOne("CarWash.Web.Infrastructures.Domain.Models.Chat")
+                        .WithMany("User")
+                        .HasForeignKey("ChatId");
                 });
 #pragma warning restore 612, 618
         }

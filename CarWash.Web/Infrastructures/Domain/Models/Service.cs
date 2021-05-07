@@ -37,5 +37,11 @@ namespace CarWash.Web.Infrastructures.Domain.Models
         public bool LikesEnabled { get; set; }
         public bool RatingsEnabled { get; set; }
         public bool CommentsEnabled { get; set; }
+
+        public virtual Booking Booking { get; set; }
+
+        public Guid? BookingId { get; set; }
+
+        public bool Thumbnail { get; set; }
     }
 }

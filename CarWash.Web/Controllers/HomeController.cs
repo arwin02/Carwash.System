@@ -101,26 +101,38 @@ namespace CarWash.Web.Controllers
             {
                 return View(model);
             }
-
-
-            Contact contact = new Contact()
+            var user = this._context.Users.FirstOrDefault(u => u.EmailAddress == model.EmailAddress);
+            if (user == null)
             {
-                Name = model.Name,
-                EmailAddress = model.EmailAddress,
-                Id = Guid.NewGuid(),
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                Subject = model.Subject,
-                Message = model.Message,
+                ModelState.AddModelError("", "Email address does'nt exist in our website. Please create your accout first to contact us.");
+                return View(model); 
+            }
+            if(user != null)
+            {
+                Contact contact = new Contact()
+                {
+                    Name = model.Name,
+                    EmailAddress = model.EmailAddress,
+                    Id = Guid.NewGuid(),
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
+                    Subject = model.Subject,
+                    Message = model.Message,
 
-            };
+                };
 
-            this._context.Contacts.Add(contact);
-            this._context.SaveChanges();
+                this._context.Contacts.Add(contact);
+                this._context.SaveChanges();
+            }
+            
 
+            return RedirectToAction("Notify");
+        }
 
-
-            return RedirectToAction("~/home");
+        [HttpGet,Route("/home/notify")]
+        public IActionResult Notify()
+        {
+            return View();
         }
 
         [HttpGet,Route("~/home/thank-you")]

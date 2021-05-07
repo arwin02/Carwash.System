@@ -68,9 +68,15 @@ namespace CarWash.Web.Controllers
             }
 
             var user = this._context.Users.FirstOrDefault(u => u.EmailAddress.ToLower() == model.EmailAddress.ToLower());
-            var userRole = this._context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
+            if(user == null)
+            {
+                ModelState.AddModelError("", "Account does'nt exist.Please create your account to login");
+                return View(model);
+            }
+
             if (user != null)
             {
+                var userRole = this._context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
                 if (BCrypt.BCryptHelper.CheckPassword(model.Password, user.Password))
                 {
                     if (user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Locked)
@@ -158,7 +164,7 @@ namespace CarWash.Web.Controllers
 
 
                         //return RedirectPermanent("~/booking/bookings-costumer/" + user.Id);
-                        return Redirect("/booking/index");
+                        return Redirect("/services/index");
 
                     }
                     else
@@ -277,7 +283,7 @@ namespace CarWash.Web.Controllers
         [HttpPost, Route("/account/verify")]
         public IActionResult Verify(VerifyViewModel model)
         {
-            var user = this._context.Users.FirstOrDefault(u => u.EmailAddress.ToLower() == model.EmailAddress.ToLower() && u.RegistrationCode == model.RegistrationCode);
+            var user = this._context.Users.FirstOrDefault(u => u.RegistrationCode == model.RegistrationCode);
             if (user != null)
             {
                 user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
@@ -286,12 +292,13 @@ namespace CarWash.Web.Controllers
                 this._context.SaveChanges();
 
 
-                return RedirectToAction("Register");
+                return RedirectToAction("Welcome");
             }
 
             return View();
         }
 
+     
 
         [HttpGet, Route("account/accessdenied")]
         public IActionResult AccessDenied(string ReturnUrl)
@@ -299,7 +306,6 @@ namespace CarWash.Web.Controllers
             ViewBag.ReturnUrl = ReturnUrl;
             return View();
         }
-        [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("account/welcome")]
         public IActionResult Welcome()
         {
@@ -307,13 +313,13 @@ namespace CarWash.Web.Controllers
         }
 
 
-        [Authorize(Policy = "SignedIn")]
+       
         [HttpGet, Route("account/forgot-password")]
         public IActionResult ForgotPassword()
         {
             return View();
         }
-        [Authorize(Policy = "SignedIn")]
+       
         [HttpPost, Route("account/forgot-password")]
         public IActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
@@ -326,9 +332,9 @@ namespace CarWash.Web.Controllers
 
             if (user != null)
             {
-                var newPassword = RandomString(8);
-                user.Password = BCryptHelper.HashPassword("", BCryptHelper.GenerateSalt(9));
-                user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.NeedToChangePassword;
+                var newPassword = RandomString(9);
+                user.Password = BCryptHelper.HashPassword(newPassword, BCryptHelper.GenerateSalt(9));
+                user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
 
                 this._context.Users.Update(user);
                 this._context.SaveChanges();
@@ -340,9 +346,15 @@ namespace CarWash.Web.Controllers
                            "CarwashBooking.ph Website - Forgot Password"
                );
 
-                return RedirectToAction("login");
+                return RedirectToAction("OTP");
             }
 
+            ModelState.AddModelError("", "Email-Address does'nt exist!");
+            return View(model);
+        }
+        [HttpGet,Route("account/otp")]
+        public IActionResult OTP()
+        {
             return View();
         }
 
@@ -366,15 +378,17 @@ namespace CarWash.Web.Controllers
 
             }
 
-            return View();
+            return View(new ChangePasswordViewModel
+            {
+                UserId = user.Id
+            });
         }
 
         [Authorize(Policy = "SignedIn")]
         [HttpPost, Route("account/change-password")]
         public IActionResult ChangePassword(ChangePasswordViewModel model)
         {
-
-
+           
             if (model.NewPassword != model.ConfirmNewPassword)
             {
                 ModelState.AddModelError("", "New Password does not match Confirm New Password");
@@ -383,7 +397,7 @@ namespace CarWash.Web.Controllers
 
 
             var user = this._context.Users.FirstOrDefault(u =>
-                    u.Id == WebUser.UserId);
+                    u.Id == model.UserId);
 
             if (user != null)
             {
@@ -399,12 +413,17 @@ namespace CarWash.Web.Controllers
                 this._context.Users.Update(user);
                 this._context.SaveChanges();
 
-                return RedirectPermanent("/home/index");
+                return RedirectPermanent("Notify");
             }
 
             return View();
         }
 
+        [HttpGet,Route("account/notify")]
+        public IActionResult Notify()
+        {
+            return View();
+        }
 
         [Authorize(Policy = "SignedIn")]
         [HttpGet, Route("account/update-profile/{userId}")]

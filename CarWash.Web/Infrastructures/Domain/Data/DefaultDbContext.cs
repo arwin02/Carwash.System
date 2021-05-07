@@ -29,6 +29,9 @@ namespace CarWash.Web.Infrastructures.Domain.Data
         public DbSet<Like> Likes { get; set; }
         public DbSet<Contact> Contacts { get; set; }
 
+        public DbSet<Chat> Chats { get; set; }
+        public DbSet<Message> Messages { get; set; }
+        public DbSet<ChatUser> ChatUsers { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,6 +44,10 @@ namespace CarWash.Web.Infrastructures.Domain.Data
             modelBuilder.Entity<Service>().ToTable("Service");
             modelBuilder.Entity<Booking>().ToTable("Booking");
             modelBuilder.Entity<Contact>().ToTable("Contact");
+
+            modelBuilder.Entity<ChatUser>()
+                   .HasKey(x => new { x.ChatId, x.UserId , x.UserAdminId });
+
         }
     }
 }
