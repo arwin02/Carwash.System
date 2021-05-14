@@ -264,7 +264,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("                            ");
             EndContext();
             BeginContext(5598, 108, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a6f2425842fb4e9c9204f4a3011cad47", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0bc40ae0782a4c6986651e0ee6218812", async() => {
                 BeginContext(5690, 12, true);
                 WriteLiteral("Another Book");
                 EndContext();
@@ -334,7 +334,7 @@ WriteAttributeValue("", 5803, Model.Booking.UserId, 5803, 21, false);
             WriteLiteral("ype=\"button\" id=\"closeEmptyTwo\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n");
             EndContext();
             BeginContext(7002, 44, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "41cb5b96c35a4a04b8ba9c4bc0bae12a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "98770e507cfd4c629ecfde2b79b23744", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

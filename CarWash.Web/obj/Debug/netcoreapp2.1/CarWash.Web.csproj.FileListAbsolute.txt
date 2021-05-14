@@ -200,3 +200,4 @@ C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Account\OTP.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Account\Notify.g.cshtml.cs
 C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Views\Home\Notify.g.cshtml.cs
+C:\Users\VGD 14\Pictures\GithubRepositorySeedData\Carwash\CarWash.Web\obj\Debug\netcoreapp2.1\Razor\Areas\Manage\Views\Calendars\Index.g.cshtml.cs

@@ -85,7 +85,7 @@ using Microsoft.AspNetCore.Authorization;
             WriteLiteral("                <div class=\"col-lg-6\">\r\n                    <div class=\"card mb-3\" style=\"max-width: 540px;\">\r\n                        <div class=\"row g-0\">\r\n                            <div class=\"col-md-4\">\r\n                                ");
             EndContext();
             BeginContext(551, 96, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "eed6d42199f446b39a64681d97ee9f03", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "bb9f86d9077c429781b25591148837e5", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -128,7 +128,7 @@ AddHtmlAttributeValue("", 605, user.FirstName != null ? "Admin" : "", 605, 40, f
             WriteLiteral("</h1>\r\n                                    ");
             EndContext();
             BeginContext(936, 92, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dee1bd5842f64b89a5d9a2d575fb2cf4", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "666c186d9ee549fca26085d3ce60d8d2", async() => {
                 BeginContext(983, 41, true);
                 WriteLiteral("Chat me<i class=\"fas fa-comment-alt\"></i>");
                 EndContext();
@@ -171,7 +171,7 @@ AddHtmlAttributeValue("", 973, user.Id, 973, 8, false);
                                     ");
             EndContext();
             BeginContext(1568, 96, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "ce0346789fa64c7397bb17cfa0a8de68", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "9de06fece0f840189bb6e972085e1481", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -214,7 +214,7 @@ AddHtmlAttributeValue("", 1622, user.FirstName != null ? "Admin" : "", 1622, 40,
             WriteLiteral("</h1>\r\n                                        ");
             EndContext();
             BeginContext(1973, 92, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "61a301a794ed417b8719f790e0b36cb2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d060074e4b54b86a39a8b370cdf430b", async() => {
                 BeginContext(2020, 41, true);
                 WriteLiteral("Chat me<i class=\"fas fa-comment-alt\"></i>");
                 EndContext();
