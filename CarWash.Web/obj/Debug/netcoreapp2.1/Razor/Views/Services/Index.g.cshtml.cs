@@ -105,7 +105,7 @@ using CarWash.Web.Infrastructures.Domain.Models;
             WriteLiteral("        ");
             EndContext();
             BeginContext(460, 114, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7dd228a5c2284698839ac59c9b92a47d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d12532eec5d941c0848f4d3212cd3397", async() => {
                 BeginContext(556, 14, true);
                 WriteLiteral("Manual Booking");
                 EndContext();
@@ -198,7 +198,7 @@ WriteAttributeValue("", 870, Model.Services.Keyword, 870, 23, false);
             WriteLiteral("                                        ");
             EndContext();
             BeginContext(1786, 74, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "8a18cd0b6aa74645868248e2a05a2867", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "a5f3d924474e44b1bb2b452ec9258958", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -236,7 +236,7 @@ AddHtmlAttributeValue("", 1814, service.Id, 1814, 11, false);
             WriteLiteral("                                        ");
             EndContext();
             BeginContext(2022, 68, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "022968c4a4dd4f419cddc7c5ddfae319", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "4413f78722f84871ad8463b45eddb00e", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -350,7 +350,7 @@ AddHtmlAttributeValue("", 1814, service.Id, 1814, 11, false);
             WriteLiteral("                                        ");
             EndContext();
             BeginContext(3261, 85, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f75e7dc8ed734499911d2fa788957835", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "90229af1d85e4a409ddd3aed295da3d6", async() => {
                 BeginContext(3334, 8, true);
                 WriteLiteral("Book Now");
                 EndContext();
@@ -379,7 +379,7 @@ AddHtmlAttributeValue("", 3289, service.Id, 3289, 11, false);
             WriteLiteral("\r\n                                        ");
             EndContext();
             BeginContext(3388, 80, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6815b6676a714b8f8dfef7083e12e821", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "583db395c59044c1ba8ed66490cfc6cb", async() => {
                 BeginContext(3458, 6, true);
                 WriteLiteral("Detail");
                 EndContext();
@@ -462,7 +462,7 @@ WriteAttributeValue("", 3967, Model.Services.PageIndex, 3967, 25, false);
             WriteLiteral("                        <li class=\"page-item\">");
             EndContext();
             BeginContext(4583, 170, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b9cc027b644a443f8468a4d3f7ae456d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ad4e1d044ac54f08a4a44f8531ed505e", async() => {
                 BeginContext(4710, 39, true);
                 WriteLiteral("<span aria-hidden=\"true\">&laquo;</span>");
                 EndContext();
@@ -533,7 +533,7 @@ AddHtmlAttributeValue("", 4703, prev, 4703, 5, false);
             WriteLiteral("                        <li class=\"page-item\">");
             EndContext();
             BeginContext(5118, 170, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f74fb2e328b64c819c3eb8ded3bb606d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6cec67dbc2b5404794df88874b22cc35", async() => {
                 BeginContext(5245, 39, true);
                 WriteLiteral("<span aria-hidden=\"true\">&raquo;</span>");
                 EndContext();

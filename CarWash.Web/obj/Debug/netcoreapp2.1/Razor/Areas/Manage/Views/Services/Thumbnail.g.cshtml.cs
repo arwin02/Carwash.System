@@ -56,7 +56,7 @@ namespace AspNetCore
             WriteLiteral("\r\n\r\n\r\n<br />\r\n<br />\r\n<br />\r\n<br />\r\n<h1 class=\"text-center\">Thumbnail</h1>\r\n<br />\r\n<br />\r\n<div class=\"text-center\">\r\n    ");
             EndContext();
             BeginContext(263, 844, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a2cbc7650ec24cbfbe19105b15cb1389", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9da71e7e946241548b499429f67c1901", async() => {
                 BeginContext(356, 85, true);
                 WriteLiteral("\r\n        <div class=\"form-group\">\r\n            <input type=\"hidden\" name=\"ServiceId\"");
                 EndContext();
@@ -71,7 +71,7 @@ WriteAttributeValue("", 449, Model.ServiceId, 449, 16, false);
                 WriteLiteral(" />\r\n            <label for=\"Thumbnail\" ></label><br />\r\n            ");
                 EndContext();
                 BeginContext(535, 156, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "53982488d827403cb2065954a6fb038d", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "def95fd2a0974ab59b87dd520df0ee17", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -111,7 +111,7 @@ AddHtmlAttributeValue("", 562, Model.ServiceId, 562, 16, false);
                 WriteLiteral("\r\n        </div>\r\n\r\n        <div class=\"form-group\">\r\n            <div class=\"col-md-10\">\r\n                <input type=\"submit\" value=\"Upload\" class=\"btn btn-primary\" />\r\n                ");
                 EndContext();
                 BeginContext(992, 66, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cec393ae01144f168d82f7f2c38448f4", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "14d3cbf459f6454cb51961a42b5a83ef", async() => {
                     BeginContext(1048, 6, true);
                     WriteLiteral("Cancel");
                     EndContext();

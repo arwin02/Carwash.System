@@ -7,6 +7,7 @@ using CarWash.Web.Infrastructures.Domain.Data;
 using CarWash.Web.Infrastructures.Domain.Enums;
 using CarWash.Web.Infrastructures.Domain.Helpers;
 using CarWash.Web.Infrastructures.Domain.Models;
+using CarWash.Web.RecaptchaValidator;
 using CarWash.Web.ViewModels.bookings;
 using CarWash.Web.ViewModels.payment;
 using Microsoft.AspNetCore.Authorization;
@@ -132,6 +133,10 @@ namespace CarWash.Web.Controllers
         [HttpPost, Route("/booking/costumer-service")]
         public IActionResult BookingWithService(PostAutoBookingViewModel model)
         {
+            string EncodedResponse = Request.Form["g-recaptcha-response"];
+            var isCaptchaValid = Recaptcha.Validate(EncodedResponse);
+
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -140,46 +145,56 @@ namespace CarWash.Web.Controllers
             Guid? Id = null;
 
             var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
+
             var service = this._context.Services.FirstOrDefault(s => s.Id == model.ServiceId);
-            if(user != null)
-            { 
-                if(service != null)
+            if (isCaptchaValid)
+            {
+                if (user != null)
                 {
-                    Booking booking = new Booking()
+                    if (service != null)
                     {
-                        Id = Guid.NewGuid(),
-                        ServiceId = model.ServiceId,
-                        UserId = model.UserId,
-                        UserName = user.UserName,
-                        PhoneNumber = model.PhoneNumber,
-                        Email = model.Email,
-                        BookingAddress = model.BookingAddress,
-                        Time = model.Time,
-                        Title = service.Vehicle,
-                        Description = service.Description,
-                        Price = service.Price,
-                        ServiceType = service.ServiceType,
-                        ItemTotal = 1,
-                        BookingStatus = Infrastructures.Domain.Enums.BookingStatus.Pending,
-                        PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid,
-                        CreatedAt = DateTime.UtcNow,
-                        UpdatedAt = DateTime.UtcNow,
-                      
-                    };
+                        Booking booking = new Booking()
+                        {
+                            Id = Guid.NewGuid(),
+                            ServiceId = model.ServiceId,
+                            UserId = model.UserId,
+                            UserName = user.UserName,
+                            PhoneNumber = model.PhoneNumber,
+                            Email = model.Email,
+                            BookingAddress = model.BookingAddress,
+                            Time = model.Time,
+                            Title = service.Vehicle,
+                            Description = service.Description,
+                            Price = service.Price,
+                            ServiceType = service.ServiceType,
+                            ItemTotal = 1,
+                            BookingStatus = Infrastructures.Domain.Enums.BookingStatus.Pending,
+                            PaymentType = Infrastructures.Domain.Enums.PaymentType.Unpaid,
+                            CreatedAt = DateTime.UtcNow,
+                            UpdatedAt = DateTime.UtcNow,
 
-                    Id = booking.Id;
-                    this._context.Bookings.Add(booking);
+                        };
 
-                    service.RatingsEnabled = true;
-                    service.LikesEnabled = true;
-                    service.CommentsEnabled = true;
+                        Id = booking.Id;
+                        this._context.Bookings.Add(booking);
 
-                    this._context.Services.Update(service);
-                    this._context.SaveChanges();
+                        service.RatingsEnabled = true;
+                        service.LikesEnabled = true;
+                        service.CommentsEnabled = true;
+
+                        this._context.Services.Update(service);
+                        this._context.SaveChanges();
+                    }
+
+
                 }
-
-               
             }
+            else
+            {
+                ModelState.AddModelError("", "Error From Google ReCaptcha :" + isCaptchaValid);
+                return View();
+            }
+           
             if(Id != null)
             {
                 return Content(@"/booking/book-review/" + Id);
@@ -396,6 +411,10 @@ namespace CarWash.Web.Controllers
         [HttpPost, Route("/booking/phase-three-booking")]
         public IActionResult PhaseThree(PhaseThreePostViewModel model)
         {
+            string EncodedResponse = Request.Form["g-recaptcha-response"];
+            var isCaptchaValid = Recaptcha.Validate(EncodedResponse);
+
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -404,21 +423,30 @@ namespace CarWash.Web.Controllers
             var user = this._context.Users.FirstOrDefault(u => u.Id == model.UserId);
             var booking = this._context.Bookings.FirstOrDefault(b => b.Id == model.BookingId);
 
-            if (user != null)
+            if (isCaptchaValid)
             {
-                if(booking != null)
+                if (user != null)
                 {
-                    booking.UserName = user.UserName;
-                    booking.PhoneNumber = model.PhoneNumber;
-                    booking.Email = model.Email;
-                    booking.Time = model.Time;
-                    booking.BookingAddress = model.Address;
+                    if (booking != null)
+                    {
+                        booking.UserName = user.UserName;
+                        booking.PhoneNumber = model.PhoneNumber;
+                        booking.Email = model.Email;
+                        booking.Time = model.Time;
+                        booking.BookingAddress = model.Address;
 
-                    this._context.Bookings.Update(booking);
-                    this._context.SaveChanges();
+                        this._context.Bookings.Update(booking);
+                        this._context.SaveChanges();
+                    }
+
                 }
-                
             }
+            else
+            {
+                ModelState.AddModelError("", "Error From Google ReCaptcha :" + isCaptchaValid);
+                return View();
+            }
+          
             //return Content(@"/home/service-book/" + model.UserId);
             //return Content(@"/feedback/user-feedbacks/" + model.UserId + "/" + model.ServiceId );
             return Content(@"/booking/book-review/" + booking.Id);

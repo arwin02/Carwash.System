@@ -89,7 +89,7 @@ using CarWash.Web.Infrastructures.Domain.Models;
             WriteLiteral("\r\n\r\n\r\n<br /><br /><br />\r\n<div class=\"section-title\">\r\n    <h2>Bookings</h2>\r\n    ");
             EndContext();
             BeginContext(234, 64, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4cfde029b26244f5a9bcdd27ff0f4ceb", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bc83df6263fa4858a1fdae1daa9730cf", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -108,7 +108,7 @@ using CarWash.Web.Infrastructures.Domain.Models;
             WriteLiteral("\r\n</div>\r\n<div class=\"form-group\">\r\n    ");
             EndContext();
             BeginContext(338, 45, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "bcb5ff78db53490b9e84778ffd7bec75", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "26f82fafad4e462d8002dbfe6d9d6463", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -126,7 +126,7 @@ using CarWash.Web.Infrastructures.Domain.Models;
             WriteLiteral("\r\n</div>\r\n\r\n\r\n");
             EndContext();
             BeginContext(397, 1147, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "aaebb5f07ff74a0bb803dff7d6e92734", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "586f9deac9ba4719a0f03423d883026a", async() => {
                 BeginContext(403, 55, true);
                 WriteLiteral("\r\n    <div id=\"phaseTwo\">\r\n        <input type=\"hidden\"");
                 EndContext();
@@ -154,7 +154,7 @@ WriteAttributeValue("", 533, Model.BookingId, 533, 16, false);
                 WriteLiteral("        <ul>\r\n            <li>\r\n                <input type=\"checkbox\" id=\"cb1\" onclick=\"getServices(\'1\')\" />\r\n                <label for=\"cb1\">");
                 EndContext();
                 BeginContext(795, 49, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "2f93bd01d599400a9527db0801088663", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "ce19ad2ea29346e8a67d604efb86a46d", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -172,7 +172,7 @@ WriteAttributeValue("", 533, Model.BookingId, 533, 16, false);
                 WriteLiteral("</label>\r\n            </li>\r\n            <li>\r\n                <input type=\"checkbox\" id=\"cb2\" onclick=\"getServices(\'2\')\" />\r\n                <label for=\"cb2\">");
                 EndContext();
                 BeginContext(1003, 54, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "333e0ed83864483085b173e5c8b6513e", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "4d1af906ac4d41a081aa0f67442d78be", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -190,7 +190,7 @@ WriteAttributeValue("", 533, Model.BookingId, 533, 16, false);
                 WriteLiteral("</label>\r\n            </li>\r\n            <li>\r\n                <input type=\"checkbox\" id=\"cb3\" onclick=\"getServices(\'3\')\" />\r\n                <label for=\"cb3\">");
                 EndContext();
                 BeginContext(1216, 50, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "ed8c3d995b82452fbe21a63480b38316", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "8b791e6be11d4dff81d128772d70e102", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -208,7 +208,7 @@ WriteAttributeValue("", 533, Model.BookingId, 533, 16, false);
                 WriteLiteral("</label>\r\n            </li>\r\n            <li>\r\n                <input type=\"checkbox\" id=\"cb4\" onclick=\"getServices(\'4\')\" />\r\n                <label for=\"cb4\">");
                 EndContext();
                 BeginContext(1425, 54, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "68486b3e574846c790b5991650a516d7", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "06e2ff16e3d94cdc89d2572642cdf03a", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -263,7 +263,7 @@ WriteAttributeValue("", 533, Model.BookingId, 533, 16, false);
 ");
             EndContext();
             BeginContext(1967, 44, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "dd74e3e9ad0b43d282b330875e9ab833", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9db378973ebd45bb9e4de94ecf53d44a", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

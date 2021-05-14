@@ -11,6 +11,7 @@ using CarWash.Web.Infrastructures.Domain.Data;
 using CarWash.Web.Infrastructures.Domain.Enums;
 using CarWash.Web.Infrastructures.Domain.Helpers;
 using CarWash.Web.Infrastructures.Domain.Models;
+using CarWash.Web.RecaptchaValidator;
 using CarWash.Web.ViewModels;
 using CarWash.Web.ViewModels.account;
 using Microsoft.AspNetCore.Authentication;
@@ -62,135 +63,147 @@ namespace CarWash.Web.Controllers
         [HttpPost, Route("/account/login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            string EncodedResponse = Request.Form["g-recaptcha-response"];
+            var isCaptchaValid = Recaptcha.Validate(EncodedResponse);
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
             var user = this._context.Users.FirstOrDefault(u => u.EmailAddress.ToLower() == model.EmailAddress.ToLower());
-            if(user == null)
+            if(isCaptchaValid)
             {
-                ModelState.AddModelError("", "Account does'nt exist.Please create your account to login");
-                return View(model);
-            }
-
-            if (user != null)
-            {
-                var userRole = this._context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
-                if (BCrypt.BCryptHelper.CheckPassword(model.Password, user.Password))
+                if (user == null)
                 {
-                    if (user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Locked)
-                    {
-                        ModelState.AddModelError("", "Your account has been locked ");
-                        return View();
-                    }
-                    else if (user.LoginStatus.Equals(Infrastructures.Domain.Enums.LoginStatus.Unverified))
-                    {
-                        ModelState.AddModelError("", "Please verify your account first.");
-                        return View();
-                    }
-
-                    else if (user.LoginStatus.Equals(Infrastructures.Domain.Enums.LoginStatus.NeedToChangePassword))
-                    {
-                        user.LoginRetries = 0;
-                        user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
-                        this._context.Users.Update(user);
-                        this._context.SaveChanges();
-
-
-                        var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
-                        var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
-                        var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
-
-
-                        WebUser.SetUser(user, roles, groups);
-                        await this.SignIn();
-                        return RedirectToAction("~/account/change-password");
-                    }
-                    else if (userRole.Role == Infrastructures.Domain.Enums.Role.Admin && user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
-                    {
-                        user.LoginRetries = 0;
-                        user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
-                        
-                        this._context.Users.Update(user);
-                        this._context.SaveChanges();
-                        
-                        var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
-                        var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
-                        var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
-
-                        WebUser.SetUser(user, roles, groups);
-                        await this.SignIn();
-
-
-                        return RedirectToAction("~/manage/users/index");
-                    }
-
-                    else if (userRole.Role == Infrastructures.Domain.Enums.Role.ContentAdmin && user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
-                    {
-                        user.LoginRetries = 0;
-                        user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
-
-                        this._context.Users.Update(user);
-                        this._context.SaveChanges();
-
-                        var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
-                        var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
-                        var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
-
-                        WebUser.SetUser(user, roles, groups);
-                        WebID.SetAdminId(user.Id);
-                        await this.SignIn();
-
-
-                        return RedirectPermanent("~/manage/users/index");
-                    }
-
-                    else if (user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
-                    {
-                        user.LoginRetries = 0;
-                        user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
-                        this._context.Users.Update(user);
-                        this._context.SaveChanges();
-
-
-                        var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
-                        var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
-                        var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
-                      
-                        WebUser.SetUser(user, roles, groups);
-                        WebID.SetUserId(user.Id);
-                        await this.SignIn();
-
-
-                        //return RedirectPermanent("~/booking/bookings-costumer/" + user.Id);
-                        return Redirect("/services/index");
-
-                    }
-                    else
-                    {
-                        user.LoginRetries = user.LoginRetries + 1;
-
-                        if (user.LoginRetries >= 3)
-                        {
-                            ModelState.AddModelError("", "Your account has been locked please contact an Administrator.");
-                            user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Locked;
-                        }
-
-                        this._context.Users.Update(user);
-                        this._context.SaveChanges();
-
-                        ModelState.AddModelError("", "Invalid Login.");
-                        return View();
-                    }
+                    ModelState.AddModelError("", "Account does'nt exist.Please create your account to login");
+                    return View(model);
                 }
 
-                ModelState.AddModelError("", "Invalid Login.");
-                return View();
+                if (user != null)
+                {
+                    var userRole = this._context.UserRoles.FirstOrDefault(ur => ur.UserId == user.Id);
+                    if (BCrypt.BCryptHelper.CheckPassword(model.Password, user.Password))
+                    {
+                        if (user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Locked)
+                        {
+                            ModelState.AddModelError("", "Your account has been locked ");
+                            return View();
+                        }
+                        else if (user.LoginStatus.Equals(Infrastructures.Domain.Enums.LoginStatus.Unverified))
+                        {
+                            ModelState.AddModelError("", "Please verify your account first.");
+                            return View();
+                        }
 
+                        else if (user.LoginStatus.Equals(Infrastructures.Domain.Enums.LoginStatus.NeedToChangePassword))
+                        {
+                            user.LoginRetries = 0;
+                            user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
+                            this._context.Users.Update(user);
+                            this._context.SaveChanges();
+
+
+                            var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
+                            var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
+                            var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
+
+
+                            WebUser.SetUser(user, roles, groups);
+                            await this.SignIn();
+                            return RedirectToAction("~/account/change-password");
+                        }
+                        else if (userRole.Role == Infrastructures.Domain.Enums.Role.Admin && user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
+                        {
+                            user.LoginRetries = 0;
+                            user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
+
+                            this._context.Users.Update(user);
+                            this._context.SaveChanges();
+
+                            var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
+                            var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
+                            var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
+
+                            WebUser.SetUser(user, roles, groups);
+                            await this.SignIn();
+
+
+                            return RedirectToAction("~/manage/users/index");
+                        }
+
+                        else if (userRole.Role == Infrastructures.Domain.Enums.Role.ContentAdmin && user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
+                        {
+                            user.LoginRetries = 0;
+                            user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
+
+                            this._context.Users.Update(user);
+                            this._context.SaveChanges();
+
+                            var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
+                            var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
+                            var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
+
+                            WebUser.SetUser(user, roles, groups);
+                            WebID.SetAdminId(user.Id);
+                            await this.SignIn();
+
+
+                            return RedirectPermanent("~/manage/users/index");
+                        }
+
+                        else if (user.LoginStatus == Infrastructures.Domain.Enums.LoginStatus.Active)
+                        {
+                            user.LoginRetries = 0;
+                            user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Active;
+                            this._context.Users.Update(user);
+                            this._context.SaveChanges();
+
+
+                            var roles = this._context.UserRoles.Where(ur => ur.UserId == user.Id).Select(ur => ur.Role).ToList();
+                            var groupIds = this._context.UserGroups.Where(ug => ug.Id == user.Id).Select(ur => ur.GroupId).ToList();
+                            var groups = this._context.Groups.Where(g => groupIds.Contains(g.Id.Value)).ToList();
+
+                            WebUser.SetUser(user, roles, groups);
+                            WebID.SetUserId(user.Id);
+                            await this.SignIn();
+
+
+                            //return RedirectPermanent("~/booking/bookings-costumer/" + user.Id);
+                            return Redirect("/services/index");
+
+                        }
+                        else
+                        {
+                            user.LoginRetries = user.LoginRetries + 1;
+
+                            if (user.LoginRetries >= 3)
+                            {
+                                ModelState.AddModelError("", "Your account has been locked please contact an Administrator.");
+                                user.LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Locked;
+                            }
+
+                            this._context.Users.Update(user);
+                            this._context.SaveChanges();
+
+                            ModelState.AddModelError("", "Invalid Login.");
+                            return View();
+                        }
+                    }
+
+                    ModelState.AddModelError("", "Invalid Login.");
+                    return View();
+
+
+                }
 
             }
-
+            else
+            {
+                ModelState.AddModelError("", "Error From Google ReCaptcha :" + isCaptchaValid);
+                return View();
+            }
+          
 
             return View();
         }
@@ -208,6 +221,9 @@ namespace CarWash.Web.Controllers
         [HttpPost, Route("/account/register")]
         public IActionResult Register(RegisterViewModel model)
         {
+            string EncodedResponse = Request.Form["g-recaptcha-response"];
+            var isCaptchaValid = Recaptcha.Validate(EncodedResponse);
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -220,55 +236,63 @@ namespace CarWash.Web.Controllers
             }
 
             var registrationCode = RandomString(6);
-
-            User user = new User()
+            if(isCaptchaValid)
             {
-                Id = Guid.NewGuid(),
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                UserName = model.FirstName + "" + model.LastName,
-                EmailAddress = model.EmailAddress.ToLower(),
-                LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Unverified,
-                LoginRetries = 0,
-                Password = BCryptHelper.HashPassword(model.Password, BCryptHelper.GenerateSalt(8)),
-                PhoneNumber = model.PhoneNumber,
-                RegistrationCode = registrationCode,
-                Gender = Infrastructures.Domain.Enums.Gender.Male,
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-             
+                User user = new User()
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    UserName = model.FirstName + "" + model.LastName,
+                    EmailAddress = model.EmailAddress.ToLower(),
+                    LoginStatus = Infrastructures.Domain.Enums.LoginStatus.Unverified,
+                    LoginRetries = 0,
+                    Password = BCryptHelper.HashPassword(model.Password, BCryptHelper.GenerateSalt(8)),
+                    PhoneNumber = model.PhoneNumber,
+                    RegistrationCode = registrationCode,
+                    Gender = Infrastructures.Domain.Enums.Gender.Male,
+                    CreatedAt = DateTime.UtcNow,
+                    UpdatedAt = DateTime.UtcNow,
 
 
-            };
 
-            this._context.UserRoles.Add(new UserRole()
+                };
+
+                this._context.UserRoles.Add(new UserRole()
+                {
+                    Id = Guid.NewGuid(),
+                    UserId = user.Id.Value,
+                    Role = Infrastructures.Domain.Enums.Role.User
+
+                });
+
+                this._context.UserGroups.Add(new UserGroup()
+                {
+                    UserId = user.Id.Value,
+                    GroupId = Guid.NewGuid(),
+
+                });
+
+
+
+
+                this._context.Users.Add(user);
+                this._context.SaveChanges();
+
+                //Send email
+                this.EmailSendNow(
+                            WelcomeEmailTemplate(registrationCode, user.UserName),
+                            model.EmailAddress,
+                            user.UserName,
+                            "Welcome To CarWashBooking"
+                );
+            }
+            else
             {
-                Id = Guid.NewGuid(),
-                UserId = user.Id.Value,
-                Role = Infrastructures.Domain.Enums.Role.User
-
-            });
-
-            this._context.UserGroups.Add(new UserGroup()
-            {
-                UserId = user.Id.Value,
-                GroupId = Guid.NewGuid(),
-
-            });
-
-          
-
-
-            this._context.Users.Add(user);
-            this._context.SaveChanges();
-
-            //Send email
-            this.EmailSendNow(
-                        WelcomeEmailTemplate(registrationCode, user.UserName),
-                        model.EmailAddress,
-                        user.UserName,
-                        "Welcome To CarWashBooking"
-            );
+                ModelState.AddModelError("", "Error From Google ReCaptcha :" + isCaptchaValid);
+                return View();
+            }
+           
 
             return RedirectToAction("verify");
 

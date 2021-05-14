@@ -85,7 +85,7 @@ namespace AspNetCore
             WriteLiteral("                        ");
             EndContext();
             BeginContext(773, 109, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "929585c7f5ae44af9ace7c798f61a704", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagOnly, "a1ea606bbf5c4be8b0435182dd3809c4", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
@@ -128,7 +128,7 @@ AddHtmlAttributeValue("", 799, Model.User.Id, 799, 14, false);
             WriteLiteral("\r\n            <ul class=\"nav nav-tabs\">\r\n                <li class=\"active\">");
             EndContext();
             BeginContext(2219, 73, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c6d192af0968473ab06ac1b0ddfc7cde", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bd8c365ce51d4832a0529db2e8f633fe", async() => {
                 BeginContext(2274, 14, true);
                 WriteLiteral("Update Profile");
                 EndContext();
@@ -156,7 +156,7 @@ AddHtmlAttributeValue("", 2258, Model.User.Id, 2258, 14, false);
             WriteLiteral("</li> |\r\n                <li>");
             EndContext();
             BeginContext(2321, 79, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c63a4ce7eb0544b6be05701d31874028", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "56453bfbbe2e4d0c99aa217171bd16b6", async() => {
                 BeginContext(2387, 9, true);
                 WriteLiteral("Thumbnail");
                 EndContext();

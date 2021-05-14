@@ -91,7 +91,7 @@ using Microsoft.AspNetCore.Authorization;
                 ");
             EndContext();
             BeginContext(533, 96, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "899ff798b14845cba83c3ae36de3e106", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7c38c5c6dc074eaf95b1d4b0cf28fdc9", async() => {
                 BeginContext(583, 42, true);
                 WriteLiteral("Login now! <i class=\"fas fa-user-alt\"></i>");
                 EndContext();
